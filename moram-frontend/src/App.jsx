@@ -6,9 +6,6 @@ import LoginPage from "./pages/auth/LoginPage";
 import DashboardPage from "./pages/dashboard/DashboardPage";
 import AssignmentListPage from "./pages/assignments/AssignmentListPage";
 import AssignmentDetailPage from "./pages/assignments/AssignmentDetailPage";
-import CommunityPage from "./pages/community/CommunityPage";
-import PostDetailPage from "./pages/community/PostDetailPage";
-import PostWritePage from "./pages/community/PostWritePage";
 import PlaceholderPage from "./pages/common/PlaceholderPage";
 
 export default function App() {
@@ -22,9 +19,6 @@ export default function App() {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/assignments" element={<AssignmentListPage />} />
           <Route path="/assignments/:assignmentId" element={<AssignmentDetailPage />} />
-          <Route path="/community" element={<CommunityPage />} />
-          <Route path="/community/write" element={<PostWritePage />} />
-          <Route path="/community/:postId" element={<PostDetailPage />} />
           <Route path="/courses" element={<PlaceholderPage title="수업" />} />
           <Route path="/calendar" element={<PlaceholderPage title="시간표 / 캘린더" />} />
           <Route path="/quizzes" element={<PlaceholderPage title="퀴즈" />} />

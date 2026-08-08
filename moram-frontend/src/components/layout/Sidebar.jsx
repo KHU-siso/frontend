@@ -7,7 +7,6 @@ const items = [
   { to: "/assignments", label: "과제", icon: "✓" },
   { to: "/quizzes", label: "퀴즈", icon: "?" },
   { to: "/chat", label: "AI Q&A", icon: "✦" },
-  { to: "/community", label: "커뮤니티", icon: "♙" },
   { to: "/mypage", label: "마이페이지", icon: "●" }
 ];
 
