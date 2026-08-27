@@ -1,33 +1,38 @@
 import React from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
-import AppLayout from "./components/layout/AppLayout";
-import ProtectedRoute from "./pages/common/ProtectedRoute";
-import LoginPage from "./pages/auth/LoginPage";
-import DashboardPage from "./pages/dashboard/DashboardPage";
-import AssignmentListPage from "./pages/assignments/AssignmentListPage";
-import AssignmentDetailPage from "./pages/assignments/AssignmentDetailPage";
-import PlaceholderPage from "./pages/common/PlaceholderPage";
-
-export default function App() {
-  return (
-    <Routes>
-      <Route path="/login" element={<LoginPage />} />
-
-      <Route element={<ProtectedRoute />}>
-        <Route element={<AppLayout />}>
-          <Route index element={<Navigate to="/dashboard" replace />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/assignments" element={<AssignmentListPage />} />
-          <Route path="/assignments/:assignmentId" element={<AssignmentDetailPage />} />
-          <Route path="/courses" element={<PlaceholderPage title="수업" />} />
-          <Route path="/calendar" element={<PlaceholderPage title="시간표 / 캘린더" />} />
-          <Route path="/quizzes" element={<PlaceholderPage title="퀴즈" />} />
-          <Route path="/chat" element={<PlaceholderPage title="AI Q&A" />} />
-          <Route path="/mypage" element={<PlaceholderPage title="마이페이지" />} />
-        </Route>
-      </Route>
-
-      <Route path="*" element={<Navigate to="/dashboard" replace />} />
-    </Routes>
-  );
+import {Routes,Route,Navigate} from "react-router-dom";
+import Landing from "./pages/Landing";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Complete from "./pages/Complete";
+import Home from "./pages/Home";
+import QuizSetup from "./pages/QuizSetup";
+import QuizSubject from "./pages/QuizSubject";
+import QuizMode from "./pages/QuizMode";
+import QuizType from "./pages/QuizType";
+import QuizPlay from "./pages/QuizPlay";
+import QuizResult from "./pages/QuizResult";
+import Chat from "./pages/Chat";
+import Library from "./pages/Library";
+import WrongNote from "./pages/WrongNote";
+import Items from "./pages/Items";
+export default function App(){return (
+<Routes>
+  <Route path="/" element={<Landing/>}/>
+  <Route path="/login" element={<Login/>}/>
+  <Route path="/signup" element={<Signup/>}/>
+  <Route path="/signup/complete" element={<Complete/>}/>
+  <Route path="/home" element={<Home/>}/>
+  <Route path="/quiz/setup" element={<QuizSetup/>}/>
+  <Route path="/quiz/subject" element={<QuizSubject/>}/>
+  <Route path="/quiz/mode" element={<QuizMode/>}/>
+  <Route path="/quiz/type" element={<QuizType/>}/>
+  <Route path="/quiz/play" element={<QuizPlay/>}/>
+  <Route path="/quiz/result" element={<QuizResult/>}/>
+  <Route path="/chat" element={<Chat/>}/>
+  <Route path="/library" element={<Library/>}/>
+  <Route path="/wrong-note" element={<WrongNote/>}/>
+  <Route path="/items" element={<Items/>}/>
+  <Route path="*" element={<Navigate to="/"/>}/>
+</Routes>
+);
 }
