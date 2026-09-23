@@ -5,6 +5,8 @@ import ChatSidebar from "../components/ChatSidebar";
 import MenuDrawer from "../components/MenuDrawer";
 import SiteFooterNav from "../components/SiteFooterNav";
 import moramMark from "../assets/chat/moram-mark.svg";
+import * as chatApi from "../api/chat";
+import { getErrorMessage } from "../api/client";
 
 const QUICK_ACTIONS = [
   { label: "간단퀴즈", message: "간단한 퀴즈 하나 내줘" },
@@ -20,7 +22,8 @@ function MascotAvatar({ className = "" }) {
   );
 }
 
-let nextId = 1;
+// MessageOut → 화면용 메시지
+const toMessage = (m) => ({ id: m.id, role: m.role, text: m.content });
 
 export default function Chat() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -29,6 +32,28 @@ export default function Chat() {
   const [input, setInput] = useState("");
   const [isReplying, setIsReplying] = useState(false);
   const scrollRef = useRef(null);
+
+  useEffect(() => {
+    chatApi
+      .listConversations()
+      .then((list) => setConversations(list.map((c) => ({ id: c.id, title: c.title, messages: null }))))
+      .catch(() => {});
+  }, []);
+
+  const setMessages = (convId, messages) =>
+    setConversations((prev) => prev.map((c) => (c.id === convId ? { ...c, messages } : c)));
+
+  const handleSelect = async (convId) => {
+    setActiveId(convId);
+    const conv = conversations.find((c) => c.id === convId);
+    if (conv?.messages) return;
+    try {
+      const list = await chatApi.listMessages(convId);
+      setMessages(convId, list.map(toMessage));
+    } catch {
+      setMessages(convId, []);
+    }
+  };
 
   const active = conversations.find((c) => c.id === activeId);
   const messages = active?.messages ?? [];
@@ -42,35 +67,38 @@ export default function Chat() {
     setInput("");
   };
 
-  const sendMessage = (text) => {
-    const trimmed = text.trim();
-    if (!trimmed) return;
-
-    let convId = activeId;
-    if (!convId) {
-      convId = nextId++;
-      const title = trimmed.length > 20 ? `${trimmed.slice(0, 20)}...` : trimmed;
-      setConversations((prev) => [{ id: convId, title, messages: [] }, ...prev]);
-      setActiveId(convId);
-    }
-
+  const appendMessage = (convId, message) =>
     setConversations((prev) =>
-      prev.map((c) => (c.id === convId ? { ...c, messages: [...c.messages, { role: "user", text: trimmed }] } : c))
+      prev.map((c) => (c.id === convId ? { ...c, messages: [...(c.messages ?? []), message] } : c))
     );
+
+  const sendMessage = async (text) => {
+    const trimmed = text.trim();
+    if (!trimmed || isReplying) return;
+
     setInput("");
     setIsReplying(true);
+    let convId = activeId;
+    try {
+      if (!convId) {
+        const title = trimmed.length > 20 ? `${trimmed.slice(0, 20)}...` : trimmed;
+        const created = await chatApi.createConversation({ title });
+        convId = created.id;
+        setConversations((prev) => [{ id: created.id, title: created.title, messages: [] }, ...prev]);
+        setActiveId(convId);
+      }
 
-    // TODO: 실제 AI 챗봇 API 연동
-    setTimeout(() => {
-      setConversations((prev) =>
-        prev.map((c) =>
-          c.id === convId
-            ? { ...c, messages: [...c.messages, { role: "assistant", text: "옹이가 아직 준비 중이에요. 곧 실제 답변으로 연결할게요!" }] }
-            : c
-        )
-      );
+      appendMessage(convId, { role: "user", text: trimmed });
+      await chatApi.sendMessage(convId, trimmed);
+      // POST 응답(MessageOut 1건)이 AI 답변인지 저장된 내 메시지인지 명세상 불명확해서, 목록을 다시 받아 서버 기준으로 맞춘다.
+      const list = await chatApi.listMessages(convId);
+      setMessages(convId, list.map(toMessage));
+    } catch (err) {
+      if (convId) appendMessage(convId, { role: "assistant", text: getErrorMessage(err, "답변을 받지 못했어요. 다시 시도해주세요.") });
+      else alert(getErrorMessage(err, "대화를 시작하지 못했어요."));
+    } finally {
       setIsReplying(false);
-    }, 700);
+    }
   };
 
   const handleSubmit = (e) => {
@@ -92,7 +120,7 @@ export default function Chat() {
         <ChatSidebar
           conversations={conversations}
           activeId={activeId}
-          onSelect={setActiveId}
+          onSelect={handleSelect}
           onNewChat={handleNewChat}
         />
 
@@ -154,7 +182,7 @@ export default function Chat() {
               <div className="flex flex-1 flex-col gap-4 overflow-y-auto pb-4">
                 {messages.map((m, i) => (
                   <div
-                    key={i}
+                    key={m.id ?? i}
                     className={`max-w-[80%] rounded-3xl px-5 py-3 text-sm ${
                       m.role === "user"
                         ? "self-end bg-gradient-to-r from-moram-navy to-moram-blue text-white"

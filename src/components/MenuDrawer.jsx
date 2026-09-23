@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { X, HelpCircle, NotebookPen, FolderOpen, Coins, User, Settings, LogOut, MessageCircle } from "lucide-react";
+import { clearSession } from "../api/client";
 
 const TOP_LINKS = [
   { label: "퀴즈", to: "/quiz", icon: HelpCircle },
@@ -53,6 +54,7 @@ export default function MenuDrawer({ open, onClose }) {
           type="button"
           onClick={() => {
             onClose();
+            clearSession();
             navigate("/login");
           }}
           className={linkClass}

@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Pencil, ChevronRight } from "lucide-react";
 import AppShell from "../components/AppShell";
 import ToggleSwitch from "../components/ToggleSwitch";
+import { getMe } from "../api/auth";
+import { getStoredUser, clearSession } from "../api/client";
 
 function SettingsRow({ label, danger, onClick }) {
   return (
@@ -38,12 +40,20 @@ export default function Profile() {
     if (hash === "#settings") document.getElementById("settings")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [hash]);
   const [editing, setEditing] = useState(false);
+  // name/email 은 GET /api/auth/me (UserOut.nickname/email). 학과·학년은 명세에 없어 아직 더미.
+  const storedUser = getStoredUser();
   const [profile, setProfile] = useState({
-    name: "윤호",
-    email: "kimjaeho@gmail.com",
+    name: storedUser?.nickname ?? "",
+    email: storedUser?.email ?? "",
     major: "컴퓨터공학과",
     year: "1학년",
   });
+
+  useEffect(() => {
+    getMe()
+      .then((me) => setProfile((prev) => ({ ...prev, name: me.nickname, email: me.email })))
+      .catch(() => {});
+  }, []);
   const [notifications, setNotifications] = useState({
     assignmentDue: true,
     studyTime: true,
@@ -55,6 +65,7 @@ export default function Profile() {
   };
 
   const handleLogout = () => {
+    clearSession();
     navigate("/login");
   };
 
@@ -76,7 +87,7 @@ export default function Profile() {
         <section className="relative rounded-[2.5rem] border-2 border-black/10 bg-white p-6 shadow-[0_4px_23px_0_rgba(0,0,0,0.1)]">
           <div className="flex flex-wrap items-center gap-6">
             <div className="grid h-20 w-20 shrink-0 place-items-center rounded-full bg-gradient-to-br from-moram-blue to-moram-navy text-3xl font-black text-white">
-              김
+              {profile.name?.[0]}
             </div>
             <div className="flex-1">
               {editing ? (

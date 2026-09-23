@@ -1,44 +1,50 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Bell, CheckCheck, Mail } from "lucide-react";
 import AppShell from "../components/AppShell";
+import { listNotifications, completeNotification } from "../api/schedule";
+import { getErrorMessage } from "../api/client";
 
-const INITIAL_NOTIFICATIONS = [
-  {
-    id: "n1",
-    title: "재형 님, 오늘 학습할 시간이 되었어요.",
-    body: "세계와 시민을 빨리 복습하세요! 오늘의 학습과 과제 일정을 확인해보세요.",
-    time: "10분 전",
-    read: false,
-  },
-  {
-    id: "n2",
-    title: "과제 마감이 얼마 남지 않았어요.",
-    body: "「주제 연구」 과제 마감까지 D-10 남았어요.",
-    time: "1시간 전",
-    read: false,
-  },
-  {
-    id: "n3",
-    title: "퀴즈 결과가 도착했어요.",
-    body: "세계와 시민 퀴즈에서 코인 20개를 획득했어요!",
-    time: "어제",
-    read: true,
-  },
-];
+function formatRelative(iso) {
+  const diffMin = Math.round((Date.now() - new Date(iso).getTime()) / 60000);
+  if (diffMin < 1) return "방금 전";
+  if (diffMin < 60) return `${diffMin}분 전`;
+  if (diffMin < 60 * 24) return `${Math.floor(diffMin / 60)}시간 전`;
+  if (diffMin < 60 * 48) return "어제";
+  return new Date(iso).toLocaleDateString("ko-KR");
+}
+
+// NotificationOut → 목록 행. is_completed 를 "읽음"으로 사용.
+const toItem = (n) => ({
+  id: n.id,
+  title: n.message,
+  body: "",
+  time: formatRelative(n.notify_at),
+  read: n.is_completed,
+});
 
 export default function Notifications() {
   const navigate = useNavigate();
-  const [items, setItems] = useState(INITIAL_NOTIFICATIONS);
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    listNotifications()
+      .then((list) => setItems(list.map(toItem)))
+      .catch((err) => setError(getErrorMessage(err, "알림을 불러오지 못했어요.")))
+      .finally(() => setLoading(false));
+  }, []);
 
   const unreadCount = items.filter((n) => !n.read).length;
 
   const markRead = (id) => {
     setItems((prev) => prev.map((n) => (n.id === id ? { ...n, read: true } : n)));
+    completeNotification(id).catch(() => {});
   };
 
   const markAllRead = () => {
-    setItems((prev) => prev.map((n) => ({ ...n, read: true })));
+    items.filter((n) => !n.read).forEach((n) => markRead(n.id));
   };
 
   return (
@@ -79,7 +85,7 @@ export default function Notifications() {
               <p className="font-bold text-black">{n.title}</p>
               <span className="ml-auto shrink-0 text-xs text-gray-400">{n.time}</span>
             </div>
-            <p className="text-sm text-gray-500">{n.body}</p>
+            {n.body && <p className="text-sm text-gray-500">{n.body}</p>}
             <span className="mt-1 flex items-center gap-1 text-xs font-semibold text-moram-blue">
               <Mail className="h-3.5 w-3.5" />
               이메일로 보기
@@ -87,7 +93,9 @@ export default function Notifications() {
           </button>
         ))}
 
-        {items.length === 0 && <p className="py-10 text-center text-sm text-gray-400">알림이 없습니다.</p>}
+        {loading && <p className="py-10 text-center text-sm text-gray-400">불러오는 중...</p>}
+        {error && <p className="py-10 text-center text-sm text-red-500">{error}</p>}
+        {!loading && !error && items.length === 0 && <p className="py-10 text-center text-sm text-gray-400">알림이 없습니다.</p>}
       </div>
     </AppShell>
   );

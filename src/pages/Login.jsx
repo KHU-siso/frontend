@@ -4,6 +4,8 @@ import BackgroundBlobs from "../components/BackgroundBlobs";
 import MascotBadge from "../components/MascotBadge";
 import moramMark from "../assets/login/moram-mark.svg";
 import birdFace from "../assets/login/bird-face.svg";
+import { login } from "../api/auth";
+import { saveSession, getErrorMessage } from "../api/client";
 
 function GoogleIcon() {
   return (
@@ -30,7 +32,7 @@ function GoogleIcon() {
 
 export default function Login() {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ username: "", password: "" });
+  const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
@@ -41,17 +43,21 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.username.trim() || !form.password.trim()) {
-      setError("아이디와 비밀번호를 모두 입력해주세요.");
+    if (!form.email.trim() || !form.password.trim()) {
+      setError("이메일과 비밀번호를 모두 입력해주세요.");
       return;
     }
     setSubmitting(true);
     try {
-      // TODO: 실제 로그인 API 연동
-      await new Promise((r) => setTimeout(r, 500));
+      const data = await login({ email: form.email.trim(), password: form.password });
+      saveSession(data);
       navigate("/dashboard");
-    } catch {
-      setError("로그인에 실패했습니다. 다시 시도해주세요.");
+    } catch (err) {
+      setError(
+        err.response?.status === 401
+          ? "이메일 또는 비밀번호가 올바르지 않습니다."
+          : getErrorMessage(err, "로그인에 실패했습니다. 다시 시도해주세요.")
+      );
     } finally {
       setSubmitting(false);
     }
@@ -94,16 +100,16 @@ export default function Login() {
         </button>
 
         <form onSubmit={handleSubmit} className="mt-6 w-full" noValidate>
-          <label htmlFor="username" className="block text-sm font-bold text-black">
-            아이디
+          <label htmlFor="email" className="block text-sm font-bold text-black">
+            이메일
           </label>
           <input
-            id="username"
-            type="text"
-            autoComplete="username"
-            placeholder="studentkijul"
-            value={form.username}
-            onChange={handleChange("username")}
+            id="email"
+            type="email"
+            autoComplete="email"
+            placeholder="student@khu.ac.kr"
+            value={form.email}
+            onChange={handleChange("email")}
             className="mt-2 w-full rounded-2xl bg-[#D2DBEC]/50 px-4 py-4 text-gray-700 placeholder:text-gray-400 outline-none ring-moram-blue/40 focus:ring-2"
           />
 

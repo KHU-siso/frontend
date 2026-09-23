@@ -1,7 +1,9 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Search, Star, XCircle, ChevronDown, ChevronUp } from "lucide-react";
 import AppShell from "../components/AppShell";
+import { listWrongNotes } from "../api/quiz";
+import { getErrorMessage } from "../api/client";
 
 /**
  * 오답노트 (오답기록) — Figma 278:602(해설 접힘) / 278:609(해설 펼침)
@@ -10,50 +12,20 @@ import AppShell from "../components/AppShell";
  * - 선택된 카드 오른쪽에 옹이가 빼꼼 내다보는 장식(Figma의 Union 도형)
  */
 
-const INITIAL_NOTES = [
-  {
-    id: "n1",
-    subject: "세계와 시민",
-    no: 3,
-    dday: 2,
-    question: "다음 중 임진왜란이 발생한 연도는 무엇인가?",
-    yourAnswer: "2006",
-    correctAnswer: "1592",
-    explanation:
-      "임진왜란은 1592년(선조 25)부터 1598년까지 7년 동안 조선과 일본(도요토미 히데요시 정권) 사이에 벌어진 거대한 국제 전쟁이다. 일본의 명나라 침공 구실(정명가도)로 시작되었으나, 조선의 끈질긴 저항과 명나라의 참전으로 동아시아 전체의 판도를 바꿨다.",
-    wrongAt: "2026-07-16",
-    bookmarked: true,
-    reviewed: true,
-  },
-  {
-    id: "n2",
-    subject: "주제연구",
-    no: 3,
-    dday: 6,
-    question: "연구 가설을 검증하기 위해 독립변수를 조작하는 연구 방법은?",
-    yourAnswer: "상관연구",
-    correctAnswer: "실험연구",
-    explanation:
-      "실험연구는 연구자가 독립변수를 의도적으로 조작하고 다른 변수를 통제하여 종속변수의 변화를 관찰함으로써 인과관계를 검증하는 방법이다. 상관연구는 변수를 조작하지 않고 관계만 살핀다.",
-    wrongAt: "2026-07-15",
-    bookmarked: false,
-    reviewed: false,
-  },
-  {
-    id: "n3",
-    subject: "디지털 디자인",
-    no: 5,
-    dday: 9,
-    question: "화면 디자인에서 요소 사이의 빈 공간을 뜻하는 용어는?",
-    yourAnswer: "space",
-    correctAnswer: "whitespace",
-    explanation:
-      "화이트스페이스(여백)는 요소 사이의 비어 있는 공간으로, 가독성을 높이고 정보의 위계를 드러내는 역할을 한다.",
-    wrongAt: "2026-07-12",
-    bookmarked: false,
-    reviewed: false,
-  },
-];
+// WrongNoteOut → 오답 카드. 과목명·D-day·북마크·복습 여부는 명세에 없어 북마크/복습은 프론트 상태로만 관리.
+const toNote = (n, i) => ({
+  id: n.quiz_question_id,
+  quizSetId: n.quiz_set_id,
+  no: i + 1,
+  question: n.question_text,
+  options: n.options,
+  yourAnswer: n.user_answer,
+  correctAnswer: n.correct_answer,
+  explanation: n.explanation,
+  wrongAt: n.answered_at,
+  bookmarked: false,
+  reviewed: false,
+});
 
 const cardShadow = "shadow-[0_1px_1px_rgba(0,0,0,0.25)]";
 
@@ -91,7 +63,7 @@ function NoteCard({ note, selected, onSelect, onToggleBookmark, onToggleExplanat
         {/* 헤더 */}
         <header className="flex items-center gap-2 border-b border-black/20 px-9 py-4">
           <h2 className="text-2xl font-semibold text-moram-logo">
-            Q. {String(note.no).padStart(2, "0")} - {note.subject} (D-{note.dday})
+            Q. {String(note.no).padStart(2, "0")} - 퀴즈 #{note.quizSetId}
           </h2>
           <button
             type="button"
@@ -166,19 +138,33 @@ function NoteCard({ note, selected, onSelect, onToggleBookmark, onToggleExplanat
 
 export default function WrongAnswerNotes() {
   const navigate = useNavigate();
-  const [notes, setNotes] = useState(INITIAL_NOTES);
+  const [notes, setNotes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
   const [query, setQuery] = useState("");
   const [sortRecent, setSortRecent] = useState(true);
   const [bookmarkOnly, setBookmarkOnly] = useState(false);
   const [openIds, setOpenIds] = useState(() => new Set());
-  const [selectedId, setSelectedId] = useState(INITIAL_NOTES[0].id);
+  const [selectedId, setSelectedId] = useState(null);
+
+  useEffect(() => {
+    listWrongNotes()
+      .then((list) => {
+        const mapped = list.map(toNote);
+        setNotes(mapped);
+        setSelectedId(mapped[0]?.id ?? null);
+      })
+      .catch((err) => setError(getErrorMessage(err, "오답 기록을 불러오지 못했어요.")))
+      .finally(() => setLoading(false));
+  }, []);
 
   const total = notes.length;
   const reviewedPct = total ? Math.round((notes.filter((n) => n.reviewed).length / total) * 100) : 0;
 
   const visible = useMemo(() => {
     const q = query.trim();
-    let list = notes.filter((n) => (!q || n.subject.includes(q)) && (!bookmarkOnly || n.bookmarked));
+    // 과목명이 응답에 없어 문제 내용으로 검색
+    let list = notes.filter((n) => (!q || n.question.includes(q)) && (!bookmarkOnly || n.bookmarked));
     if (sortRecent) list = [...list].sort((a, b) => b.wrongAt.localeCompare(a.wrongAt));
     return list;
   }, [notes, query, sortRecent, bookmarkOnly]);
@@ -240,7 +226,7 @@ export default function WrongAnswerNotes() {
                   type="search"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="과목명을 검색하세요."
+                  placeholder="문제 내용을 검색하세요."
                   className="w-full bg-transparent text-lg font-medium text-moram-logo outline-none placeholder:text-moram-logo"
                 />
               </label>
@@ -268,13 +254,23 @@ export default function WrongAnswerNotes() {
                 onToggleBookmark={() => update(note.id, (n) => ({ bookmarked: !n.bookmarked }))}
                 onReview={() => {
                   update(note.id, () => ({ reviewed: true }));
-                  navigate("/quiz", { state: { reviewSubject: note.subject } });
+                  navigate("/quiz", {
+                    state: {
+                      reviewNote: {
+                        quiz_question_id: note.id,
+                        question_text: note.question,
+                        options: note.options,
+                      },
+                    },
+                  });
                 }}
               />
             ))}
-            {visible.length === 0 && (
+            {loading && <p className="py-10 text-center text-sm text-gray-400">불러오는 중...</p>}
+            {error && <p className="py-10 text-center text-sm text-red-500">{error}</p>}
+            {!loading && !error && visible.length === 0 && (
               <p className="py-10 text-center text-sm text-gray-400">
-                {bookmarkOnly ? "북마크한 오답이 없어요." : "검색 결과가 없어요."}
+                {notes.length === 0 ? "아직 틀린 문제가 없어요." : bookmarkOnly ? "북마크한 오답이 없어요." : "검색 결과가 없어요."}
               </p>
             )}
           </div>

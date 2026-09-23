@@ -1,38 +1,103 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronDown, ArrowRight } from "lucide-react";
+import { ChevronDown, ArrowRight, Upload, Trash2, FileText } from "lucide-react";
 import AppShell from "../components/AppShell";
+import { listSubjects } from "../api/subjects";
+import { listDocuments, uploadDocument, deleteDocument } from "../api/documents";
+import { getErrorMessage } from "../api/client";
 
-const COURSES = [
-  {
-    id: "photo1",
-    title: "사진 1",
-    professor: "이재용 교수님",
-    counts: { 퀴즈: 0, 시험: 0, 과제: 0, 학습: 0 },
-    notices: 0,
-  },
-  {
-    id: "digital-design",
-    title: "디지털 디자인",
-    professor: "조서연 교수님",
-    counts: { 퀴즈: 0, 시험: 0, 과제: 0, 학습: 0 },
-    notices: 0,
-  },
-  {
-    id: "reflection-01",
-    title: "성찰과 표현 01분반",
-    professor: "곽윤호 교수님",
-    counts: { 퀴즈: 0, 시험: 0, 과제: 0, 학습: 0 },
-    notices: 0,
-  },
-  {
-    id: "citizenship-03",
-    title: "세계와 시민 03 분반",
-    professor: "김재형 교수님",
-    counts: { 퀴즈: 0, 시험: 0, 과제: 0, 학습: 0 },
-    notices: 0,
-  },
-];
+const hhmm = (time) => time.slice(0, 5);
+
+// SubjectOut → 과목 행. 교수명·퀴즈/시험/과제/학습 개수·공지 수는 명세에 없어 표시하지 않음.
+const toCourse = (s) => ({
+  id: s.id,
+  title: s.name,
+  professor: `매주 ${s.day_of_week} ${hhmm(s.start_time)}~${hhmm(s.end_time)}${s.is_canceled_this_week ? " · 이번 주 휴강" : ""}`,
+});
+
+function DocumentsSection() {
+  const [docs, setDocs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState("");
+  const fileRef = useRef(null);
+
+  useEffect(() => {
+    listDocuments()
+      .then(setDocs)
+      .catch((err) => setError(getErrorMessage(err, "자료 목록을 불러오지 못했어요.")))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const handleFile = async (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file) return;
+    setUploading(true);
+    setError("");
+    try {
+      const created = await uploadDocument(file);
+      setDocs((prev) => [created, ...prev]);
+    } catch (err) {
+      setError(getErrorMessage(err, "업로드에 실패했어요."));
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleDelete = async (doc) => {
+    if (!window.confirm(`"${doc.filename}" 자료를 삭제할까요?`)) return;
+    try {
+      await deleteDocument(doc.id);
+      setDocs((prev) => prev.filter((d) => d.id !== doc.id));
+    } catch (err) {
+      setError(getErrorMessage(err, "삭제에 실패했어요."));
+    }
+  };
+
+  return (
+    <section className="rounded-[2rem] border-2 border-black/10 bg-white px-6 py-5 shadow-[0_4px_23px_0_rgba(0,0,0,0.1)]">
+      <div className="flex items-center gap-3">
+        <p className="text-lg font-bold text-black">내 학습 자료</p>
+        <span className="text-sm text-gray-400">업로드한 자료로 퀴즈·AI chat을 이용할 수 있어요.</span>
+        <input ref={fileRef} type="file" className="hidden" onChange={handleFile} />
+        <button
+          type="button"
+          onClick={() => fileRef.current?.click()}
+          disabled={uploading}
+          className="ml-auto flex items-center gap-2 rounded-full bg-gradient-to-r from-moram-navy to-moram-blue px-5 py-2 text-sm font-bold text-white disabled:opacity-60"
+        >
+          <Upload className="h-4 w-4" />
+          {uploading ? "업로드 중..." : "자료 업로드"}
+        </button>
+      </div>
+
+      {error && <p className="mt-3 text-sm text-red-500">{error}</p>}
+
+      <ul className="mt-4 flex flex-col divide-y divide-gray-100">
+        {docs.map((doc) => (
+          <li key={doc.id} className="flex items-center gap-3 py-3 text-sm">
+            <FileText className="h-4 w-4 shrink-0 text-moram-blue" />
+            <span className="flex-1 truncate font-medium text-black">{doc.filename}</span>
+            <span className="shrink-0 text-gray-400">
+              {doc.num_pages}쪽 · {new Date(doc.created_at).toLocaleDateString("ko-KR")}
+            </span>
+            <button
+              type="button"
+              onClick={() => handleDelete(doc)}
+              aria-label="삭제"
+              className="shrink-0 text-gray-300 transition hover:text-red-500"
+            >
+              <Trash2 className="h-4 w-4" />
+            </button>
+          </li>
+        ))}
+        {loading && <li className="py-3 text-center text-sm text-gray-400">불러오는 중...</li>}
+        {!loading && docs.length === 0 && <li className="py-3 text-center text-sm text-gray-400">아직 업로드한 자료가 없어요.</li>}
+      </ul>
+    </section>
+  );
+}
 
 function AttendanceTracker() {
   const STATES = ["none", "present", "absent"];
@@ -109,21 +174,6 @@ function CourseRow({ course }) {
           <p className="text-sm text-gray-500">2026년 2학기 · {course.professor}</p>
         </div>
 
-        <div className="flex gap-6 text-center text-sm text-gray-400">
-          {Object.entries(course.counts).map(([label, value]) => (
-            <div key={label}>
-              <p className="font-bold text-gray-500">{value}</p>
-              <p>{label}</p>
-            </div>
-          ))}
-        </div>
-
-        <div className="h-8 w-px bg-gray-200" />
-
-        <div className="text-center text-sm text-gray-400">
-          <p className="font-bold text-gray-500">{course.notices}</p>
-          <p>공지</p>
-        </div>
 
         <Link
           to={`/library/${course.id}`}
@@ -146,13 +196,24 @@ function CourseRow({ course }) {
 export default function Library() {
   const [query, setQuery] = useState("");
   const [semester, setSemester] = useState("2026학년도 2학기");
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    listSubjects()
+      .then((list) => setCourses(list.map(toCourse)))
+      .catch((err) => setError(getErrorMessage(err, "과목 목록을 불러오지 못했어요.")))
+      .finally(() => setLoading(false));
+  }, []);
 
   const filtered = useMemo(
-    () => COURSES.filter((c) => c.title.toLowerCase().includes(query.toLowerCase())),
-    [query]
+    () => courses.filter((c) => c.title.toLowerCase().includes(query.toLowerCase())),
+    [courses, query]
   );
 
-  const totalNotices = COURSES.reduce((sum, c) => sum + c.notices, 0);
+  // 공지/메시지 수는 명세에 대응 API가 없음 (아직 더미)
+  const totalNotices = 0;
 
   return (
     <AppShell>
@@ -194,12 +255,18 @@ export default function Library() {
           </div>
         </div>
 
+        <DocumentsSection />
+
         <div className="flex flex-col gap-4">
+          {loading && <p className="py-10 text-center text-sm text-gray-400">불러오는 중...</p>}
+          {error && <p className="py-10 text-center text-sm text-red-500">{error}</p>}
           {filtered.map((course) => (
             <CourseRow key={course.id} course={course} />
           ))}
-          {filtered.length === 0 && (
-            <p className="py-10 text-center text-sm text-gray-400">검색 결과가 없습니다.</p>
+          {!loading && !error && filtered.length === 0 && (
+            <p className="py-10 text-center text-sm text-gray-400">
+              {courses.length === 0 ? "등록된 과목이 없어요. 대시보드 시간표의 + 로 추가해보세요." : "검색 결과가 없습니다."}
+            </p>
           )}
         </div>
       </div>

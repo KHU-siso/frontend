@@ -4,9 +4,11 @@ import { Search, Bell } from "lucide-react";
 import SiteFooterNav from "./SiteFooterNav";
 import MenuDrawer from "./MenuDrawer";
 import moramMark from "../assets/dashboard/moram-mark.svg";
+import { getStoredUser } from "../api/client";
 
 export default function AppShell({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const initial = getStoredUser()?.nickname?.[0] ?? "";
 
   return (
     <div className="flex min-h-screen flex-col bg-[#d2dbec]/10">
@@ -40,7 +42,7 @@ export default function AppShell({ children }) {
           to="/profile"
           className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-gradient-to-br from-moram-blue to-moram-navy text-sm font-bold text-white"
         >
-          김
+          {initial}
         </Link>
       </header>
 

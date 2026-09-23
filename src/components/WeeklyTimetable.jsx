@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Plus } from "lucide-react";
 import AddScheduleModal from "./AddScheduleModal";
+import { createSubject, DAYS_OF_WEEK } from "../api/subjects";
+import { getErrorMessage } from "../api/client";
 
 const DAYS = [
   { label: "일", date: "6일" },
@@ -14,23 +16,48 @@ const DAYS = [
 
 const HOURS = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
 
-// dayIndex: 0=일 ... 6=토. start/end are hours (24h).
-const INITIAL_BLOCKS = [
-  { day: 1, start: 9, end: 11, label: "사진 예405", color: "#ffa3a3" },
-  { day: 2, start: 9, end: 11, label: "디지털디자인 예224", color: "#b3e4a7" },
-  { day: 1, start: 14, end: 15, label: "배고파 밥 8282", color: "#bb99e2" },
-  { day: 3, start: 14, end: 15, label: "배고파 밥 8282", color: "#c7b3ea" },
-  { day: 2, start: 16, end: 18, label: "알바", color: "#ffd000" },
-  { day: 4, start: 16, end: 18, label: "알바", color: "#ffd000" },
-];
+// 블록 색상은 API(SubjectOut)에 없는 값이라 프론트에서만 관리 (새로고침 시 기본 팔레트로 돌아감)
+const PALETTE = ["#ffa3a3", "#b3e4a7", "#bb99e2", "#ffd000", "#7dd3fc", "#c7b3ea"];
 
-export default function WeeklyTimetable() {
+const toHour = (time, round) => {
+  const [h, m] = time.split(":").map(Number);
+  return round === "up" && m > 0 ? h + 1 : h;
+};
+const pad = (n) => String(n).padStart(2, "0");
+
+// SubjectOut → 블록. dayIndex: 0=일 ... 6=토. start/end are hours (24h).
+const toBlock = (subject, color) => ({
+  id: subject.id,
+  day: DAYS.findIndex((d) => subject.day_of_week.startsWith(d.label)),
+  start: toHour(subject.start_time),
+  end: toHour(subject.end_time, "up"),
+  label: subject.is_canceled_this_week ? `${subject.name} (휴강)` : subject.name,
+  color: subject.is_canceled_this_week ? "#e5e7eb" : color,
+});
+
+export default function WeeklyTimetable({ subjects = [], onSubjectCreated }) {
   const [view, setView] = useState("주");
-  const [blocks, setBlocks] = useState(INITIAL_BLOCKS);
+  const [colors, setColors] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
 
-  const handleAdd = (newBlock) => {
-    setBlocks((prev) => [...prev, newBlock]);
+  const blocks = subjects.map((s, i) => toBlock(s, colors[s.id] ?? PALETTE[i % PALETTE.length]));
+
+  const handleAdd = async (newBlock) => {
+    try {
+      const created = await createSubject({
+        name: newBlock.label,
+        // 모달의 요일 인덱스(0=일) → SubjectCreate.day_of_week("월요일" ...)
+        day_of_week: DAYS_OF_WEEK[(newBlock.day + 6) % 7],
+        start_time: `${pad(newBlock.start)}:00:00`,
+        end_time: `${pad(newBlock.end)}:00:00`,
+      });
+      setColors((prev) => ({ ...prev, [created.id]: newBlock.color }));
+      onSubjectCreated?.(created);
+      return true;
+    } catch (err) {
+      alert(getErrorMessage(err, "과목을 추가하지 못했어요."));
+      return false;
+    }
   };
 
   return (
@@ -83,6 +110,7 @@ export default function WeeklyTimetable() {
                 return (
                   <div
                     key={d.label}
+                    title={block.label}
                     className="rounded-md p-1 text-left text-[9px] font-bold leading-tight text-moram-navy"
                     style={{ gridRow: `span ${span}`, backgroundColor: block.color }}
                   >

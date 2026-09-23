@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-function TaskRow({ task }) {
-  const [cancelled, setCancelled] = useState(false);
+function TaskRow({ task, cancelled, onToggleCancel }) {
   const isOverdue = task.status === "overdue";
 
   return (
@@ -29,17 +28,24 @@ function TaskRow({ task }) {
       </div>
 
       <div className="mt-3 flex items-center gap-3">
-        <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-[#d2dbec]">
-          <div
-            className="h-full rounded-full"
-            style={{ width: `${task.progress}%`, backgroundColor: isOverdue ? "#b91c1c" : "#082d66" }}
-          />
-        </div>
-        <span className="shrink-0 text-xs text-gray-500">현재 진행률 {task.progress}%</span>
+        {/* 진행률은 API(PriorityChecklistItem)에 없는 값이라 있을 때만 표시 */}
+        {task.progress != null ? (
+          <>
+            <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-[#d2dbec]">
+              <div
+                className="h-full rounded-full"
+                style={{ width: `${task.progress}%`, backgroundColor: isOverdue ? "#b91c1c" : "#082d66" }}
+              />
+            </div>
+            <span className="shrink-0 text-xs text-gray-500">현재 진행률 {task.progress}%</span>
+          </>
+        ) : (
+          <div className="flex-1" />
+        )}
         <button
           type="button"
-          onClick={() => setCancelled((v) => !v)}
-          className={`shrink-0 rounded-full px-4 py-1.5 text-xs font-semibold text-white transition ${
+          onClick={onToggleCancel}
+          className={`ml-auto shrink-0 rounded-full px-4 py-1.5 text-xs font-semibold text-white transition ${
             cancelled ? "bg-gray-300" : "bg-gradient-to-r from-[#06275a] to-[#0d53c0]"
           }`}
         >
@@ -50,14 +56,24 @@ function TaskRow({ task }) {
   );
 }
 
-export default function TaskListCard({ tasks }) {
+export default function TaskListCard({ tasks, cancelledSubjectIds = new Set(), onToggleCancel, loading, error }) {
   return (
     <div className="rounded-[2.5rem] border border-black/10 bg-white p-6 shadow-[0_4px_4px_0_#d2dbec]">
       <p className="mb-4 text-2xl font-bold text-black/70">해야할 일</p>
       <div className="flex flex-col gap-3">
         {tasks.map((task) => (
-          <TaskRow key={task.id} task={task} />
+          <TaskRow
+            key={task.id}
+            task={task}
+            cancelled={cancelledSubjectIds.has(task.subjectId)}
+            onToggleCancel={() => onToggleCancel?.(task.subjectId)}
+          />
         ))}
+        {loading && <p className="py-4 text-center text-sm text-gray-400">불러오는 중...</p>}
+        {error && <p className="py-4 text-center text-sm text-red-500">{error}</p>}
+        {!loading && !error && tasks.length === 0 && (
+          <p className="py-4 text-center text-sm text-gray-400">마감이 다가오는 과제가 없어요.</p>
+        )}
       </div>
     </div>
   );

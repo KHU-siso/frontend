@@ -18,19 +18,23 @@ export default function AddScheduleModal({ open, onClose, onAdd }) {
   const [day, setDay] = useState("월");
   const [startHour, setStartHour] = useState(9);
   const [duration, setDuration] = useState(1);
+  const [saving, setSaving] = useState(false);
 
   if (!open) return null;
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!name.trim()) return;
-    onAdd({
+    if (!name.trim() || saving) return;
+    setSaving(true);
+    const ok = await onAdd({
       label: name.trim(),
       color,
       day: DAY_OPTIONS.indexOf(day),
       start: startHour,
       end: startHour + duration,
     });
+    setSaving(false);
+    if (ok === false) return;
     setName("");
     onClose();
   };
@@ -142,9 +146,10 @@ export default function AddScheduleModal({ open, onClose, onAdd }) {
             </button>
             <button
               type="submit"
-              className="flex-1 rounded-full bg-gradient-to-r from-[#06275a] to-[#0d53c0] py-3 text-sm font-bold text-white"
+              disabled={saving}
+              className="flex-1 disabled:opacity-60 rounded-full bg-gradient-to-r from-[#06275a] to-[#0d53c0] py-3 text-sm font-bold text-white"
             >
-              추가하기
+              {saving ? "추가 중..." : "추가하기"}
             </button>
           </div>
         </form>

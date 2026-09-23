@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { getCharacter } from "../api/schedule";
 import { Coins, ArrowLeft, ArrowRight } from "lucide-react";
 import AppShell from "../components/AppShell";
 
@@ -45,11 +46,18 @@ function MascotPreview({ equippedItems }) {
 }
 
 export default function ItemShop() {
-  const [coins, setCoins] = useState(250);
+  // 보유 코인은 GET /api/character 의 coin_balance. 구매/착용 API는 명세에 없어 프론트에서만 차감·관리.
+  const [coins, setCoins] = useState(0);
   const [owned, setOwned] = useState(["glasses"]);
   const [equipped, setEquipped] = useState({ 안경: "glasses" });
   const [category, setCategory] = useState("모자");
   const [categoryIndex, setCategoryIndex] = useState(0);
+
+  useEffect(() => {
+    getCharacter()
+      .then((c) => setCoins(c.coin_balance))
+      .catch(() => {});
+  }, []);
 
   const items = ITEMS_BY_CATEGORY[category];
   const equippedItems = Object.values(equipped)

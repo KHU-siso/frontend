@@ -1,18 +1,24 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ChevronDown, XCircle } from "lucide-react";
 import moramMark from "../assets/quiz/moram-mark.svg";
+import { listDocuments } from "../api/documents";
+import { generateQuiz, getQuestion, submitAnswer, retryAnswer, getQuizResult } from "../api/quiz";
+import { getErrorMessage } from "../api/client";
 
 /**
  * 퀴즈 학습 흐름 — Figma 281:320(시작) → 281:336/405(학습 설정) → 281:461/522(과목 선택)
  * → 281:544/283:20(학습 방식) → 283:94(문제 유형, 문제풀기 선택시) → 문제 풀이 → 280:357(결과)
  *
  * 대시보드/메뉴에서 "퀴즈하기"를 누르면 항상 이 순서(step 스테이트 머신)를 처음부터 거친다.
- * 오답노트의 "복습퀴즈하기"에서 넘어온 경우(state.reviewSubject)는 설정 단계를 건너뛰고
- * 바로 해당 과목의 문제 풀이로 진입한다.
+ * 오답노트의 "복습퀴즈하기"에서 넘어온 경우(state.reviewNote)는 설정 단계를 건너뛰고
+ * 해당 문제 하나를 retry API로 다시 풀어본다.
+ *
+ * API 연동: 과목 선택 = 업로드한 자료(document) 선택 → POST /api/quiz/generate(document_id, quiz_type)
+ * → GET /api/quiz/{set}/questions/{index} 를 한 문제씩 → POST .../submit (다시 풀기는 .../retry)
+ * → GET /api/quiz/{set}/result.
+ * 학습 목표/연속 학습/문제 수, 학습 방식(문제 풀기/오답 복습/개념/빠른)은 명세에 대응 필드가 없어 UI만 유지.
  */
-
-const SUBJECTS = ["세계와 시민", "인간의 가치 탐색", "성찰과 표현", "대학 영어", "미적분"];
 
 const MODES = [
   { id: "solve", title: "문제 풀기", desc: "배운 내용을 문제로 확인해요." },
@@ -24,33 +30,8 @@ const MODES = [
 const DURATION_OPTIONS = ["30분", "1시간", "1시간 30분"];
 const COUNT_OPTIONS = ["10문제", "20문제", "30문제"];
 
-const QUESTION_BANK = {
-  "세계와 시민": [
-    { type: "객관식", prompt: "임진왜란이 발생한 연도는?", options: ["2005", "2006", "2007", "1592"], answer: "1592" },
-    { type: "객관식", prompt: "대한민국의 수도는?", options: ["부산", "서울", "인천", "대전"], answer: "서울" },
-    { type: "주관식", prompt: "세계 시민의 권리와 의무를 실천하는 대표적 활동은? (한 단어)", answer: "봉사" },
-  ],
-  "인간의 가치 탐색": [
-    { type: "객관식", prompt: "매슬로우의 욕구 5단계 중 가장 높은 단계는?", options: ["생리적 욕구", "안전 욕구", "자아실현 욕구", "소속 욕구"], answer: "자아실현 욕구" },
-    { type: "주관식", prompt: "타인의 입장에서 함께 느끼는 능력을 뜻하는 단어는? (한글)", answer: "공감" },
-    { type: "객관식", prompt: "다음 중 내재적 가치에 해당하는 것은?", options: ["돈", "행복", "명예", "권력"], answer: "행복" },
-  ],
-  "성찰과 표현": [
-    { type: "주관식", prompt: "자신의 생각과 감정을 담은 짧은 글을 무엇이라 하는가?", answer: "수필" },
-    { type: "객관식", prompt: "성찰적 글쓰기에 가장 적합한 형식은?", options: ["보고서", "일기", "광고문", "설명서"], answer: "일기" },
-    { type: "객관식", prompt: "다음 중 1인칭 시점의 특징은?", options: ["객관적 서술", "화자의 생각 직접 전달", "전지적 시점", "인물 외부 관찰"], answer: "화자의 생각 직접 전달" },
-  ],
-  "대학 영어": [
-    { type: "객관식", prompt: "'whitespace'의 뜻으로 가장 알맞은 것은?", options: ["여백", "검정", "속도", "소리"], answer: "여백" },
-    { type: "주관식", prompt: "'책'을 뜻하는 영단어는? (소문자)", answer: "book" },
-    { type: "객관식", prompt: "다음 중 완료 시제를 만들 때 쓰는 조동사는?", options: ["do", "have", "will", "can"], answer: "have" },
-  ],
-  미적분: [
-    { type: "객관식", prompt: "f(x) = x² 의 도함수는?", options: ["x", "2x", "x²", "2"], answer: "2x" },
-    { type: "주관식", prompt: "함수의 순간 변화율을 구하는 개념은? (한글)", answer: "미분" },
-    { type: "객관식", prompt: "∫2x dx 의 결과는? (+C 생략)", options: ["x²", "2x²", "x", "2"], answer: "x²" },
-  ],
-};
+// question_index 가 0부터인지 1부터인지 명세에 없음 — 백엔드 확인 후 조정
+const QUESTION_INDEX_BASE = 0;
 
 /* ------------------------------------------------------------------ */
 /* 공통 배경/헤더 셸 — 로고 + 나가기 버튼 + 은은한 원형 장식 (Figma 배경 Ellipse들 참고) */
@@ -195,19 +176,19 @@ function FieldDays({ label, value, onChange }) {
   );
 }
 
-function SubjectList({ value, onSelect }) {
+function SubjectList({ items, value, onSelect }) {
   return (
     <div className="mt-10 flex w-full max-w-sm flex-col gap-4">
-      {SUBJECTS.map((s) => (
+      {items.map((item) => (
         <button
-          key={s}
+          key={item.id}
           type="button"
-          onClick={() => onSelect(s)}
-          className={`rounded-3xl border-[1.5px] bg-black/[0.03] px-6 py-4 text-base font-bold text-moram-navy transition ${
-            value === s ? "border-moram-navy shadow-[0_4px_10px_rgba(0,0,0,0.15)]" : "border-transparent hover:border-black/10"
+          onClick={() => onSelect(item)}
+          className={`truncate rounded-3xl border-[1.5px] bg-black/[0.03] px-6 py-4 text-base font-bold text-moram-navy transition ${
+            value?.id === item.id ? "border-moram-navy shadow-[0_4px_10px_rgba(0,0,0,0.15)]" : "border-transparent hover:border-black/10"
           }`}
         >
-          {s}
+          {item.filename}
         </button>
       ))}
     </div>
@@ -287,19 +268,36 @@ function ScoreRing({ percent }) {
 export default function Quiz() {
   const navigate = useNavigate();
   const location = useLocation();
-  const reviewSubject = location.state?.reviewSubject;
+  // 오답노트 "복습퀴즈하기" → WrongNoteOut 한 건
+  const reviewNote = location.state?.reviewNote;
 
-  const [step, setStep] = useState(reviewSubject ? "questions" : "intro");
+  const [step, setStep] = useState(reviewNote ? "questions" : "intro");
   const [settings, setSettings] = useState({ duration: "", streak: "", count: "" });
-  const [subject, setSubject] = useState(reviewSubject || "");
-  const [mode, setMode] = useState(reviewSubject ? "review" : "");
+  const [documents, setDocuments] = useState(null);
+  const [doc, setDoc] = useState(null);
+  const [mode, setMode] = useState(reviewNote ? "review" : "");
   const [qType, setQType] = useState("");
 
+  const [quizSet, setQuizSet] = useState(null);
+  const [generating, setGenerating] = useState(false);
+  const [retrying, setRetrying] = useState(Boolean(reviewNote));
   const [index, setIndex] = useState(0);
+  const [question, setQuestion] = useState(
+    reviewNote
+      ? { id: reviewNote.quiz_question_id, question_text: reviewNote.question_text, options: reviewNote.options }
+      : null
+  );
+  const [loadError, setLoadError] = useState("");
   const [selected, setSelected] = useState(null);
   const [shortAnswer, setShortAnswer] = useState("");
-  const [checked, setChecked] = useState(false);
+  const [feedback, setFeedback] = useState(null); // QuizSubmitResponse
+  const [submitting, setSubmitting] = useState(false);
   const [results, setResults] = useState([]);
+  const [result, setResult] = useState(null); // QuizResultOut
+
+  const total = reviewNote ? 1 : quizSet?.total_questions ?? 0;
+  const checked = feedback !== null;
+  const isChoice = Array.isArray(question?.options) && question.options.length > 0;
 
   // 281:320 "퀴즈 학습 시작 (모션 추가)" — 잠시 보여준 뒤 자동으로 설정 단계로 이동
   useEffect(() => {
@@ -308,50 +306,98 @@ export default function Quiz() {
     return () => clearTimeout(t);
   }, [step]);
 
-  const pool = QUESTION_BANK[subject] || [];
-  const activeQuestions = useMemo(() => {
-    if (mode === "solve" && qType) {
-      const filtered = pool.filter((q) => q.type === qType);
-      return filtered.length ? filtered : pool;
-    }
-    return pool;
-  }, [pool, mode, qType]);
+  // 과목(자료) 선택 단계에 들어가면 업로드한 자료 목록을 불러온다
+  useEffect(() => {
+    if (step !== "subject" || documents) return;
+    listDocuments()
+      .then(setDocuments)
+      .catch((err) => {
+        setDocuments([]);
+        setLoadError(getErrorMessage(err, "자료 목록을 불러오지 못했어요."));
+      });
+  }, [step, documents]);
 
-  const question = activeQuestions[index];
-  const isLast = index === activeQuestions.length - 1;
-  const canCheck = question?.type === "객관식" ? selected !== null : shortAnswer.trim().length > 0;
+  // 문제는 한 번에 한 문제씩 서버에서 받아온다
+  useEffect(() => {
+    if (step !== "questions" || !quizSet) return;
+    let cancelled = false;
+    setQuestion(null);
+    setLoadError("");
+    getQuestion(quizSet.id, index + QUESTION_INDEX_BASE)
+      .then((q) => !cancelled && setQuestion(q))
+      .catch((err) => !cancelled && setLoadError(getErrorMessage(err, "문제를 불러오지 못했어요.")));
+    return () => {
+      cancelled = true;
+    };
+  }, [step, quizSet, index]);
 
-  const isCorrect = useMemo(() => {
-    if (!question || !checked) return null;
-    if (question.type === "객관식") return selected === question.answer;
-    return shortAnswer.trim().toLowerCase() === question.answer.toLowerCase();
-  }, [question, checked, selected, shortAnswer]);
+  const isLast = index === total - 1;
+  const canCheck = isChoice ? selected !== null : shortAnswer.trim().length > 0;
 
   const exit = () => navigate("/dashboard");
 
-  const handleCheck = () => {
-    if (!canCheck || checked || !question) return;
-    setChecked(true);
-    setResults((prev) => [...prev, { id: question.prompt, correct: isCorrect }]);
+  const startQuiz = async () => {
+    if (!doc || !qType || generating) return;
+    setGenerating(true);
+    setLoadError("");
+    try {
+      const set = await generateQuiz({ document_id: doc.id, quiz_type: qType });
+      setQuizSet(set);
+      setIndex(0);
+      setResults([]);
+      setRetrying(false);
+      setStep("questions");
+    } catch (err) {
+      setLoadError(getErrorMessage(err, "퀴즈를 만들지 못했어요."));
+    } finally {
+      setGenerating(false);
+    }
+  };
+
+  const handleCheck = async () => {
+    if (!canCheck || checked || !question || submitting) return;
+    // 객관식은 선택한 보기 텍스트를 user_answer 로 보냄 (보기 번호인지 텍스트인지 명세에 없음 — 백엔드 확인 필요)
+    const answer = isChoice ? selected : shortAnswer.trim();
+    setSubmitting(true);
+    try {
+      const res = await (retrying ? retryAnswer : submitAnswer)(question.id, answer);
+      setFeedback(res);
+      setResults((prev) => [...prev, { id: question.id, correct: res.is_correct }]);
+    } catch (err) {
+      setLoadError(getErrorMessage(err, "채점에 실패했어요. 다시 시도해주세요."));
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const showResult = async () => {
+    setStep("result");
+    if (!quizSet) return;
+    try {
+      setResult(await getQuizResult(quizSet.id));
+    } catch {
+      setResult(null); // 실패 시 로컬 채점 결과로 표시
+    }
   };
 
   const handleNext = () => {
-    if (isLast) {
-      setStep("result");
-    } else {
-      setIndex((i) => i + 1);
-    }
     setSelected(null);
     setShortAnswer("");
-    setChecked(false);
+    setFeedback(null);
+    setLoadError("");
+    if (isLast) showResult();
+    else setIndex((i) => i + 1);
   };
 
+  // 다시 풀기: 같은 문제들을 retry API로 다시 제출
   const resetQuiz = () => {
     setIndex(0);
     setResults([]);
+    setResult(null);
     setSelected(null);
     setShortAnswer("");
-    setChecked(false);
+    setFeedback(null);
+    setRetrying(true);
     setStep("questions");
   };
 
@@ -399,12 +445,22 @@ export default function Quiz() {
     );
   }
 
-  /* ---------------- 281:461 / 281:522 과목 선택 ---------------- */
+  /* ---------------- 281:461 / 281:522 과목(자료) 선택 ---------------- */
   if (step === "subject") {
     return (
-      <QuizChrome onExit={exit} title="무엇을 공부할까요?">
-        <SubjectList value={subject} onSelect={setSubject} />
-        {subject && (
+      <QuizChrome onExit={exit} title="무엇을 공부할까요?" subtitle="자료실에 업로드한 자료로 문제를 만들어요.">
+        {documents === null && <p className="mt-10 text-sm text-black/40">불러오는 중...</p>}
+        {loadError && <p className="mt-6 text-sm text-red-500">{loadError}</p>}
+        {documents?.length === 0 && !loadError && (
+          <p className="mt-10 text-sm text-black/50">
+            아직 업로드한 자료가 없어요.{" "}
+            <Link to="/library" className="font-semibold text-moram-blue hover:underline">
+              자료실에서 업로드하기
+            </Link>
+          </p>
+        )}
+        {documents?.length > 0 && <SubjectList items={documents} value={doc} onSelect={setDoc} />}
+        {doc && (
           <button
             type="button"
             onClick={() => setStep("mode")}
@@ -425,7 +481,8 @@ export default function Quiz() {
         {mode && (
           <button
             type="button"
-            onClick={() => setStep(mode === "solve" ? "type" : "questions")}
+            // 퀴즈 생성 API가 quiz_type 을 필수로 받아서 모든 방식에서 문제 유형을 고르게 함
+            onClick={() => setStep("type")}
             className="mt-14 w-full max-w-sm rounded-full bg-gradient-to-r from-[#06275a] to-[#0d53c0] py-4 text-base font-medium text-white transition hover:brightness-110"
           >
             학습 시작
@@ -440,13 +497,15 @@ export default function Quiz() {
     return (
       <QuizChrome onExit={exit} title="문제 풀기">
         <TypeChoice value={qType} onSelect={setQType} />
+        {loadError && <p className="mt-6 text-sm text-red-500">{loadError}</p>}
         {qType && (
           <button
             type="button"
-            onClick={() => setStep("questions")}
-            className="mt-14 w-full max-w-sm rounded-full bg-gradient-to-r from-[#06275a] to-[#0d53c0] py-4 text-base font-medium text-white transition hover:brightness-110"
+            onClick={startQuiz}
+            disabled={generating}
+            className="mt-14 w-full max-w-sm rounded-full bg-gradient-to-r from-[#06275a] to-[#0d53c0] py-4 text-base font-medium text-white transition hover:brightness-110 disabled:opacity-60"
           >
-            학습 시작
+            {generating ? "문제를 만드는 중..." : "학습 시작"}
           </button>
         )}
       </QuizChrome>
@@ -455,10 +514,11 @@ export default function Quiz() {
 
   /* ---------------- 280:357 결과 화면 ---------------- */
   if (step === "result") {
-    const total = activeQuestions.length;
-    const correctCount = results.filter((r) => r.correct).length;
-    const wrongCount = Math.max(total - correctCount, 0);
-    const percent = total ? Math.round((correctCount / total) * 100) : 0;
+    const localCorrect = results.filter((r) => r.correct).length;
+    const resultTotal = result?.total_questions ?? total;
+    const correctCount = result?.correct_count ?? localCorrect;
+    const wrongCount = Math.max(resultTotal - correctCount, 0);
+    const percent = result?.score ?? (resultTotal ? Math.round((correctCount / resultTotal) * 100) : 0);
     const message = percent >= 80 ? "정말 잘했어요!" : percent >= 50 ? "좋은 시작이에요!" : "다음엔 더 잘해봐요!";
 
     return (
@@ -469,8 +529,11 @@ export default function Quiz() {
         </div>
         <h2 className="mt-8 text-2xl font-bold text-black">{message}</h2>
         <p className="mt-2 text-base font-semibold text-moram-navy">
-          총 {total}문제 중 <span className="text-[#0d53c0]">{correctCount}문제</span> 정답
+          총 {resultTotal}문제 중 <span className="text-[#0d53c0]">{correctCount}문제</span> 정답
         </p>
+        {result?.coins_awarded > 0 && (
+          <p className="mt-1 text-sm font-semibold text-amber-600">코인 {result.coins_awarded}개를 받았어요!</p>
+        )}
 
         <div className="mt-8 flex gap-4">
           <div className="flex w-24 flex-col items-center gap-1 rounded-3xl bg-[#d2dbec]/40 py-5">
@@ -488,13 +551,15 @@ export default function Quiz() {
         </div>
 
         <div className="mt-10 flex w-full max-w-sm flex-col gap-3">
-          <button
-            type="button"
-            onClick={resetQuiz}
-            className="rounded-full bg-gradient-to-r from-[#06275a] to-[#0d53c0] py-4 text-base font-bold text-white transition hover:brightness-110"
-          >
-            다시 풀기
-          </button>
+          {!reviewNote && (
+            <button
+              type="button"
+              onClick={resetQuiz}
+              className="rounded-full bg-gradient-to-r from-[#06275a] to-[#0d53c0] py-4 text-base font-bold text-white transition hover:brightness-110"
+            >
+              다시 풀기
+            </button>
+          )}
           <button
             type="button"
             onClick={exit}
@@ -514,27 +579,32 @@ export default function Quiz() {
   /* ---------------- 문제 풀이 화면 ---------------- */
   if (!question) {
     return (
-      <QuizChrome onExit={exit} title="문제를 준비하지 못했어요">
-        <p className="mt-6 text-sm text-black/50">선택한 조건에 맞는 문제가 아직 없어요.</p>
-        <button
-          type="button"
-          onClick={exit}
-          className="mt-8 rounded-full bg-gradient-to-r from-[#06275a] to-[#0d53c0] px-8 py-3 text-sm font-bold text-white"
-        >
-          대시보드로
-        </button>
+      <QuizChrome onExit={exit} title={loadError ? "문제를 준비하지 못했어요" : "문제를 불러오는 중..."}>
+        {loadError && (
+          <>
+            <p className="mt-6 text-sm text-black/50">{loadError}</p>
+            <button
+              type="button"
+              onClick={exit}
+              className="mt-8 rounded-full bg-gradient-to-r from-[#06275a] to-[#0d53c0] px-8 py-3 text-sm font-bold text-white"
+            >
+              대시보드로
+            </button>
+          </>
+        )}
       </QuizChrome>
     );
   }
 
-  const progress = ((index + (checked ? 1 : 0)) / activeQuestions.length) * 100;
+  const progress = total ? ((index + (checked ? 1 : 0)) / total) * 100 : 0;
+  const correctAnswer = feedback?.correct_answer;
 
   return (
     <div className="min-h-screen bg-white">
       <header className="flex items-center gap-4 px-6 py-6 sm:px-10">
         <img src={moramMark} alt="moram" className="h-6" />
         <span className="text-lg font-medium text-moram-navy">
-          {index + 1}/{activeQuestions.length}
+          {index + 1}/{total}
         </span>
         <div className="h-2 flex-1 overflow-hidden rounded-full bg-gray-100">
           <div className="h-full rounded-full bg-moram-navy transition-all" style={{ width: `${progress}%` }} />
@@ -550,18 +620,20 @@ export default function Quiz() {
 
       <main className="mx-auto flex max-w-2xl flex-col items-center px-6 py-10">
         <div className="flex gap-2 self-center">
-          <span className="rounded-full bg-[#d2dbec]/70 px-4 py-2 text-sm text-moram-navy">{subject}</span>
-          <span className="rounded-full bg-[#0d53c0] px-4 py-2 text-sm text-white">{question.type}</span>
+          <span className="max-w-[240px] truncate rounded-full bg-[#d2dbec]/70 px-4 py-2 text-sm text-moram-navy">
+            {reviewNote ? "오답 복습" : doc?.filename}
+          </span>
+          <span className="rounded-full bg-[#0d53c0] px-4 py-2 text-sm text-white">{isChoice ? "객관식" : "주관식"}</span>
         </div>
 
-        <h1 className="mt-8 text-center text-2xl font-semibold text-black sm:text-3xl">{question.prompt}</h1>
+        <h1 className="mt-8 text-center text-2xl font-semibold text-black sm:text-3xl">{question.question_text}</h1>
 
-        {question.type === "객관식" ? (
+        {isChoice ? (
           <div className="mt-8 flex w-full flex-col gap-4">
             {question.options.map((opt, i) => {
               const isSelected = selected === opt;
-              const showCorrect = checked && opt === question.answer;
-              const showWrong = checked && isSelected && opt !== question.answer;
+              const showCorrect = checked && opt === correctAnswer;
+              const showWrong = checked && isSelected && !feedback.is_correct;
               return (
                 <button
                   key={opt}
@@ -598,19 +670,23 @@ export default function Quiz() {
         )}
 
         {checked && (
-          <p className={`mt-4 flex items-center gap-2 text-sm font-semibold ${isCorrect ? "text-emerald-600" : "text-red-600"}`}>
-            {!isCorrect && <XCircle className="h-4 w-4" />}
-            {isCorrect ? "정답이에요!" : `오답이에요. 정답은 "${question.answer}" 입니다.`}
-          </p>
+          <div className="mt-4 flex flex-col items-center gap-2">
+            <p className={`flex items-center gap-2 text-sm font-semibold ${feedback.is_correct ? "text-emerald-600" : "text-red-600"}`}>
+              {!feedback.is_correct && <XCircle className="h-4 w-4" />}
+              {feedback.is_correct ? "정답이에요!" : `오답이에요. 정답은 "${correctAnswer}" 입니다.`}
+            </p>
+            {feedback.explanation && <p className="text-center text-sm text-black/60">{feedback.explanation}</p>}
+          </div>
         )}
+        {loadError && <p className="mt-4 text-sm text-red-500">{loadError}</p>}
 
         <button
           type="button"
           onClick={checked ? handleNext : handleCheck}
-          disabled={!checked && !canCheck}
+          disabled={!checked && (!canCheck || submitting)}
           className="mt-10 w-full rounded-3xl bg-[#d2dbec]/60 py-5 text-center font-medium text-moram-navy transition disabled:opacity-60 enabled:bg-moram-blue enabled:text-white"
         >
-          {checked ? (isLast ? "결과 보기" : "다음 문제") : "정답 확인"}
+          {checked ? (isLast ? "결과 보기" : "다음 문제") : submitting ? "채점 중..." : "정답 확인"}
         </button>
       </main>
     </div>
