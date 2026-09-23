@@ -42,7 +42,7 @@ export default function Profile() {
     name: "윤호",
     email: "kimjaeho@gmail.com",
     major: "컴퓨터공학과",
-    year: "3학년",
+    year: "1학년",
   });
   const [notifications, setNotifications] = useState({
     assignmentDue: true,
