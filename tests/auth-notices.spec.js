@@ -5,8 +5,8 @@ const showNotice = process.env.VITE_SHOW_AUTH_DEMO_NOTICE === 'true'
 
 test('authentication notice flag controls passive copy without pretending to sign in', async ({ page }) => {
   await page.goto('/login')
-  await expect(page.locator('.auth-preview-note p')).toHaveCount(showNotice ? 1 : 0)
-  await expect(page.getByRole('link', { name: '대시보드 미리보기' })).toBeVisible()
+  await expect(page.locator('.auth-preview-note')).toHaveCount(0)
+  await expect(page.getByRole('link', { name: '대시보드 미리보기' })).toHaveCount(0)
   await expect(page.locator('.login-legal')).toHaveCount(showNotice ? 1 : 0)
   await page.getByLabel('아이디', { exact: true }).fill('notice-check')
   await page.getByLabel('비밀번호', { exact: true }).fill('not-a-real-password')

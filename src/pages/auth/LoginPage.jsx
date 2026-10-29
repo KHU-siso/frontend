@@ -36,10 +36,6 @@ export default function LoginPage() {
         </form>
         <p className="auth-status" role="status">{status}</p>
         <Link className="login-signup" to="/signup">회원가입</Link>
-        <div className="auth-preview-note">
-          <AuthDemoNotice><p><strong>화면 미리보기</strong> · 실제 로그인은 지원하지 않습니다.</p></AuthDemoNotice>
-          <Link to="/dashboard">대시보드 미리보기</Link>
-        </div>
         <AuthDemoNotice>
           <p className="login-legal">이용약관 및 개인정보 처리방침은 서비스 연결 시 제공됩니다.</p>
         </AuthDemoNotice>

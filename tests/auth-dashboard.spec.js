@@ -7,7 +7,7 @@ async function readyScreenshot(page, testInfo, name) {
   await page.screenshot({ path: testInfo.outputPath(`${name}.png`), fullPage: true })
 }
 
-test('login never authenticates and demo entry is separate', async ({ page }, testInfo) => {
+test('login rejects unsupported authentication and has no dashboard preview link', async ({ page }, testInfo) => {
   const errors = []
   page.on('pageerror', error => errors.push(error.message))
   await page.goto('/login')
@@ -22,7 +22,8 @@ test('login never authenticates and demo entry is separate', async ({ page }, te
   await expect(page).toHaveURL('/login')
   await page.getByRole('button', { name: 'Google로 계속하기' }).click()
   await expect(page.getByRole('status')).toContainText('Google로 계속할 수 없습니다')
-  await page.getByRole('link', { name: '대시보드 미리보기' }).click()
+  await expect(page.getByRole('link', { name: '대시보드 미리보기' })).toHaveCount(0)
+  await page.goto('/dashboard')
   await expect(page).toHaveURL('/dashboard')
   await expect(page.getByRole('heading', { name: /작은 배움으로 오늘의 목표/ })).toBeVisible()
   await expect(page.locator('.app-header .brand-logo')).toHaveAttribute('href', '/dashboard')
