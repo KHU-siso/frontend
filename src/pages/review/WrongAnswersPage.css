@@ -1,0 +1,29 @@
+.wrong-answers-page { --wrong-face-height: clamp(4rem, 13vw, 7.5rem); --wrong-face-width: calc(var(--wrong-face-height) * 400 / 700); max-width: 68rem; padding-inline-end: calc(clamp(1.25rem, 3.5vw, 3.5rem) + var(--wrong-face-width)); }
+.wrong-summary-row { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 2rem; }
+.wrong-summary-row p { font-size: 0.8rem; }
+.wrong-summary-row p strong { float: right; }
+.wrong-summary-row progress { width: 100%; height: 0.65rem; border: 0; border-radius: 1rem; overflow: hidden; accent-color: var(--color-ink); }
+.wrong-filters { display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; }
+.wrong-filters .service-search { max-width: none; border: 0; border-radius: 2rem; background: #e5eaf5; }
+.wrong-filters .service-toolbar { margin: 0; gap: 0.5rem; }
+.wrong-filters select { max-width: 10rem; padding: 0.5rem; font-size: 0.75rem; }
+.wrong-list { display: grid; gap: 2rem; margin-top: 2rem; }
+.wrong-card { position: relative; border: 1px solid #aabedc; border-radius: 1.5rem; background: white; box-shadow: 0 0 1.5rem rgb(210 219 236 / 65%); }
+.wrong-card > header { display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem; padding: 0.75rem 1.25rem; border-bottom: 1px solid #b8cae3; }
+.wrong-card h2 { margin: 0; font-size: 0.95rem; }
+.wrong-card > header > .service-plain-button { margin-left: auto; padding: 0.4rem 0.75rem; background: var(--color-ink); color: white; font-size: 0.7rem; }
+.bookmark-button { border: 0; background: transparent; color: #aa7800; font-size: 1.4rem; cursor: pointer; }
+.bookmark-button[aria-pressed='true'] { color: #aa7800; }
+.wrong-card__body { position: relative; padding: 1rem 1.25rem; font-size: 0.875rem; line-height: 1.7; }
+/* Original 292:63 Union SVG, unmodified. This viewport shows its right face lobe
+   without stretching the head when the question or explanation gets longer.
+   Asset canvas: 4955×1772, card edge x=4354, face viewport x=4354/y=545, h=700. */
+.wrong-card__face { position: absolute; left: calc(100% - 0.5px); top: 50%; z-index: 1; width: var(--wrong-face-width); height: var(--wrong-face-height); transform: translateY(-50%); clip-path: ellipse(88% 51% at 9.25% 50%); pointer-events: none; background-image: url('../../assets/review/wrong-card-union.svg'); background-repeat: no-repeat; background-size: calc(var(--wrong-face-height) * 4955 / 700) calc(var(--wrong-face-height) * 1772 / 700); background-position: calc(var(--wrong-face-height) * -4354 / 700) calc(var(--wrong-face-height) * -545 / 700); }
+.wrong-card__eye { position: absolute; left: 23.75%; width: 10.5%; height: auto; }
+.wrong-card__eye--upper { top: 27.857%; }
+.wrong-card__eye--lower { top: 55.857%; }
+.wrong-submitted { color: #b91c1c; }
+.wrong-correct { color: #2e7d32; }
+.wrong-explanation-toggle { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 0.8rem 1.25rem; border: 0; border-top: 1px solid #b8cae3; border-radius: 0 0 1.5rem 1.5rem; background: transparent; color: var(--color-hero); font: inherit; font-size: 0.875rem; cursor: pointer; }
+.wrong-explanation { padding: 0 1.25rem 1.25rem; margin: 0; font-size: 0.875rem; line-height: 1.9; }
+@media (max-width: 47.99rem) { .wrong-answers-page { padding-inline-end: calc(1rem + var(--wrong-face-width)); } .wrong-summary-row { grid-template-columns: 1fr; gap: 1rem; } .wrong-card h2 { font-size: 0.8125rem; } .wrong-card > header { padding-inline: 1rem; } .wrong-list { gap: 1.5rem; } }

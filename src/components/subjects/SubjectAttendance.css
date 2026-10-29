@@ -1,0 +1,32 @@
+.subject-attendance { min-width: 0; }
+.subject-attendance .attendance-table { min-width: 56rem; }
+.subject-attendance .attendance-table td { padding: 0.4rem; }
+.attendance-sessions { display: grid; gap: 0.65rem; }
+.attendance-session { display: grid; gap: 0.25rem; }
+.attendance-session > span { color: #7187a5; font-size: 0.625rem; font-weight: 500; }
+.attendance-select {
+  appearance: none;
+  -webkit-appearance: none;
+  display: block;
+  width: 100%;
+  min-width: 3.3rem;
+  min-height: 2.75rem;
+  padding: 0.45rem 1.3rem 0.45rem 0.45rem;
+  border: 1px solid #d7e0ed;
+  border-radius: 0.5rem;
+  background-color: #f5f7fb;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23557094' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-position: right 0.25rem center;
+  background-size: 0.8rem;
+  background-repeat: no-repeat;
+  color: #657b99;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.attendance-select--present { color: #2e7d32; background-color: #eaf5ed; border-color: #c3dfc9; }
+.attendance-select--absent { color: #b92c3b; background-color: #fff0f1; border-color: #f0ccd1; }
+.attendance-select--late { color: #966114; background-color: #fff5df; border-color: #ebdbb6; }
+.attendance-select--cancelled { color: #426da9; background-color: #eaf0fc; border-color: #c8d7ef; }
+.attendance-select option { color: #123263; background: white; }
+.attendance-select:focus-visible { outline-offset: -3px; }

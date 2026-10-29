@@ -1,0 +1,14 @@
+.moram-modal {
+  width: min(32rem, calc(100% - 2rem));
+  max-height: calc(100svh - 2rem);
+  padding: 0;
+  border: 0;
+  border-radius: 1.25rem;
+  color: var(--color-ink);
+  box-shadow: 0 20px 70px rgb(18 50 99 / 25%);
+}
+.moram-modal::backdrop { background: rgb(18 50 99 / 25%); backdrop-filter: blur(5px); }
+.moram-modal__content { padding: clamp(1.25rem, 4vw, 2rem); }
+.moram-modal header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.5rem; }
+.moram-modal h2 { margin: 0; font-size: 1.25rem; }
+.modal-close { display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border: 0; background: transparent; color: var(--color-hero); font-size: 2rem; cursor: pointer; }

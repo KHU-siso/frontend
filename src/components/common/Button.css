@@ -1,0 +1,18 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3rem;
+  padding: 0.8em 1.8em;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, var(--color-action-start), var(--color-action-end));
+  color: var(--color-white);
+  font-weight: var(--font-extrabold);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: box-shadow 160ms ease;
+}
+.button:hover { box-shadow: 0 4px 16px rgb(6 39 90 / 20%); }
+.button:disabled { opacity: 0.5; cursor: not-allowed; }

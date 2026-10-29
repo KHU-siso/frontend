@@ -1,0 +1,157 @@
+.landing { display: grid; min-width: 0; isolation: isolate; }
+.landing-stage {
+  grid-area: 1 / 1;
+  min-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity var(--landing-fade-duration) ease,
+    visibility 0s var(--landing-fade-duration);
+}
+.landing-stage.is-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: opacity var(--landing-fade-duration) ease, visibility 0s;
+}
+.wordmark {
+  margin: 0;
+  background: linear-gradient(90deg, var(--color-wordmark-start) 30.769%, var(--color-hero));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  font-size: 25.85vw;
+  font-weight: var(--font-extrabold);
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+}
+.intro-stage { display: grid; place-items: center; background: var(--color-hero); }
+.hero-art { position: relative; width: 100%; aspect-ratio: 1.596; }
+.intro-wordmark {
+  position: absolute;
+  top: -5.55%;
+  left: 50%;
+  width: max-content;
+  translate: -50% 0;
+}
+.ong-illustration { position: absolute; inset: 0; }
+.ong-layer { position: absolute; display: grid; place-items: center; }
+.ong-layer img {
+  display: block;
+  width: var(--layer-image-width, 100%);
+  height: auto;
+  /* Original SVG roots and viewBoxes remain untouched. */
+  transform: var(--layer-transform, none);
+}
+.ong-layer--ground {
+  left: 17.05%; top: 75.33%; width: 57.1%; aspect-ratio: 3.92;
+  --layer-image-width: 99.69%; --layer-transform: rotate(-0.75deg);
+}
+.ong-layer--head {
+  left: 44.17%; top: 5.28%; width: 25.95%; aspect-ratio: 1.111;
+  --layer-image-width: 90.55%; --layer-transform: rotate(6.79deg) skewX(-0.45deg);
+}
+.ong-layer--back-foot {
+  left: 49.34%; top: 53.37%; width: 19.44%; aspect-ratio: 0.898;
+  --layer-image-width: 54.37%; --layer-transform: rotate(-32.3deg) skewX(0.99deg);
+}
+.ong-layer--body {
+  left: 30.58%; top: 20.7%; width: 39.79%; aspect-ratio: 1.11;
+  --layer-image-width: 90.55%; --layer-transform: rotate(6.79deg) skewX(-0.45deg);
+}
+.ong-layer--eye-left { left: 49.71%; top: 14.77%; width: 2.17%; }
+.ong-layer--eye-right { left: 58.27%; top: 19.01%; width: 2.17%; }
+.ong-layer--front-foot {
+  left: 17.24%; top: 32.65%; width: 33.52%; aspect-ratio: 0.985;
+  --layer-image-width: 52.13%; --layer-transform: rotate(138.95deg) skewX(1deg);
+}
+.ong-layer--step-near {
+  left: 71.98%; top: 63%; width: 21.46%; aspect-ratio: 4.23;
+  --layer-image-width: 99.72%; --layer-transform: rotate(-0.75deg);
+}
+.ong-layer--step-far {
+  left: 91.47%; top: 54.66%; width: 12.19%; aspect-ratio: 4.23;
+  --layer-image-width: 99.72%; --layer-transform: rotate(-0.75deg);
+}
+.welcome-stage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(1rem, 2vw, 2rem);
+  padding-block: var(--space-6) var(--space-8);
+  background: var(--color-white);
+}
+.welcome-wordmark { width: max-content; min-width: 100%; align-self: center; }
+.welcome-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-inline: var(--page-gutter);
+  text-align: center;
+  font-weight: var(--font-extrabold);
+}
+.welcome-description {
+  margin: 0;
+  color: var(--color-copy-muted);
+  font-size: clamp(1rem, 2.55vw, 2.375rem);
+  line-height: 1.5;
+  word-break: keep-all;
+}
+.study-button {
+  width: 26.22vw;
+  min-width: 12rem;
+  min-height: 5.64vw;
+  margin-top: clamp(1.75rem, 3.6vw, 3.5rem);
+  padding: 0.55em 1em;
+  font-size: clamp(1.25rem, 2.55vw, 2.375rem);
+}
+.welcome-benefits {
+  display: flex;
+  justify-content: center;
+  gap: clamp(1rem, 1.8vw, 2rem);
+  margin: clamp(2rem, 4.8vw, 4.5rem) 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--color-copy-muted);
+  font-size: clamp(0.75rem, 1.68vw, 1.5rem);
+  line-height: 1.5;
+}
+.welcome-benefits li { display: flex; align-items: center; gap: clamp(1rem, 1.8vw, 2rem); }
+.benefit-separator { display: block; width: 0.35em; height: auto; }
+
+@media (max-width: 47.99rem) {
+  /* Normalized illustration crop between the header and footer. */
+  .hero-art { aspect-ratio: 0.578; }
+  .wordmark { font-size: 26.89vw; }
+  .intro-wordmark { top: 19.68%; }
+  .ong-layer--ground { left: 4.39%; top: 72.93%; width: 90.42%; }
+  .ong-layer--head { left: 42.91%; top: 31.04%; width: 41.35%; }
+  .ong-layer--back-foot { left: 51.16%; top: 58.78%; width: 30.98%; }
+  .ong-layer--body { left: 21.27%; top: 39.93%; width: 63.41%; }
+  .ong-layer--eye-left { left: 51.73%; top: 36.5%; width: 3.46%; }
+  .ong-layer--eye-right { left: 65.39%; top: 38.93%; width: 3.46%; }
+  .ong-layer--front-foot { left: 0; top: 46.83%; width: 53.42%; }
+  .ong-layer--step-near {
+    left: 87.25%; top: 68.46%; width: 33.93%;
+    --layer-image-width: 99.87%; --layer-transform: rotate(-0.34deg);
+  }
+  .ong-layer--step-far { left: 118.09%; top: 57.25%; width: 19.3%; }
+  .welcome-stage { gap: var(--space-6); padding-block: var(--space-8); }
+  .welcome-description { font-size: clamp(0.8125rem, 4vw, 1.1875rem); }
+  .study-button {
+    width: 59vw;
+    min-width: 11.5rem;
+    min-height: 3.2rem;
+    margin-top: var(--space-6);
+    font-size: clamp(1.125rem, 4.95vw, 1.5rem);
+  }
+  .welcome-benefits {
+    flex-direction: column;
+    gap: var(--space-4);
+    margin-top: var(--space-6);
+    font-size: clamp(0.875rem, 3.98vw, 1.125rem);
+  }
+  .welcome-benefits li { flex-direction: column; gap: var(--space-4); }
+}

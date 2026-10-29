@@ -1,0 +1,1191 @@
+{
+  "pastel-blue-ong-cap": {
+    "ratio": 2,
+    "placement": {
+      "left": 25.5,
+      "top": 12,
+      "width": 49
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-blue-ong-cap.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-green-ong-cap": {
+    "ratio": 2,
+    "placement": {
+      "left": 25.5,
+      "top": 12,
+      "width": 49
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-green-ong-cap.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-navy-ong-cap": {
+    "ratio": 2,
+    "placement": {
+      "left": 25.5,
+      "top": 12,
+      "width": 49
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-navy-ong-cap.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-cream-bear-cap": {
+    "ratio": 2,
+    "placement": {
+      "left": 25.5,
+      "top": 12,
+      "width": 49
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-cream-bear-cap.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-pink-ribbon-cap": {
+    "ratio": 2,
+    "placement": {
+      "left": 25.5,
+      "top": 12,
+      "width": 49
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-pink-ribbon-cap.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-red-backward-cap": {
+    "ratio": 2,
+    "placement": {
+      "left": 25.5,
+      "top": 12.3,
+      "width": 49
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-red-backward-cap.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-yellow-ong-bucket-hat": {
+    "ratio": 1.875,
+    "placement": {
+      "left": 24,
+      "top": 10.8,
+      "width": 52
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-yellow-ong-bucket-hat.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "beige-brim-hat": {
+    "ratio": 2,
+    "placement": {
+      "left": 22.5,
+      "top": 11.3,
+      "width": 55
+    },
+    "layers": [
+      {
+        "file": "refined/beige-brim-hat.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-purple-pom-beanie": {
+    "ratio": 1.6666666666666667,
+    "placement": {
+      "left": 25.8,
+      "top": 9.2,
+      "width": 48.4
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-purple-pom-beanie.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-blue-bear-beanie": {
+    "ratio": 1.6666666666666667,
+    "placement": {
+      "left": 25.8,
+      "top": 9,
+      "width": 48.4
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-blue-bear-beanie.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-black-cat-beanie": {
+    "ratio": 1.6666666666666667,
+    "placement": {
+      "left": 25.8,
+      "top": 9,
+      "width": 48.4
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-black-cat-beanie.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-pink-cat-headband": {
+    "ratio": 1.6666666666666667,
+    "placement": {
+      "left": 26,
+      "top": 10.6,
+      "width": 48
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-pink-cat-headband.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-yellow-rabbit-headband": {
+    "ratio": 1.6666666666666667,
+    "placement": {
+      "left": 26,
+      "top": 7.4,
+      "width": 48
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-yellow-rabbit-headband.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-blue-earflap-hat": {
+    "ratio": 1.3636363636363635,
+    "placement": {
+      "left": 22,
+      "top": 11.8,
+      "width": 56
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-blue-earflap-hat.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-brown-aviator-hat": {
+    "ratio": 1.3636363636363635,
+    "placement": {
+      "left": 22,
+      "top": 10.6,
+      "width": 56
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-brown-aviator-hat.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-pink-hair-bow": {
+    "ratio": 1.3333333333333333,
+    "placement": {
+      "left": 55.8,
+      "top": 16.6,
+      "width": 20.5
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-pink-hair-bow.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-red-hair-bow": {
+    "ratio": 1.3333333333333333,
+    "placement": {
+      "left": 55.8,
+      "top": 16.6,
+      "width": 20.5
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-red-hair-bow.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-yellow-hair-bow": {
+    "ratio": 1.3333333333333333,
+    "placement": {
+      "left": 55.8,
+      "top": 16.6,
+      "width": 20.5
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-yellow-hair-bow.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-purple-hair-bow": {
+    "ratio": 1.3333333333333333,
+    "placement": {
+      "left": 55.8,
+      "top": 16.6,
+      "width": 20.5
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-purple-hair-bow.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-blue-hair-bow": {
+    "ratio": 1.3333333333333333,
+    "placement": {
+      "left": 55.8,
+      "top": 16.6,
+      "width": 20.5
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-blue-hair-bow.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-cherry-cardigan": {
+    "ratio": 1.6,
+    "placement": {
+      "left": 9.3,
+      "top": 41.15,
+      "width": 81.4
+    },
+    "layers": [
+      {
+        "file": "rounded/pastel-cherry-cardigan.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export.",
+    "attachmentAnchors": {
+      "badge": {
+        "left": 26
+      }
+    }
+  },
+  "pastel-red-collar-cardigan": {
+    "ratio": 1.6,
+    "placement": {
+      "left": 9.3,
+      "top": 41.15,
+      "width": 81.4
+    },
+    "layers": [
+      {
+        "file": "rounded/pastel-red-collar-cardigan.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-navy-sailor-top": {
+    "ratio": 1.6,
+    "placement": {
+      "left": 9.3,
+      "top": 41.2,
+      "width": 81.4
+    },
+    "layers": [
+      {
+        "file": "rounded/pastel-navy-sailor-top.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-pink-heart-sweater": {
+    "ratio": 1.6,
+    "placement": {
+      "left": 9.35,
+      "top": 41.15,
+      "width": 81.3
+    },
+    "layers": [
+      {
+        "file": "rounded/pastel-pink-heart-sweater.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-cream-bear-bag-hoodie": {
+    "ratio": 1.6,
+    "placement": {
+      "left": 9.3,
+      "top": 41.15,
+      "width": 81.4
+    },
+    "layers": [
+      {
+        "file": "rounded/pastel-cream-bear-bag-hoodie.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-blue-cloud-sweater": {
+    "ratio": 1.6,
+    "placement": {
+      "left": 9.35,
+      "top": 41.15,
+      "width": 81.3
+    },
+    "layers": [
+      {
+        "file": "rounded/pastel-blue-cloud-sweater.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-cream-stripe-sweater": {
+    "ratio": 1.6,
+    "placement": {
+      "left": 9.35,
+      "top": 41.15,
+      "width": 81.3
+    },
+    "layers": [
+      {
+        "file": "rounded/pastel-cream-stripe-sweater.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "red-varsity-jacket": {
+    "ratio": 1.6,
+    "placement": {
+      "left": 9.4,
+      "top": 41.33,
+      "width": 81.2
+    },
+    "layers": [
+      {
+        "file": "rounded/red-varsity-jacket.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-green-ong-varsity": {
+    "ratio": 1.6,
+    "placement": {
+      "left": 9.35,
+      "top": 41.33,
+      "width": 81.3
+    },
+    "layers": [
+      {
+        "file": "rounded/pastel-green-ong-varsity.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export.",
+    "attachmentAnchors": {
+      "badge": {
+        "left": 26
+      }
+    }
+  },
+  "pastel-navy-scarf-coat": {
+    "ratio": 1.6,
+    "placement": {
+      "left": 9.35,
+      "top": 41.15,
+      "width": 81.3
+    },
+    "layers": [
+      {
+        "file": "rounded/pastel-navy-scarf-coat.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export.",
+    "attachmentAnchors": {
+      "badge": {
+        "left": 26
+      }
+    }
+  },
+  "pastel-cream-ong-bag": {
+    "ratio": 1.2857142857142858,
+    "placement": {
+      "left": 19,
+      "top": 43.4,
+      "width": 64
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-cream-ong-bag.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-yellow-star-bag": {
+    "ratio": 1.2857142857142858,
+    "placement": {
+      "left": 19,
+      "top": 43.4,
+      "width": 65
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-yellow-star-bag.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-blue-ong-bag": {
+    "ratio": 1.2857142857142858,
+    "placement": {
+      "left": 19,
+      "top": 43.4,
+      "width": 64
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-blue-ong-bag.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-brown-bear-bag": {
+    "ratio": 1.2857142857142858,
+    "placement": {
+      "left": 19,
+      "top": 43.4,
+      "width": 64
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-brown-bear-bag.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-pink-heart-bag": {
+    "ratio": 1.2857142857142858,
+    "placement": {
+      "left": 19,
+      "top": 43.4,
+      "width": 64
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-pink-heart-bag.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-black-ong-bag": {
+    "ratio": 1.2857142857142858,
+    "placement": {
+      "left": 19,
+      "top": 43.4,
+      "width": 64
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-black-ong-bag.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-green-frog-bag": {
+    "ratio": 1.2857142857142858,
+    "placement": {
+      "left": 19,
+      "top": 43.4,
+      "width": 64
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-green-frog-bag.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-cream-bow-tote": {
+    "ratio": 0.8148148148148148,
+    "placement": {
+      "left": 68,
+      "top": 50.5,
+      "width": 24
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-cream-bow-tote.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-purple-ong-backpack": {
+    "ratio": 0.75,
+    "placement": {
+      "left": 75,
+      "top": 47,
+      "width": 21
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-purple-ong-backpack.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      },
+      {
+        "file": "refined/pastel-purple-ong-backpack-straps.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100,
+        "wearableOnly": true
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export.",
+    "renderParts": [
+      {
+        "layer": 0,
+        "placement": {
+          "left": 75,
+          "top": 47,
+          "width": 21
+        },
+        "zIndex": 18
+      },
+      {
+        "layer": 1,
+        "ratio": 1.5,
+        "placement": {
+          "left": 12,
+          "top": 41.9,
+          "width": 76
+        },
+        "zIndex": 34
+      }
+    ]
+  },
+  "pastel-blue-fringe-scarf": {
+    "ratio": 1.25,
+    "placement": {
+      "left": 24,
+      "top": 41.3,
+      "width": 52
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-blue-fringe-scarf.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export.",
+    "attachmentAnchors": {
+      "badge": {
+        "left": 26
+      }
+    }
+  },
+  "pastel-red-fringe-scarf": {
+    "ratio": 1.25,
+    "placement": {
+      "left": 24,
+      "top": 41.3,
+      "width": 52
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-red-fringe-scarf.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export.",
+    "attachmentAnchors": {
+      "badge": {
+        "left": 26
+      }
+    }
+  },
+  "pastel-yellow-check-scarf": {
+    "ratio": 1.25,
+    "placement": {
+      "left": 24,
+      "top": 41.3,
+      "width": 52
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-yellow-check-scarf.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export.",
+    "attachmentAnchors": {
+      "badge": {
+        "left": 26
+      }
+    }
+  },
+  "pastel-purple-scarf": {
+    "ratio": 1.25,
+    "placement": {
+      "left": 24,
+      "top": 41.5,
+      "width": 52
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-purple-scarf.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export.",
+    "attachmentAnchors": {
+      "badge": {
+        "left": 26
+      }
+    }
+  },
+  "pastel-pink-heart-scarf": {
+    "ratio": 1.25,
+    "placement": {
+      "left": 24,
+      "top": 41.3,
+      "width": 52
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-pink-heart-scarf.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export.",
+    "attachmentAnchors": {
+      "badge": {
+        "left": 26
+      }
+    }
+  },
+  "pastel-navy-stripe-scarf": {
+    "ratio": 1.25,
+    "placement": {
+      "left": 24,
+      "top": 41.3,
+      "width": 52
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-navy-stripe-scarf.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export.",
+    "attachmentAnchors": {
+      "badge": {
+        "left": 26
+      }
+    }
+  },
+  "pastel-red-bow-tie": {
+    "ratio": 1.3333333333333333,
+    "placement": {
+      "left": 36.5,
+      "top": 43.1,
+      "width": 27
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-red-bow-tie.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-cream-fur-neck-ribbon": {
+    "ratio": 1.4285714285714286,
+    "placement": {
+      "left": 24,
+      "top": 41.3,
+      "width": 52
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-cream-fur-neck-ribbon.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-red-round-glasses": {
+    "ratio": 2.3076923076923075,
+    "placement": {
+      "left": 27.345217391304338,
+      "top": 24.90914530228433,
+      "width": 43.869565217391326
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-red-round-glasses.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-yellow-frame-glasses": {
+    "ratio": 2.3076923076923075,
+    "placement": {
+      "left": 27.7925052030021,
+      "top": 25.00683205102254,
+      "width": 42.97546533239703
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-yellow-frame-glasses.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-purple-cat-sunglasses": {
+    "ratio": 2.3076923076923075,
+    "placement": {
+      "left": 28.49040963447345,
+      "top": 25.45918165050542,
+      "width": 41.51499191115974
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-purple-cat-sunglasses.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-pink-heart-sunglasses": {
+    "ratio": 2.3076923076923075,
+    "placement": {
+      "left": 27.309370562204933,
+      "top": 25.03431372709268,
+      "width": 43.87610943449633
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-pink-heart-sunglasses.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-silver-round-glasses": {
+    "ratio": 2.3076923076923075,
+    "placement": {
+      "left": 27.345217391304338,
+      "top": 24.90914530228433,
+      "width": 43.869565217391326
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-silver-round-glasses.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-blue-sunglasses": {
+    "ratio": 2.3076923076923075,
+    "placement": {
+      "left": 27.759531678814618,
+      "top": 24.979890612333076,
+      "width": 42.97296329821455
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-blue-sunglasses.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-white-cat-glasses": {
+    "ratio": 2.3076923076923075,
+    "placement": {
+      "left": 28.51262337758031,
+      "top": 25.479284776506695,
+      "width": 41.534931845046316
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-white-cat-glasses.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-daisy-badge": {
+    "ratio": 1,
+    "placement": {
+      "left": 62,
+      "top": 53.8,
+      "width": 12.6
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-daisy-badge.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-blossom-badge": {
+    "ratio": 1,
+    "placement": {
+      "left": 62,
+      "top": 53.8,
+      "width": 12.6
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-blossom-badge.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-cherry-badge": {
+    "ratio": 1,
+    "placement": {
+      "left": 62,
+      "top": 53.8,
+      "width": 12.6
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-cherry-badge.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-star-badge": {
+    "ratio": 1,
+    "placement": {
+      "left": 62,
+      "top": 53.8,
+      "width": 12.6
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-star-badge.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-heart-badge": {
+    "ratio": 1,
+    "placement": {
+      "left": 62,
+      "top": 53.8,
+      "width": 12.6
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-heart-badge.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-snowflake-badge": {
+    "ratio": 1,
+    "placement": {
+      "left": 62,
+      "top": 53.8,
+      "width": 12.6
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-snowflake-badge.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-clover-badge": {
+    "ratio": 1,
+    "placement": {
+      "left": 62,
+      "top": 53.8,
+      "width": 12.6
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-clover-badge.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-carrot-badge": {
+    "ratio": 1,
+    "placement": {
+      "left": 62.7,
+      "top": 53.8,
+      "width": 12.6
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-carrot-badge.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "pastel-ong-badge": {
+    "ratio": 1,
+    "placement": {
+      "left": 62,
+      "top": 54,
+      "width": 13.2
+    },
+    "layers": [
+      {
+        "file": "refined/pastel-ong-badge.svg",
+        "x": 0,
+        "y": 0,
+        "width": 100
+      }
+    ],
+    "artworkProvenance": "Project-local vector refinement of the existing product, not an unmodified Figma export."
+  },
+  "blue-headphones": {
+    "placement": {
+      "left": 18,
+      "top": 14.5,
+      "width": 64
+    }
+  },
+  "gray-earflap-hat": {
+    "placement": {
+      "left": 18.5,
+      "top": 7.8,
+      "width": 63
+    }
+  },
+  "cream-scarf": {
+    "placement": {
+      "left": 24.5,
+      "top": 41.3,
+      "width": 51
+    },
+    "attachmentAnchors": {
+      "badge": {
+        "left": 26
+      }
+    }
+  },
+  "green-bow": {
+    "placement": {
+      "left": 25,
+      "top": 41.5,
+      "width": 50
+    },
+    "attachmentAnchors": {
+      "badge": {
+        "left": 26
+      }
+    }
+  },
+  "round-glasses": {
+    "placement": {
+      "left": 30.625677043655067,
+      "top": 25.7529527406979,
+      "width": 37.31089128212723
+    }
+  }
+}

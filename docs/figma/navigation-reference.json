@@ -1,0 +1,28 @@
+{
+  "fileKey": "a9SBfEEq9DY4PA857328Zr",
+  "nodeId": "683:464",
+  "recordedOn": "2026-10-28",
+  "source": "Figma MCP get_design_context including screenshot; no original file edits.",
+  "verified": {
+    "overlay": { "nodeId": "683:791", "background": "rgba(255,255,255,0.15)", "backdropBlurSourceUnits": 17, "top": 330 },
+    "sidebar": { "nodeId": "684:7", "width": 1832, "frameWidth": 6016, "gradient": "linear-gradient(95.307deg, rgb(210,219,236) 18.271%, rgba(210,219,236,0.3) 136.74%)", "cornerRadius": 0 },
+    "labels": ["퀴즈", "오답노트", "자료실", "코인샵", "마이페이지", "설정", "로그아웃하기"],
+    "ink": "#123263",
+    "iconLayers": {
+      "quiz": ["686:7", "693:8"],
+      "review": ["693:9", "693:10"],
+      "materials": ["694:16", "696:17", "696:18"],
+      "shop": ["694:12", "694:14", "694:15"],
+      "profile": ["702:708"],
+      "settings": ["696:27", "696:28"],
+      "logout": ["696:20", "696:23"]
+    }
+  },
+  "adaptations": [
+    "Source frame is about 6x the supplied browser-size render; overlay blur is 3 CSS pixels, sidebar width is 30.45vw, bounded for large and mobile screens.",
+    "Dashboard link retained for existing navigation, with a code-native SVG home icon; AI chat is an added original SVG in the same navy line style.",
+    "Active state and close control are accessible implementation additions.",
+    "No authentication API exists; the door item retains the honest label 로그인 화면으로 and never clears economy or simulates server logout.",
+    "Shop/inventory tabs use existing MORAM tokens, not an unverified Figma tab design. /inventory redirects to /shop?tab=inventory."
+  ]
+}

@@ -1,0 +1,3173 @@
+{
+  "fileKey": "a9SBfEEq9DY4PA857328Zr",
+  "sourceNodeId": "971:733",
+  "sourceImage": "src/assets/items/pastel/971-733-source.png",
+  "pixelSize": [
+    1536,
+    1024
+  ],
+  "extraction": "Original RGBA icon pixels retained; only disconnected neighboring scraps outside the icon support become transparent. No redraw, recolor, white removal or resizing. Positions are development attachments because the sheet has no posed Ong.",
+  "items": [
+    {
+      "id": "pastel-blue-ong-cap",
+      "name": "파란 옹이 야구모자",
+      "category": "모자",
+      "slot": "headwear",
+      "price": 8,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        1,
+        1
+      ],
+      "sourceRect": [
+        31,
+        35,
+        166,
+        126
+      ],
+      "aliasOf": null,
+      "ratio": 1.31746,
+      "placement": {
+        "left": 23.285714,
+        "top": 1.0,
+        "width": 53.428571
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-blue-ong-cap.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "red-beret",
+      "name": "빨간 베레모",
+      "category": "모자",
+      "slot": "headwear",
+      "price": 8,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        1,
+        2
+      ],
+      "sourceRect": [
+        207,
+        33,
+        169,
+        113
+      ],
+      "aliasOf": "red-beret",
+      "ratio": 1.495575,
+      "placement": {
+        "left": 20.0,
+        "top": 1.295568,
+        "width": 60.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/red-beret.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-yellow-ong-bucket-hat",
+      "name": "노란 옹이 버킷햇",
+      "category": "모자",
+      "slot": "headwear",
+      "price": 8,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        1,
+        3
+      ],
+      "sourceRect": [
+        386,
+        39,
+        183,
+        125
+      ],
+      "aliasOf": null,
+      "ratio": 1.464,
+      "placement": {
+        "left": 20.314313,
+        "top": 1.0,
+        "width": 59.371373
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-yellow-ong-bucket-hat.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-purple-pom-beanie",
+      "name": "보라 방울 비니",
+      "category": "모자",
+      "slot": "headwear",
+      "price": 8,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        1,
+        4
+      ],
+      "sourceRect": [
+        576,
+        15,
+        170,
+        150
+      ],
+      "aliasOf": null,
+      "ratio": 1.133333,
+      "placement": {
+        "left": 27.019277,
+        "top": 1.0,
+        "width": 45.961446
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-purple-pom-beanie.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-cream-bear-cap",
+      "name": "크림 곰무늬 모자",
+      "category": "모자",
+      "slot": "headwear",
+      "price": 8,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        1,
+        5
+      ],
+      "sourceRect": [
+        757,
+        33,
+        166,
+        131
+      ],
+      "aliasOf": null,
+      "ratio": 1.267176,
+      "placement": {
+        "left": 24.305344,
+        "top": 1.0,
+        "width": 51.389313
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-cream-bear-cap.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-green-ong-cap",
+      "name": "초록 옹이 야구모자",
+      "category": "모자",
+      "slot": "headwear",
+      "price": 8,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        1,
+        6
+      ],
+      "sourceRect": [
+        933,
+        35,
+        167,
+        127
+      ],
+      "aliasOf": null,
+      "ratio": 1.314961,
+      "placement": {
+        "left": 23.336401,
+        "top": 1.0,
+        "width": 53.327199
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-green-ong-cap.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-pink-ribbon-cap",
+      "name": "분홍 리본 야구모자",
+      "category": "모자",
+      "slot": "headwear",
+      "price": 8,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        1,
+        7
+      ],
+      "sourceRect": [
+        1112,
+        26,
+        177,
+        136
+      ],
+      "aliasOf": null,
+      "ratio": 1.301471,
+      "placement": {
+        "left": 23.60994,
+        "top": 1.0,
+        "width": 52.78012
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-pink-ribbon-cap.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-navy-ong-cap",
+      "name": "남색 옹이 야구모자",
+      "category": "모자",
+      "slot": "headwear",
+      "price": 8,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        1,
+        8
+      ],
+      "sourceRect": [
+        1313,
+        30,
+        177,
+        135
+      ],
+      "aliasOf": null,
+      "ratio": 1.311111,
+      "placement": {
+        "left": 23.414458,
+        "top": 1.0,
+        "width": 53.171084
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-navy-ong-cap.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-blue-earflap-hat",
+      "name": "파란 털 귀달이 모자",
+      "category": "모자",
+      "slot": "headwear",
+      "price": 8,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        2,
+        1
+      ],
+      "sourceRect": [
+        15,
+        174,
+        174,
+        143
+      ],
+      "aliasOf": null,
+      "ratio": 1.216783,
+      "placement": {
+        "left": 18.0,
+        "top": 7.333258,
+        "width": 64.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-blue-earflap-hat.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-pink-cat-headband",
+      "name": "분홍 고양이 머리띠",
+      "category": "모자",
+      "slot": "headwear",
+      "price": 8,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        2,
+        2
+      ],
+      "sourceRect": [
+        189,
+        192,
+        140,
+        113
+      ],
+      "aliasOf": null,
+      "ratio": 1.238938,
+      "placement": {
+        "left": 24.877919,
+        "top": 1.0,
+        "width": 50.244162
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-pink-cat-headband.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-yellow-rabbit-headband",
+      "name": "노란 토끼 머리띠",
+      "category": "모자",
+      "slot": "headwear",
+      "price": 8,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        2,
+        3
+      ],
+      "sourceRect": [
+        336,
+        170,
+        138,
+        139
+      ],
+      "aliasOf": null,
+      "ratio": 0.992806,
+      "placement": {
+        "left": 29.86877,
+        "top": 1.0,
+        "width": 40.26246
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-yellow-rabbit-headband.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "blue-headphones",
+      "name": "파란 헤드폰",
+      "category": "모자",
+      "slot": "headwear",
+      "price": 8,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        2,
+        4
+      ],
+      "sourceRect": [
+        474,
+        181,
+        161,
+        137
+      ],
+      "aliasOf": "blue-headphones",
+      "ratio": 1.175182,
+      "placement": {
+        "left": 26.170697,
+        "top": 1.0,
+        "width": 47.658605
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/blue-headphones.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-red-backward-cap",
+      "name": "빨간 뒤집어 쓴 모자",
+      "category": "모자",
+      "slot": "headwear",
+      "price": 8,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        2,
+        5
+      ],
+      "sourceRect": [
+        640,
+        188,
+        159,
+        119
+      ],
+      "aliasOf": null,
+      "ratio": 1.336134,
+      "placement": {
+        "left": 22.907057,
+        "top": 1.0,
+        "width": 54.185886
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-red-backward-cap.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "cream-bonnet",
+      "name": "크림 보닛",
+      "category": "모자",
+      "slot": "headwear",
+      "price": 8,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        2,
+        6
+      ],
+      "sourceRect": [
+        799,
+        177,
+        141,
+        158
+      ],
+      "aliasOf": "cream-bonnet",
+      "ratio": 0.892405,
+      "placement": {
+        "left": 31.904606,
+        "top": 1.0,
+        "width": 36.190788
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/cream-bonnet.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-blue-bear-beanie",
+      "name": "파란 곰 귀 비니",
+      "category": "모자",
+      "slot": "headwear",
+      "price": 8,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        2,
+        7
+      ],
+      "sourceRect": [
+        940,
+        191,
+        148,
+        129
+      ],
+      "aliasOf": null,
+      "ratio": 1.147287,
+      "placement": {
+        "left": 26.736341,
+        "top": 1.0,
+        "width": 46.527319
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-blue-bear-beanie.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-black-cat-beanie",
+      "name": "검은 고양이 비니",
+      "category": "모자",
+      "slot": "headwear",
+      "price": 8,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        2,
+        8
+      ],
+      "sourceRect": [
+        1088,
+        194,
+        138,
+        122
+      ],
+      "aliasOf": null,
+      "ratio": 1.131148,
+      "placement": {
+        "left": 27.063599,
+        "top": 1.0,
+        "width": 45.872803
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-black-cat-beanie.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "beige-brim-hat",
+      "name": "파란 띠 챙모자",
+      "category": "모자",
+      "slot": "headwear",
+      "price": 8,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        2,
+        9
+      ],
+      "sourceRect": [
+        1226,
+        206,
+        149,
+        97
+      ],
+      "aliasOf": "beige-brim-hat",
+      "ratio": 1.536082,
+      "placement": {
+        "left": 20.0,
+        "top": 2.012962,
+        "width": 60.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/beige-brim-hat.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-brown-aviator-hat",
+      "name": "갈색 고글 비행모",
+      "category": "모자",
+      "slot": "headwear",
+      "price": 8,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        2,
+        10
+      ],
+      "sourceRect": [
+        1375,
+        188,
+        148,
+        135
+      ],
+      "aliasOf": null,
+      "ratio": 1.096296,
+      "placement": {
+        "left": 18.0,
+        "top": 3.413355,
+        "width": 64.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-brown-aviator-hat.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-pink-hair-bow",
+      "name": "분홍 머리 리본",
+      "category": "액세서리",
+      "slot": "headwear",
+      "price": 5,
+      "available": true,
+      "tags": [
+        "파스텔",
+        "장식"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        3,
+        1
+      ],
+      "sourceRect": [
+        44,
+        339,
+        97,
+        74
+      ],
+      "aliasOf": null,
+      "ratio": 1.310811,
+      "placement": {
+        "left": 52.0,
+        "top": 14.0,
+        "width": 24.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-pink-hair-bow.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-red-hair-bow",
+      "name": "빨간 머리 리본",
+      "category": "액세서리",
+      "slot": "headwear",
+      "price": 5,
+      "available": true,
+      "tags": [
+        "파스텔",
+        "장식"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        3,
+        2
+      ],
+      "sourceRect": [
+        168,
+        338,
+        96,
+        73
+      ],
+      "aliasOf": null,
+      "ratio": 1.315068,
+      "placement": {
+        "left": 52.0,
+        "top": 14.0,
+        "width": 24.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-red-hair-bow.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-yellow-hair-bow",
+      "name": "노란 머리 리본",
+      "category": "액세서리",
+      "slot": "headwear",
+      "price": 5,
+      "available": true,
+      "tags": [
+        "파스텔",
+        "장식"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        3,
+        3
+      ],
+      "sourceRect": [
+        290,
+        336,
+        92,
+        72
+      ],
+      "aliasOf": null,
+      "ratio": 1.277778,
+      "placement": {
+        "left": 52.0,
+        "top": 14.0,
+        "width": 24.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-yellow-hair-bow.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-purple-hair-bow",
+      "name": "보라 머리 리본",
+      "category": "액세서리",
+      "slot": "headwear",
+      "price": 5,
+      "available": true,
+      "tags": [
+        "파스텔",
+        "장식"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        3,
+        4
+      ],
+      "sourceRect": [
+        413,
+        336,
+        94,
+        73
+      ],
+      "aliasOf": null,
+      "ratio": 1.287671,
+      "placement": {
+        "left": 52.0,
+        "top": 14.0,
+        "width": 24.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-purple-hair-bow.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-blue-hair-bow",
+      "name": "파란 머리 리본",
+      "category": "액세서리",
+      "slot": "headwear",
+      "price": 5,
+      "available": true,
+      "tags": [
+        "파스텔",
+        "장식"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        3,
+        5
+      ],
+      "sourceRect": [
+        540,
+        336,
+        94,
+        73
+      ],
+      "aliasOf": null,
+      "ratio": 1.287671,
+      "placement": {
+        "left": 52.0,
+        "top": 14.0,
+        "width": 24.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-blue-hair-bow.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-daisy-badge",
+      "name": "데이지 장식",
+      "category": "장식",
+      "slot": "badge",
+      "price": 4,
+      "available": true,
+      "tags": [
+        "파스텔",
+        "장식"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        3,
+        6
+      ],
+      "sourceRect": [
+        676,
+        336,
+        74,
+        73
+      ],
+      "aliasOf": null,
+      "ratio": 1.013699,
+      "placement": {
+        "left": 62.0,
+        "top": 54.0,
+        "width": 14.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-daisy-badge.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-blossom-badge",
+      "name": "분홍 꽃 장식",
+      "category": "장식",
+      "slot": "badge",
+      "price": 4,
+      "available": true,
+      "tags": [
+        "파스텔",
+        "장식"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        3,
+        7
+      ],
+      "sourceRect": [
+        777,
+        335,
+        81,
+        77
+      ],
+      "aliasOf": null,
+      "ratio": 1.051948,
+      "placement": {
+        "left": 62.0,
+        "top": 54.0,
+        "width": 14.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-blossom-badge.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-cherry-badge",
+      "name": "체리 장식",
+      "category": "장식",
+      "slot": "badge",
+      "price": 4,
+      "available": true,
+      "tags": [
+        "파스텔",
+        "장식"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        3,
+        8
+      ],
+      "sourceRect": [
+        881,
+        335,
+        80,
+        76
+      ],
+      "aliasOf": null,
+      "ratio": 1.052632,
+      "placement": {
+        "left": 62.0,
+        "top": 54.0,
+        "width": 14.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-cherry-badge.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-star-badge",
+      "name": "별 장식",
+      "category": "장식",
+      "slot": "badge",
+      "price": 4,
+      "available": true,
+      "tags": [
+        "파스텔",
+        "장식"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        3,
+        9
+      ],
+      "sourceRect": [
+        980,
+        339,
+        73,
+        72
+      ],
+      "aliasOf": null,
+      "ratio": 1.013889,
+      "placement": {
+        "left": 62.0,
+        "top": 54.0,
+        "width": 14.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-star-badge.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-heart-badge",
+      "name": "하트 장식",
+      "category": "장식",
+      "slot": "badge",
+      "price": 4,
+      "available": true,
+      "tags": [
+        "파스텔",
+        "장식"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        3,
+        10
+      ],
+      "sourceRect": [
+        1075,
+        343,
+        75,
+        66
+      ],
+      "aliasOf": null,
+      "ratio": 1.136364,
+      "placement": {
+        "left": 62.0,
+        "top": 54.0,
+        "width": 14.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-heart-badge.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-snowflake-badge",
+      "name": "눈꽃 장식",
+      "category": "장식",
+      "slot": "badge",
+      "price": 4,
+      "available": true,
+      "tags": [
+        "파스텔",
+        "장식"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        3,
+        11
+      ],
+      "sourceRect": [
+        1174,
+        335,
+        71,
+        77
+      ],
+      "aliasOf": null,
+      "ratio": 0.922078,
+      "placement": {
+        "left": 62.0,
+        "top": 54.0,
+        "width": 14.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-snowflake-badge.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-clover-badge",
+      "name": "클로버 장식",
+      "category": "장식",
+      "slot": "badge",
+      "price": 4,
+      "available": true,
+      "tags": [
+        "파스텔",
+        "장식"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        3,
+        12
+      ],
+      "sourceRect": [
+        1267,
+        337,
+        67,
+        71
+      ],
+      "aliasOf": null,
+      "ratio": 0.943662,
+      "placement": {
+        "left": 62.0,
+        "top": 54.0,
+        "width": 14.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-clover-badge.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-carrot-badge",
+      "name": "당근 장식",
+      "category": "장식",
+      "slot": "badge",
+      "price": 4,
+      "available": true,
+      "tags": [
+        "파스텔",
+        "장식"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        3,
+        13
+      ],
+      "sourceRect": [
+        1360,
+        336,
+        52,
+        76
+      ],
+      "aliasOf": null,
+      "ratio": 0.684211,
+      "placement": {
+        "left": 62.0,
+        "top": 54.0,
+        "width": 14.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-carrot-badge.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-ong-badge",
+      "name": "흰 옹이 장식",
+      "category": "장식",
+      "slot": "badge",
+      "price": 4,
+      "available": true,
+      "tags": [
+        "파스텔",
+        "장식"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        3,
+        14
+      ],
+      "sourceRect": [
+        1438,
+        335,
+        61,
+        77
+      ],
+      "aliasOf": null,
+      "ratio": 0.792208,
+      "placement": {
+        "left": 62.0,
+        "top": 54.0,
+        "width": 14.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-ong-badge.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-cream-drawstring-hoodie",
+      "name": "크림 끈 후드",
+      "category": "옷",
+      "slot": "outfit",
+      "price": 14,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        4,
+        1
+      ],
+      "sourceRect": [
+        20,
+        425,
+        193,
+        135
+      ],
+      "aliasOf": null,
+      "ratio": 1.42963,
+      "placement": {
+        "left": 7.0,
+        "top": 35.5,
+        "width": 86.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-cream-drawstring-hoodie.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-blue-ong-hoodie",
+      "name": "파란 옹이 후드",
+      "category": "옷",
+      "slot": "outfit",
+      "price": 14,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        4,
+        2
+      ],
+      "sourceRect": [
+        223,
+        422,
+        185,
+        138
+      ],
+      "aliasOf": null,
+      "ratio": 1.34058,
+      "placement": {
+        "left": 7.495547,
+        "top": 35.5,
+        "width": 85.008905
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-blue-ong-hoodie.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "yellow-hoodie",
+      "name": "노란 끈 후드",
+      "category": "옷",
+      "slot": "outfit",
+      "price": 14,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        4,
+        3
+      ],
+      "sourceRect": [
+        410,
+        424,
+        181,
+        136
+      ],
+      "aliasOf": "yellow-hoodie",
+      "ratio": 1.330882,
+      "placement": {
+        "left": 7.803012,
+        "top": 35.5,
+        "width": 84.393976
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/yellow-hoodie.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-purple-bag-hoodie",
+      "name": "보라 후드·가방 세트",
+      "category": "옷",
+      "slot": "outfit",
+      "price": 14,
+      "available": true,
+      "tags": [
+        "파스텔",
+        "코스튬"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        4,
+        4
+      ],
+      "sourceRect": [
+        594,
+        425,
+        185,
+        133
+      ],
+      "aliasOf": null,
+      "ratio": 1.390977,
+      "placement": {
+        "left": 7.0,
+        "top": 35.5,
+        "width": 86.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-purple-bag-hoodie.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ],
+      "occupiedSlots": [
+        "outfit",
+        "bag"
+      ],
+      "combinationNote": "의상과 장신구가 한 이미지로 그려진 세트입니다. 포함된 가방이나 목도리만 따로 해제할 수 없습니다."
+    },
+    {
+      "id": "pastel-cherry-cardigan",
+      "name": "체리 크림 가디건",
+      "category": "옷",
+      "slot": "outfit",
+      "price": 14,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        4,
+        5
+      ],
+      "sourceRect": [
+        782,
+        430,
+        183,
+        126
+      ],
+      "aliasOf": null,
+      "ratio": 1.452381,
+      "placement": {
+        "left": 7.0,
+        "top": 35.5,
+        "width": 86.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-cherry-cardigan.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-red-collar-cardigan",
+      "name": "빨간 흰 깃 가디건",
+      "category": "옷",
+      "slot": "outfit",
+      "price": 14,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        4,
+        6
+      ],
+      "sourceRect": [
+        966,
+        430,
+        182,
+        123
+      ],
+      "aliasOf": null,
+      "ratio": 1.479675,
+      "placement": {
+        "left": 7.0,
+        "top": 35.5,
+        "width": 86.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-red-collar-cardigan.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-navy-sailor-top",
+      "name": "남색 세일러 리본 상의",
+      "category": "옷",
+      "slot": "outfit",
+      "price": 14,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        4,
+        7
+      ],
+      "sourceRect": [
+        1150,
+        427,
+        184,
+        127
+      ],
+      "aliasOf": null,
+      "ratio": 1.448819,
+      "placement": {
+        "left": 7.0,
+        "top": 35.5,
+        "width": 86.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-navy-sailor-top.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-pink-heart-sweater",
+      "name": "분홍 하트 니트",
+      "category": "옷",
+      "slot": "outfit",
+      "price": 14,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        4,
+        8
+      ],
+      "sourceRect": [
+        1334,
+        429,
+        186,
+        130
+      ],
+      "aliasOf": null,
+      "ratio": 1.430769,
+      "placement": {
+        "left": 7.0,
+        "top": 35.5,
+        "width": 86.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-pink-heart-sweater.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-green-ong-varsity",
+      "name": "초록 옹이 배색 재킷",
+      "category": "옷",
+      "slot": "outfit",
+      "price": 14,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        5,
+        1
+      ],
+      "sourceRect": [
+        19,
+        562,
+        194,
+        130
+      ],
+      "aliasOf": null,
+      "ratio": 1.492308,
+      "placement": {
+        "left": 7.0,
+        "top": 35.5,
+        "width": 86.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-green-ong-varsity.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "brown-toggle-coat",
+      "name": "갈색 토글 코트",
+      "category": "옷",
+      "slot": "outfit",
+      "price": 14,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        5,
+        2
+      ],
+      "sourceRect": [
+        216,
+        561,
+        186,
+        129
+      ],
+      "aliasOf": "brown-toggle-coat",
+      "ratio": 1.44186,
+      "placement": {
+        "left": 7.0,
+        "top": 35.5,
+        "width": 86.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/brown-toggle-coat.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "blue-collar-jacket",
+      "name": "파란 둥근 깃 재킷",
+      "category": "옷",
+      "slot": "outfit",
+      "price": 14,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        5,
+        3
+      ],
+      "sourceRect": [
+        402,
+        563,
+        187,
+        125
+      ],
+      "aliasOf": "blue-collar-jacket",
+      "ratio": 1.496,
+      "placement": {
+        "left": 7.0,
+        "top": 35.5,
+        "width": 86.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/blue-collar-jacket.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-cream-bear-bag-hoodie",
+      "name": "크림 후드·곰 가방 세트",
+      "category": "옷",
+      "slot": "outfit",
+      "price": 14,
+      "available": true,
+      "tags": [
+        "파스텔",
+        "코스튬"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        5,
+        4
+      ],
+      "sourceRect": [
+        589,
+        561,
+        179,
+        131
+      ],
+      "aliasOf": null,
+      "ratio": 1.366412,
+      "placement": {
+        "left": 7.0,
+        "top": 35.5,
+        "width": 86.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-cream-bear-bag-hoodie.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ],
+      "occupiedSlots": [
+        "outfit",
+        "bag"
+      ],
+      "combinationNote": "의상과 장신구가 한 이미지로 그려진 세트입니다. 포함된 가방이나 목도리만 따로 해제할 수 없습니다."
+    },
+    {
+      "id": "pastel-navy-scarf-coat",
+      "name": "남색 코트·체크 목도리 세트",
+      "category": "옷",
+      "slot": "outfit",
+      "price": 14,
+      "available": true,
+      "tags": [
+        "파스텔",
+        "코스튬"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        5,
+        5
+      ],
+      "sourceRect": [
+        768,
+        561,
+        192,
+        128
+      ],
+      "aliasOf": null,
+      "ratio": 1.5,
+      "placement": {
+        "left": 7.0,
+        "top": 35.5,
+        "width": 86.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-navy-scarf-coat.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ],
+      "occupiedSlots": [
+        "outfit",
+        "neckAccessory"
+      ],
+      "combinationNote": "의상과 장신구가 한 이미지로 그려진 세트입니다. 포함된 가방이나 목도리만 따로 해제할 수 없습니다."
+    },
+    {
+      "id": "pastel-pink-fur-cape",
+      "name": "분홍 털 깃 리본 케이프",
+      "category": "옷",
+      "slot": "outfit",
+      "price": 14,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        5,
+        6
+      ],
+      "sourceRect": [
+        960,
+        563,
+        189,
+        130
+      ],
+      "aliasOf": null,
+      "ratio": 1.453846,
+      "placement": {
+        "left": 7.0,
+        "top": 35.5,
+        "width": 86.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-pink-fur-cape.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-blue-cloud-sweater",
+      "name": "파란 구름 니트",
+      "category": "옷",
+      "slot": "outfit",
+      "price": 14,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        5,
+        7
+      ],
+      "sourceRect": [
+        1149,
+        563,
+        187,
+        129
+      ],
+      "aliasOf": null,
+      "ratio": 1.449612,
+      "placement": {
+        "left": 7.0,
+        "top": 35.5,
+        "width": 86.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-blue-cloud-sweater.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-cream-stripe-sweater",
+      "name": "크림 줄무늬 니트",
+      "category": "옷",
+      "slot": "outfit",
+      "price": 14,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        5,
+        8
+      ],
+      "sourceRect": [
+        1336,
+        563,
+        184,
+        131
+      ],
+      "aliasOf": null,
+      "ratio": 1.40458,
+      "placement": {
+        "left": 7.0,
+        "top": 35.5,
+        "width": 86.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-cream-stripe-sweater.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-cream-ong-bag",
+      "name": "크림 옹이 크로스백",
+      "category": "액세서리",
+      "slot": "bag",
+      "price": 9,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        6,
+        1
+      ],
+      "sourceRect": [
+        32,
+        694,
+        123,
+        117
+      ],
+      "aliasOf": null,
+      "ratio": 1.051282,
+      "placement": {
+        "left": 17.0,
+        "top": 46.0,
+        "width": 48.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-cream-ong-bag.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "red-bag",
+      "name": "빨간 크로스백",
+      "category": "액세서리",
+      "slot": "bag",
+      "price": 9,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        6,
+        2
+      ],
+      "sourceRect": [
+        168,
+        694,
+        135,
+        116
+      ],
+      "aliasOf": "red-bag",
+      "ratio": 1.163793,
+      "placement": {
+        "left": 17.0,
+        "top": 46.0,
+        "width": 48.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/red-bag.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-yellow-star-bag",
+      "name": "노란 별 가방",
+      "category": "액세서리",
+      "slot": "bag",
+      "price": 9,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        6,
+        3
+      ],
+      "sourceRect": [
+        316,
+        694,
+        125,
+        117
+      ],
+      "aliasOf": null,
+      "ratio": 1.068376,
+      "placement": {
+        "left": 17.0,
+        "top": 46.0,
+        "width": 48.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-yellow-star-bag.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-purple-ong-backpack",
+      "name": "보라 옹이 백팩",
+      "category": "액세서리",
+      "slot": "bag",
+      "price": 9,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        6,
+        4
+      ],
+      "sourceRect": [
+        470,
+        694,
+        118,
+        118
+      ],
+      "aliasOf": null,
+      "ratio": 1.0,
+      "placement": {
+        "left": 17.0,
+        "top": 46.0,
+        "width": 48.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-purple-ong-backpack.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-blue-ong-bag",
+      "name": "파란 옹이 크로스백",
+      "category": "액세서리",
+      "slot": "bag",
+      "price": 9,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        6,
+        5
+      ],
+      "sourceRect": [
+        609,
+        694,
+        121,
+        115
+      ],
+      "aliasOf": null,
+      "ratio": 1.052174,
+      "placement": {
+        "left": 17.0,
+        "top": 46.0,
+        "width": 48.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-blue-ong-bag.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-brown-bear-bag",
+      "name": "갈색 곰 가방",
+      "category": "액세서리",
+      "slot": "bag",
+      "price": 9,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        6,
+        6
+      ],
+      "sourceRect": [
+        735,
+        694,
+        149,
+        115
+      ],
+      "aliasOf": null,
+      "ratio": 1.295652,
+      "placement": {
+        "left": 17.0,
+        "top": 46.0,
+        "width": 48.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-brown-bear-bag.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-pink-heart-bag",
+      "name": "분홍 하트 가방",
+      "category": "액세서리",
+      "slot": "bag",
+      "price": 9,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        6,
+        7
+      ],
+      "sourceRect": [
+        901,
+        694,
+        147,
+        116
+      ],
+      "aliasOf": null,
+      "ratio": 1.267241,
+      "placement": {
+        "left": 17.0,
+        "top": 46.0,
+        "width": 48.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-pink-heart-bag.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-black-ong-bag",
+      "name": "검은 옹이 크로스백",
+      "category": "액세서리",
+      "slot": "bag",
+      "price": 9,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        6,
+        8
+      ],
+      "sourceRect": [
+        1065,
+        694,
+        153,
+        114
+      ],
+      "aliasOf": null,
+      "ratio": 1.342105,
+      "placement": {
+        "left": 17.0,
+        "top": 46.0,
+        "width": 48.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-black-ong-bag.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-cream-bow-tote",
+      "name": "파란 리본 크림 토트백",
+      "category": "액세서리",
+      "slot": "bag",
+      "price": 9,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        6,
+        9
+      ],
+      "sourceRect": [
+        1248,
+        694,
+        100,
+        120
+      ],
+      "aliasOf": null,
+      "ratio": 0.833333,
+      "placement": {
+        "left": 17.0,
+        "top": 46.0,
+        "width": 48.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-cream-bow-tote.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-green-frog-bag",
+      "name": "초록 개구리 가방",
+      "category": "액세서리",
+      "slot": "bag",
+      "price": 9,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        6,
+        10
+      ],
+      "sourceRect": [
+        1352,
+        694,
+        149,
+        117
+      ],
+      "aliasOf": null,
+      "ratio": 1.273504,
+      "placement": {
+        "left": 17.0,
+        "top": 46.0,
+        "width": 48.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-green-frog-bag.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-blue-fringe-scarf",
+      "name": "파란 술 목도리",
+      "category": "액세서리",
+      "slot": "neckAccessory",
+      "price": 6,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        7,
+        1
+      ],
+      "sourceRect": [
+        36,
+        816,
+        132,
+        100
+      ],
+      "aliasOf": null,
+      "ratio": 1.32,
+      "placement": {
+        "left": 19.5,
+        "top": 41.0,
+        "width": 61.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-blue-fringe-scarf.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-red-fringe-scarf",
+      "name": "빨간 술 목도리",
+      "category": "액세서리",
+      "slot": "neckAccessory",
+      "price": 6,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        7,
+        2
+      ],
+      "sourceRect": [
+        185,
+        816,
+        126,
+        101
+      ],
+      "aliasOf": null,
+      "ratio": 1.247525,
+      "placement": {
+        "left": 19.5,
+        "top": 41.0,
+        "width": 61.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-red-fringe-scarf.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-yellow-check-scarf",
+      "name": "노란 체크 목도리",
+      "category": "액세서리",
+      "slot": "neckAccessory",
+      "price": 6,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        7,
+        3
+      ],
+      "sourceRect": [
+        328,
+        816,
+        128,
+        105
+      ],
+      "aliasOf": null,
+      "ratio": 1.219048,
+      "placement": {
+        "left": 19.5,
+        "top": 41.0,
+        "width": 61.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-yellow-check-scarf.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-purple-scarf",
+      "name": "보라 목도리",
+      "category": "액세서리",
+      "slot": "neckAccessory",
+      "price": 6,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        7,
+        4
+      ],
+      "sourceRect": [
+        476,
+        816,
+        130,
+        103
+      ],
+      "aliasOf": null,
+      "ratio": 1.262136,
+      "placement": {
+        "left": 19.5,
+        "top": 41.0,
+        "width": 61.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-purple-scarf.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "cream-scarf",
+      "name": "크림 머플러",
+      "category": "액세서리",
+      "slot": "neckAccessory",
+      "price": 6,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        7,
+        5
+      ],
+      "sourceRect": [
+        626,
+        816,
+        134,
+        106
+      ],
+      "aliasOf": "cream-scarf",
+      "ratio": 1.264151,
+      "placement": {
+        "left": 19.5,
+        "top": 41.0,
+        "width": 61.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/cream-scarf.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "green-bow",
+      "name": "초록 매듭 스카프",
+      "category": "액세서리",
+      "slot": "neckAccessory",
+      "price": 6,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        7,
+        6
+      ],
+      "sourceRect": [
+        774,
+        816,
+        135,
+        105
+      ],
+      "aliasOf": "green-bow",
+      "ratio": 1.285714,
+      "placement": {
+        "left": 19.5,
+        "top": 41.0,
+        "width": 61.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/green-bow.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-pink-heart-scarf",
+      "name": "분홍 하트 목도리",
+      "category": "액세서리",
+      "slot": "neckAccessory",
+      "price": 6,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        7,
+        7
+      ],
+      "sourceRect": [
+        930,
+        816,
+        126,
+        104
+      ],
+      "aliasOf": null,
+      "ratio": 1.211538,
+      "placement": {
+        "left": 19.5,
+        "top": 41.0,
+        "width": 61.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-pink-heart-scarf.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-navy-stripe-scarf",
+      "name": "남색 줄무늬 목도리",
+      "category": "액세서리",
+      "slot": "neckAccessory",
+      "price": 6,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        7,
+        8
+      ],
+      "sourceRect": [
+        1078,
+        816,
+        131,
+        103
+      ],
+      "aliasOf": null,
+      "ratio": 1.271845,
+      "placement": {
+        "left": 19.5,
+        "top": 41.0,
+        "width": 61.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-navy-stripe-scarf.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-cream-fur-neck-ribbon",
+      "name": "크림 털 리본 목장식",
+      "category": "액세서리",
+      "slot": "neckAccessory",
+      "price": 6,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        7,
+        9
+      ],
+      "sourceRect": [
+        1231,
+        822,
+        132,
+        93
+      ],
+      "aliasOf": null,
+      "ratio": 1.419355,
+      "placement": {
+        "left": 19.5,
+        "top": 41.0,
+        "width": 61.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-cream-fur-neck-ribbon.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-red-bow-tie",
+      "name": "빨간 나비넥타이",
+      "category": "액세서리",
+      "slot": "neckAccessory",
+      "price": 6,
+      "available": true,
+      "tags": [
+        "파스텔"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        7,
+        10
+      ],
+      "sourceRect": [
+        1383,
+        816,
+        119,
+        100
+      ],
+      "aliasOf": null,
+      "ratio": 1.19,
+      "placement": {
+        "left": 34.0,
+        "top": 41.0,
+        "width": 32.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-red-bow-tie.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "round-glasses",
+      "name": "동그란 안경",
+      "category": "액세서리",
+      "slot": "faceAccessory",
+      "price": 8,
+      "available": true,
+      "tags": [
+        "파스텔",
+        "안경"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        8,
+        1
+      ],
+      "sourceRect": [
+        35,
+        932,
+        163,
+        66
+      ],
+      "aliasOf": "round-glasses",
+      "ratio": 2.469697,
+      "placement": {
+        "left": 27.0,
+        "top": 25.284891,
+        "width": 46.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/round-glasses.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ],
+      "eyesAbove": true
+    },
+    {
+      "id": "pastel-red-round-glasses",
+      "name": "빨간 동그란 안경",
+      "category": "액세서리",
+      "slot": "faceAccessory",
+      "price": 8,
+      "available": true,
+      "tags": [
+        "파스텔",
+        "안경"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        8,
+        2
+      ],
+      "sourceRect": [
+        217,
+        932,
+        163,
+        66
+      ],
+      "aliasOf": null,
+      "ratio": 2.469697,
+      "placement": {
+        "left": 27.0,
+        "top": 25.284891,
+        "width": 46.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-red-round-glasses.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ],
+      "eyesAbove": true
+    },
+    {
+      "id": "pastel-yellow-frame-glasses",
+      "name": "노란 테 안경",
+      "category": "액세서리",
+      "slot": "faceAccessory",
+      "price": 8,
+      "available": true,
+      "tags": [
+        "파스텔",
+        "안경"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        8,
+        3
+      ],
+      "sourceRect": [
+        404,
+        936,
+        165,
+        61
+      ],
+      "aliasOf": null,
+      "ratio": 2.704918,
+      "placement": {
+        "left": 27.0,
+        "top": 25.834056,
+        "width": 46.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-yellow-frame-glasses.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ],
+      "eyesAbove": true
+    },
+    {
+      "id": "pastel-purple-cat-sunglasses",
+      "name": "보라 캣아이 선글라스",
+      "category": "액세서리",
+      "slot": "faceAccessory",
+      "price": 8,
+      "available": true,
+      "tags": [
+        "파스텔",
+        "안경"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        8,
+        4
+      ],
+      "sourceRect": [
+        601,
+        934,
+        169,
+        62
+      ],
+      "aliasOf": null,
+      "ratio": 2.725806,
+      "placement": {
+        "left": 27.0,
+        "top": 25.878242,
+        "width": 46.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-purple-cat-sunglasses.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-pink-heart-sunglasses",
+      "name": "분홍 하트 선글라스",
+      "category": "액세서리",
+      "slot": "faceAccessory",
+      "price": 8,
+      "available": true,
+      "tags": [
+        "파스텔",
+        "안경"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        8,
+        5
+      ],
+      "sourceRect": [
+        795,
+        933,
+        154,
+        65
+      ],
+      "aliasOf": null,
+      "ratio": 2.369231,
+      "placement": {
+        "left": 27.0,
+        "top": 25.017102,
+        "width": 46.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-pink-heart-sunglasses.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-silver-round-glasses",
+      "name": "은색 동그란 안경",
+      "category": "액세서리",
+      "slot": "faceAccessory",
+      "price": 8,
+      "available": true,
+      "tags": [
+        "파스텔",
+        "안경"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        8,
+        6
+      ],
+      "sourceRect": [
+        968,
+        932,
+        162,
+        65
+      ],
+      "aliasOf": null,
+      "ratio": 2.492308,
+      "placement": {
+        "left": 27.0,
+        "top": 25.342183,
+        "width": 46.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-silver-round-glasses.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ],
+      "eyesAbove": true
+    },
+    {
+      "id": "pastel-blue-sunglasses",
+      "name": "파란 선글라스",
+      "category": "액세서리",
+      "slot": "faceAccessory",
+      "price": 8,
+      "available": true,
+      "tags": [
+        "파스텔",
+        "안경"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        8,
+        7
+      ],
+      "sourceRect": [
+        1145,
+        936,
+        164,
+        61
+      ],
+      "aliasOf": null,
+      "ratio": 2.688525,
+      "placement": {
+        "left": 27.0,
+        "top": 25.798898,
+        "width": 46.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-blue-sunglasses.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ]
+    },
+    {
+      "id": "pastel-white-cat-glasses",
+      "name": "흰 캣아이 안경",
+      "category": "액세서리",
+      "slot": "faceAccessory",
+      "price": 8,
+      "available": true,
+      "tags": [
+        "파스텔",
+        "안경"
+      ],
+      "sourceNodeId": "971:733",
+      "sourceIds": [
+        "971:733"
+      ],
+      "sourceCell": [
+        8,
+        8
+      ],
+      "sourceRect": [
+        1341,
+        939,
+        151,
+        54
+      ],
+      "aliasOf": null,
+      "ratio": 2.796296,
+      "placement": {
+        "left": 27.0,
+        "top": 26.022478,
+        "width": 46.0
+      },
+      "layers": [
+        {
+          "id": "971:733",
+          "file": "pastel/pastel-white-cat-glasses.png",
+          "x": 0,
+          "y": 0,
+          "width": 100
+        }
+      ],
+      "eyesAbove": true
+    }
+  ]
+}

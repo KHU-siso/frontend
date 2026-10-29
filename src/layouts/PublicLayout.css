@@ -1,0 +1,91 @@
+.public-layout {
+  display: grid;
+  grid-template-rows: var(--header-height) 1fr auto;
+  min-height: 100svh;
+  background: var(--color-white);
+  transition: background-color var(--landing-fade-duration) ease;
+}
+.public-header {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 4.7vw, 4.25rem);
+  padding-inline: var(--page-gutter);
+  background: var(--color-white);
+  color: var(--color-ink);
+  font-size: clamp(0.875rem, 1.655vw, 1.5rem);
+  font-weight: var(--font-semibold);
+}
+.public-header nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3.25vw, 3rem);
+}
+.public-header a, .public-footer a {
+  text-decoration: none;
+  white-space: nowrap;
+  text-underline-offset: 0.25em;
+}
+.public-header a:hover, .public-footer a:hover { text-decoration: underline; }
+.public-header__account { margin-left: auto; }
+.public-main { display: grid; min-width: 0; outline: none; }
+.public-footer { display: none; }
+.skip-link {
+  position: fixed;
+  z-index: 10;
+  top: 0.5rem;
+  left: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--color-white);
+  color: var(--color-ink);
+  border-radius: 0.5rem;
+  translate: 0 -200%;
+}
+.skip-link:focus { translate: none; }
+
+/* Development breakpoint, not a Figma-provided constraint. */
+@media (max-width: 47.99rem) {
+  .public-layout {
+    --header-height: 4.5rem;
+    --page-gutter: clamp(1rem, 4.8vw, 1.5rem);
+  }
+  .public-header {
+    gap: clamp(1rem, 8vw, 3rem);
+    background: transparent;
+    color: var(--mobile-chrome-color, var(--color-ink));
+    font-size: clamp(0.75rem, 3.98vw, 1.0625rem);
+    transition: color var(--landing-fade-duration) ease;
+  }
+  .public-header .public-header__secondary { display: none; }
+  .public-header__account {
+    flex: 1;
+    justify-content: space-between;
+    gap: var(--space-4);
+  }
+  .public-footer {
+    display: block;
+    padding: var(--space-5) var(--page-gutter);
+    color: var(--mobile-chrome-color, var(--color-ink));
+    font-size: clamp(0.6875rem, 3.6vw, 1rem);
+    font-weight: var(--font-semibold);
+    transition: color var(--landing-fade-duration) ease;
+  }
+  .public-footer nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+  /* A single mounted header changes theme without a second header or effect. */
+  .public-layout:has(.landing[data-stage='intro']) {
+    --mobile-chrome-color: var(--color-white);
+    --dark-logo-opacity: 0;
+    --light-logo-opacity: 1;
+    --focus-outline: var(--color-white);
+    background: var(--color-hero);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .public-layout { --landing-fade-duration: 0ms; }
+}

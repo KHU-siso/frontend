@@ -1,0 +1,17 @@
+.brand-logo {
+  display: grid;
+  align-items: center;
+  width: clamp(5rem, 7.8vw, 7.1rem);
+  flex-shrink: 0;
+  text-decoration: none;
+}
+.brand-logo > * { grid-area: 1 / 1; }
+.brand-logo img { display: block; width: 100%; height: auto; }
+.brand-logo__dark {
+  opacity: var(--dark-logo-opacity, 1);
+  transition: opacity var(--landing-fade-duration) ease;
+}
+.brand-logo__light {
+  opacity: var(--light-logo-opacity, 0);
+  transition: opacity var(--landing-fade-duration) ease;
+}

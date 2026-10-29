@@ -1,0 +1,29 @@
+:root {
+  /* Verified in development-file contexts 984:12, 986:32, 953:53, 952:48. */
+  --color-white: #ffffff;
+  --color-ink: #123263;
+  --color-hero: #5482b4;
+  --color-wordmark-start: #c3e9fe;
+  --color-action-start: #06275a;
+  --color-action-end: #0d53c0;
+  --color-copy-muted: #b3b3b3;
+  --font-semibold: 600;
+  --font-extrabold: 800;
+
+  /* Application choices, not original Figma measurements. */
+  --font-family: 'Inter', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --page-gutter: clamp(1.25rem, 4.5vw, 5rem);
+  --header-height: clamp(4.75rem, 8.45vw, 7.625rem);
+  --radius-pill: 999px;
+  --focus-outline: #123263;
+  /* User requested 0.6–0.8 seconds. */
+  --landing-fade-duration: 700ms;
+}

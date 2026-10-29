@@ -1,0 +1,116 @@
+/* Figma 601:313 / 683:65,78,87: 1345×315 horizontal cards. Actual CSS
+   sizes adapt to the unchanged dashboard slot so four cards remain visible. */
+.dashboard-tasks {
+  container-type: size;
+  --todo-panel-padding: clamp(0.65rem, 1.5vh, 1.25rem);
+  --todo-heading-height: 1.25rem;
+  --todo-heading-gap: 0.65rem;
+  --todo-gap: 0.5rem;
+  --todo-list-padding: 0.2rem;
+  --todo-card-height: min(
+    calc((100cqh - 2 * var(--todo-panel-padding) - 2px - var(--todo-heading-height) - var(--todo-heading-gap) - 3 * var(--todo-gap) - 2 * var(--todo-list-padding)) / 4),
+    calc((100cqw - 2 * var(--todo-panel-padding) - 2px - 2 * var(--todo-list-padding)) * 315 / 1345)
+  );
+  --todo-window-height: calc(4 * var(--todo-card-height) + 3 * var(--todo-gap) + 2 * var(--todo-list-padding));
+}
+.dashboard-tasks .todo-panel {
+  flex: none;
+  width: 100%;
+  height: calc(var(--todo-window-height) + var(--todo-heading-height) + var(--todo-heading-gap) + 2 * var(--todo-panel-padding) + 2px);
+  max-height: 100%;
+  padding: var(--todo-panel-padding);
+}
+.dashboard-tasks #tasks-heading { height: var(--todo-heading-height); margin: 0 0 var(--todo-heading-gap); line-height: var(--todo-heading-height); }
+.todo-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-auto-rows: var(--todo-card-height);
+  align-content: start;
+  gap: var(--todo-gap);
+  height: var(--todo-window-height);
+  padding: var(--todo-list-padding);
+  margin: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior-y: contain;
+  touch-action: pan-y;
+  direction: rtl;
+  scrollbar-width: thin;
+  scrollbar-color: #082d66 rgb(210 219 236 / 70%);
+}
+.todo-list::-webkit-scrollbar { width: 4px; }
+.todo-list::-webkit-scrollbar-track { border-radius: 1rem; background: rgb(210 219 236 / 70%); }
+.todo-list::-webkit-scrollbar-thumb { border-radius: 1rem; background: #082d66; }
+.todo-card {
+  direction: ltr;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+  min-height: 0;
+  gap: 0.6rem;
+  padding: 0.45rem clamp(0.6rem, 3cqw, 1rem);
+  border: 1px solid rgb(0 0 0 / 30%);
+  border-radius: calc(var(--todo-card-height) * 0.34);
+  background: white;
+  box-shadow: 0 1px 5px rgb(0 0 0 / 25%);
+}
+.todo-card--overdue { background: rgb(255 163 163 / 27%); }
+.todo-card.is-cancelled { background: #edf1f8; }
+.todo-copy { display: grid; gap: 0.2rem; flex: 1; min-width: 0; }
+.todo-heading { display: flex; align-items: baseline; gap: 0.4rem; min-width: 0; }
+.todo-heading h3 { flex: 0 1 auto; min-width: 0; margin: 0; color: #111; font-size: clamp(0.75rem, 3.7cqw, 1rem); line-height: 1.2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.todo-teacher { flex: 0 1 auto; min-width: 0; margin: 0; color: #30333a; font-size: 0.6rem; line-height: 1.2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.todo-progress-label { display: flex; gap: 0.45rem; margin: 0; color: #30333a; font-size: 0.6rem; line-height: 1.25; white-space: nowrap; }
+.todo-copy progress { display: block; width: 100%; height: 0.4rem; border: 0; border-radius: 1rem; overflow: hidden; background: #d2dbec; }
+.todo-copy progress::-webkit-progress-bar { background: #d2dbec; border-radius: 1rem; }
+.todo-copy progress::-webkit-progress-value { background: #082d66; border-radius: 1rem; }
+.todo-copy progress::-moz-progress-bar { background: #082d66; border-radius: 1rem; }
+.todo-card--overdue progress { background: white; }
+.todo-card--overdue progress::-webkit-progress-bar { background: white; }
+.todo-card--overdue progress::-webkit-progress-value { background: #b91c1c; }
+.todo-card--overdue progress::-moz-progress-bar { background: #b91c1c; }
+.todo-state { display: grid; align-content: space-between; justify-items: end; flex-shrink: 0; gap: 0.15rem; }
+.todo-state > span { display: inline-flex; align-items: center; gap: 0.25rem; color: #2e7d32; font-size: 0.5625rem; line-height: 1.2; white-space: nowrap; }
+.todo-state > span::before { content: ''; flex-shrink: 0; width: 0.35rem; height: 0.35rem; border-radius: 50%; background: currentColor; }
+.todo-state > .is-overdue { color: #ff0004; }
+.todo-state button { position: relative; display: grid; place-content: center; width: 2rem; height: 2rem; min-height: 0; padding: 0.25rem; border: 0; border-radius: 50%; color: white; background: #082d66; font: inherit; font-size: 0.5625rem; line-height: 1.05; cursor: pointer; }
+.todo-state button::after { content: ''; position: absolute; inset: -0.2rem; }
+.todo-empty { direction: ltr; margin: 0; align-self: center; font-size: 0.8125rem; }
+.todo-heading h3 a { text-decoration: none; }
+.todo-heading h3 a:hover { text-decoration: underline; }
+.todo-progress-label > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.todo-state > span { max-width: 6.5rem; }
+.todo-status-text { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+@media (max-width: 63.99rem) {
+  .dashboard-tasks { --todo-panel-padding: 0.65rem; --todo-heading-gap: 0.5rem; --todo-gap: 0.3rem; }
+  .todo-card { gap: 0.35rem; padding: 0.2rem 0.5rem; }
+  .todo-copy { gap: 0.1rem; }
+  .todo-heading { gap: 0.3rem; }
+  .todo-heading h3 { font-size: 0.75rem; line-height: 1.15; }
+  .todo-teacher { font-size: 0.5rem; }
+  .todo-progress-label { gap: 0.3rem; font-size: 0.5625rem; line-height: 1.15; }
+  .todo-copy progress { height: 0.25rem; }
+  .todo-state > span { font-size: 0.46875rem; gap: 0.15rem; }
+  .todo-state > span { max-width: 4.5rem; }
+  .todo-state > span::before { width: 0.25rem; height: 0.25rem; }
+  .todo-state button { width: 1.4rem; height: 1.4rem; padding: 0.15rem; font-size: 0.46875rem; }
+}
+@media (max-height: 40rem) {
+  .dashboard-tasks { --todo-panel-padding: 0.5rem; }
+  .todo-card { padding-block: 0.2rem; }
+}
+@media (min-width: 64rem) and (max-height: 40rem) {
+  .todo-copy { gap: 0.1rem; }
+  .todo-heading h3 { font-size: 0.875rem; }
+  .todo-copy progress { height: 0.3rem; }
+  .todo-state button { width: 1.5rem; height: 1.5rem; padding: 0.15rem; font-size: 0.5rem; }
+}
+@media (min-width: 64rem) and (min-height: 50.01rem) {
+  .dashboard-tasks { --todo-heading-height: 1.75rem; }
+  .dashboard-tasks #tasks-heading { font-size: clamp(1rem, 1.4vw, 1.4rem); }
+  .todo-heading h3 { font-size: clamp(0.75rem, 4.6cqw, 1.125rem); }
+  .todo-copy progress { height: clamp(0.4rem, 0.9vw, 0.9rem); }
+  .todo-state > span::before { width: clamp(0.35rem, 0.65vw, 0.65rem); height: clamp(0.35rem, 0.65vw, 0.65rem); }
+  .todo-state button { width: clamp(1.75rem, 2.5vw, 2.5rem); height: clamp(1.75rem, 2.5vw, 2.5rem); }
+}

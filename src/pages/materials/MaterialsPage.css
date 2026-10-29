@@ -1,0 +1,49 @@
+.materials-page .materials-semester-select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-inline-end: 2.75rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23123263' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1rem 1rem;
+}
+.materials-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+.materials-summary > div { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.25rem; border-radius: 0.65rem; }
+.materials-summary span::before { content: '• '; color: #ed535b; }
+.materials-summary > div:last-child span::before { color: #2e7d32; }
+.materials-summary strong { color: #b91c1c; }
+.materials-summary > div:last-child strong { color: #2e7d32; }
+.materials-courses { display: grid; gap: 1rem; }
+.material-course { border-radius: 0.75rem; padding: 1rem 1.25rem; }
+.material-course__header { display: flex; align-items: center; gap: 1.25rem; }
+.material-course__toggle { display: flex; align-items: center; gap: 1rem; flex: 1; min-width: 0; padding: 0.5rem 0; border: 0; background: transparent; color: var(--color-ink); text-align: left; font: inherit; cursor: pointer; }
+.material-course__chevron { display: block; flex: 0 0 1.25rem; width: 1.25rem; height: 1.25rem; align-self: center; }
+.material-course__toggle[aria-expanded='true'] .material-course__chevron { transform: rotate(180deg); }
+.material-course__toggle > span { min-width: 0; }
+.material-course__toggle strong { overflow-wrap: anywhere; }
+.material-course__toggle strong { display: block; color: #111; font-size: 1.125rem; }
+.material-course__toggle small { display: block; margin-top: 0.4rem; color: #6d7788; font-size: 0.7rem; }
+.material-course__counts { display: flex; gap: 1.3rem; margin: 0; color: #7c8490; }
+.material-course__counts > div { display: flex; flex-direction: column-reverse; align-items: center; gap: 0.4rem; font-size: 0.75rem; }
+.material-course__counts dd { margin: 0; }
+.material-course__home { padding: 0.6rem 1rem; border: 0; border-radius: 2rem; background: linear-gradient(90deg, #123263, #0d53c0); color: white; font: inherit; font-size: 0.7rem; cursor: pointer; }
+.material-course__home { flex-shrink: 0; text-align: center; text-decoration: none; }
+.material-course__manage { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; padding-top: 0.6rem; }
+.material-course__actions { flex-wrap: wrap; }
+.materials-add { font-size: 0.875rem; }
+.material-course__details { margin-top: 0.8rem; padding-top: 1rem; border-top: 1px solid #d7dee9; }
+.material-course__actions { display: flex; gap: 0.5rem; }
+.material-resource-list { margin-top: 1rem; }
+.material-resource-list h3 { font-size: 0.875rem; }
+.material-resource-list > button { display: flex; justify-content: space-between; gap: 1rem; width: 100%; padding: 0.85rem 0; border: 0; border-top: 1px solid #edf0f6; background: transparent; color: var(--color-ink); font: inherit; font-size: 0.8125rem; text-align: left; cursor: pointer; }
+.material-resource-list > button span { font-size: 0.7rem; color: var(--color-hero); }
+.attendance-scroll { overflow: auto; margin-top: 1.25rem; }
+.attendance-table { border-collapse: collapse; min-width: 40rem; width: 100%; font-size: 0.7rem; text-align: center; }
+.attendance-table caption { padding: 0.5rem 0; color: #617b9e; text-align: left; }
+.attendance-table th, .attendance-table td { padding: 0.7rem 0.4rem; border: 1px solid #d7dee9; }
+.attendance-table .is-present { color: #2e7d32; }
+.attendance-table .is-absent { color: #b91c1c; }
+.material-preview { white-space: pre-wrap; line-height: 1.9; font-size: 0.875rem; }
+@media (max-width: 60rem) { .material-course__counts { display: none; } }
+@media (max-width: 60rem) { .material-course:has(.material-course__details) .material-course__header { flex-wrap: wrap; } .material-course:has(.material-course__details) .material-course__counts { display: flex; justify-content: space-between; order: 3; flex-basis: 100%; padding-top: 0.75rem; } }
+@media (max-width: 47.99rem) { .materials-summary { grid-template-columns: 1fr; gap: 0.75rem; } .materials-page .service-title { background: linear-gradient(90deg, #123263, #2566c9); color: white; padding: 1.25rem; border-radius: 0.75rem; } .materials-page .service-title p { color: #d2dbec; } .material-course__header { gap: 0.5rem; } .material-course__toggle { gap: 0.6rem; } .material-course__toggle strong { font-size: 1rem; } .material-course__home { padding: 0.6rem; font-size: 0.6rem; } .material-resource-list > button span { display: none; } }

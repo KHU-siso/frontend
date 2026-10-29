@@ -1,0 +1,39 @@
+{
+  "fileKey": "a9SBfEEq9DY4PA857328Zr",
+  "nodeId": "529:41",
+  "recordedOn": "2026-10-28",
+  "source": "Figma MCP get_design_context, returned screenshot, and download_assets for text node 529:78.",
+  "frame": { "width": 5982, "height": 4254 },
+  "assetLayers": {
+    "logo": { "node": "529:42", "reuse": "src/assets/moram/moram-logo.svg", "verified": "Exact downloaded SHA-256 match" },
+    "backgroundTop": { "node": "529:71", "reuse": "src/assets/auth/login-background-large.svg", "verified": "Exact downloaded SHA-256 match" },
+    "backgrounds": { "529:57": "background-large.svg", "529:70": "background-small.svg", "529:72": "background-right.svg" },
+    "coinOng": {
+      "528:7": "coin-ong-small.svg",
+      "528:10,770:9": "coin-ong-small-eye.svg",
+      "529:73": "coin-ong-body.svg",
+      "529:76": "coin-ong-eye-left.svg",
+      "529:77": "coin-ong-eye-right.svg",
+      "529:78": "coin-ong-currency.png"
+    },
+    "correctIndicator": { "530:56": "correct-circle.svg", "530:59": "correct-check.svg" },
+    "balance": { "530:42": "balance-coin.svg", "530:43": "c text" },
+    "shopArrow": { "530:38": "shop-arrow.svg" }
+  },
+  "coinOngComposition": {
+    "sourceBoundsIncludingGlow": { "x": 2608, "y": 604, "width": 856.001, "height": 1072.171 },
+    "method": "Original layered SVGs with their exported glow and original transparent currency glyph PNG. No generated or substitute character.",
+    "currency": "529:78 uses Inclusive Sans. Its original ink export is used to avoid a fallback-font substitution. The trimmed PNG is aligned to the visual source."
+  },
+  "behavior": [
+    "Existing reward calculation and CLAIM_REWARD reducer are unchanged: up to 3 coins, one claim per quiz session.",
+    "Before claiming, the primary button says 코인 받기. After claiming, it becomes 다음 학습하기, matching the received-reward design.",
+    "Displayed reward and balance come from shared state, not the source frame's sample +3 and 15 COIN values.",
+    "Mixed or zero-correct results use a neutral completion heading instead of falsely claiming all answers were correct.",
+    "Rewards remain in localStorage; quiz sessions remain memory-only as before. A missing/reloaded session shows recovery without creating a reward."
+  ],
+  "limitations": [
+    "Mobile layout adapts the verified PC composition; mobile node 964:601 was not requested again or visually verified.",
+    "Korean text retains the existing application fallback font; the character and its currency glyph use actual Figma assets."
+  ]
+}

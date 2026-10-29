@@ -1,0 +1,362 @@
+[
+  {
+    "id": "color-lime",
+    "price": 6
+  },
+  {
+    "id": "color-white",
+    "price": 0
+  },
+  {
+    "id": "color-lavender",
+    "price": 6
+  },
+  {
+    "id": "color-yellow",
+    "price": 6
+  },
+  {
+    "id": "color-pink",
+    "price": 6
+  },
+  {
+    "id": "color-mint",
+    "price": 6
+  },
+  {
+    "id": "cream-bear-hoodie",
+    "price": 14
+  },
+  {
+    "id": "red-varsity-jacket",
+    "price": 16
+  },
+  {
+    "id": "blue-collar-jacket",
+    "price": 14
+  },
+  {
+    "id": "gray-check-jacket",
+    "price": 15
+  },
+  {
+    "id": "yellow-hoodie",
+    "price": 13
+  },
+  {
+    "id": "brown-toggle-coat",
+    "price": 18
+  },
+  {
+    "id": "beige-brim-hat",
+    "price": 10
+  },
+  {
+    "id": "blue-headphones",
+    "price": 12
+  },
+  {
+    "id": "gray-earflap-hat",
+    "price": 12
+  },
+  {
+    "id": "red-beret",
+    "price": 8
+  },
+  {
+    "id": "blue-cap",
+    "price": 8
+  },
+  {
+    "id": "cream-bonnet",
+    "price": 11
+  },
+  {
+    "id": "bear-hood",
+    "price": 12
+  },
+  {
+    "id": "green-bow",
+    "price": 5
+  },
+  {
+    "id": "classic-buttons",
+    "price": 7
+  },
+  {
+    "id": "round-glasses",
+    "price": 8
+  },
+  {
+    "id": "black-shoes",
+    "price": 8
+  },
+  {
+    "id": "cream-scarf",
+    "price": 6
+  },
+  {
+    "id": "red-bag",
+    "price": 9
+  },
+  {
+    "id": "pastel-blue-ong-cap",
+    "price": 8
+  },
+  {
+    "id": "pastel-yellow-ong-bucket-hat",
+    "price": 8
+  },
+  {
+    "id": "pastel-purple-pom-beanie",
+    "price": 8
+  },
+  {
+    "id": "pastel-cream-bear-cap",
+    "price": 8
+  },
+  {
+    "id": "pastel-green-ong-cap",
+    "price": 8
+  },
+  {
+    "id": "pastel-pink-ribbon-cap",
+    "price": 8
+  },
+  {
+    "id": "pastel-navy-ong-cap",
+    "price": 8
+  },
+  {
+    "id": "pastel-blue-earflap-hat",
+    "price": 8
+  },
+  {
+    "id": "pastel-pink-cat-headband",
+    "price": 8
+  },
+  {
+    "id": "pastel-yellow-rabbit-headband",
+    "price": 8
+  },
+  {
+    "id": "pastel-red-backward-cap",
+    "price": 8
+  },
+  {
+    "id": "pastel-blue-bear-beanie",
+    "price": 8
+  },
+  {
+    "id": "pastel-black-cat-beanie",
+    "price": 8
+  },
+  {
+    "id": "pastel-brown-aviator-hat",
+    "price": 8
+  },
+  {
+    "id": "pastel-pink-hair-bow",
+    "price": 5
+  },
+  {
+    "id": "pastel-red-hair-bow",
+    "price": 5
+  },
+  {
+    "id": "pastel-yellow-hair-bow",
+    "price": 5
+  },
+  {
+    "id": "pastel-purple-hair-bow",
+    "price": 5
+  },
+  {
+    "id": "pastel-blue-hair-bow",
+    "price": 5
+  },
+  {
+    "id": "pastel-daisy-badge",
+    "price": 4
+  },
+  {
+    "id": "pastel-blossom-badge",
+    "price": 4
+  },
+  {
+    "id": "pastel-cherry-badge",
+    "price": 4
+  },
+  {
+    "id": "pastel-star-badge",
+    "price": 4
+  },
+  {
+    "id": "pastel-heart-badge",
+    "price": 4
+  },
+  {
+    "id": "pastel-snowflake-badge",
+    "price": 4
+  },
+  {
+    "id": "pastel-clover-badge",
+    "price": 4
+  },
+  {
+    "id": "pastel-carrot-badge",
+    "price": 4
+  },
+  {
+    "id": "pastel-ong-badge",
+    "price": 4
+  },
+  {
+    "id": "pastel-cream-drawstring-hoodie",
+    "price": 14
+  },
+  {
+    "id": "pastel-blue-ong-hoodie",
+    "price": 14
+  },
+  {
+    "id": "pastel-purple-bag-hoodie",
+    "price": 14
+  },
+  {
+    "id": "pastel-cherry-cardigan",
+    "price": 14
+  },
+  {
+    "id": "pastel-red-collar-cardigan",
+    "price": 14
+  },
+  {
+    "id": "pastel-navy-sailor-top",
+    "price": 14
+  },
+  {
+    "id": "pastel-pink-heart-sweater",
+    "price": 14
+  },
+  {
+    "id": "pastel-green-ong-varsity",
+    "price": 14
+  },
+  {
+    "id": "pastel-cream-bear-bag-hoodie",
+    "price": 14
+  },
+  {
+    "id": "pastel-navy-scarf-coat",
+    "price": 14
+  },
+  {
+    "id": "pastel-pink-fur-cape",
+    "price": 14
+  },
+  {
+    "id": "pastel-blue-cloud-sweater",
+    "price": 14
+  },
+  {
+    "id": "pastel-cream-stripe-sweater",
+    "price": 14
+  },
+  {
+    "id": "pastel-cream-ong-bag",
+    "price": 9
+  },
+  {
+    "id": "pastel-yellow-star-bag",
+    "price": 9
+  },
+  {
+    "id": "pastel-purple-ong-backpack",
+    "price": 9
+  },
+  {
+    "id": "pastel-blue-ong-bag",
+    "price": 9
+  },
+  {
+    "id": "pastel-brown-bear-bag",
+    "price": 9
+  },
+  {
+    "id": "pastel-pink-heart-bag",
+    "price": 9
+  },
+  {
+    "id": "pastel-black-ong-bag",
+    "price": 9
+  },
+  {
+    "id": "pastel-cream-bow-tote",
+    "price": 9
+  },
+  {
+    "id": "pastel-green-frog-bag",
+    "price": 9
+  },
+  {
+    "id": "pastel-blue-fringe-scarf",
+    "price": 6
+  },
+  {
+    "id": "pastel-red-fringe-scarf",
+    "price": 6
+  },
+  {
+    "id": "pastel-yellow-check-scarf",
+    "price": 6
+  },
+  {
+    "id": "pastel-purple-scarf",
+    "price": 6
+  },
+  {
+    "id": "pastel-pink-heart-scarf",
+    "price": 6
+  },
+  {
+    "id": "pastel-navy-stripe-scarf",
+    "price": 6
+  },
+  {
+    "id": "pastel-cream-fur-neck-ribbon",
+    "price": 6
+  },
+  {
+    "id": "pastel-red-bow-tie",
+    "price": 6
+  },
+  {
+    "id": "pastel-red-round-glasses",
+    "price": 8
+  },
+  {
+    "id": "pastel-yellow-frame-glasses",
+    "price": 8
+  },
+  {
+    "id": "pastel-purple-cat-sunglasses",
+    "price": 8
+  },
+  {
+    "id": "pastel-pink-heart-sunglasses",
+    "price": 8
+  },
+  {
+    "id": "pastel-silver-round-glasses",
+    "price": 8
+  },
+  {
+    "id": "pastel-blue-sunglasses",
+    "price": 8
+  },
+  {
+    "id": "pastel-white-cat-glasses",
+    "price": 8
+  }
+]

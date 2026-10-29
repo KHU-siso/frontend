@@ -1,0 +1,61 @@
+/* Local scope: these additions never change the existing landing layout/tokens. */
+.auth-shell {
+  --auth-muted: #abb0b7;
+  --auth-input: rgb(210 219 236 / 50%);
+  --auth-action: linear-gradient(90deg, #123263, #2566c9);
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  overflow: clip;
+  background: white;
+  color: #111;
+}
+.auth-background { position: absolute; z-index: -1; inset: 0; overflow: hidden; pointer-events: none; }
+.auth-background img { position: absolute; height: auto; }
+.auth-background__top { width: 59%; top: -46%; right: -20%; }
+.auth-background__right { width: 26%; top: 19%; right: -8%; }
+.auth-background__bottom { width: 26%; bottom: 10%; left: -5%; }
+.auth-background__small { width: 13%; top: 44%; left: 5%; }
+.auth-shell--signup .auth-background__top { width: 43%; top: -28%; right: 0; }
+.auth-shell--signup .auth-background__right { width: 19%; top: 20%; right: 7%; }
+.auth-shell--signup .auth-background__bottom { width: 59%; bottom: -43%; left: -21%; }
+.auth-shell--signup .auth-background__small { width: 59%; top: 35%; left: 21%; }
+.auth-header { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.25rem 2.5%; min-height: 4.5rem; }
+.auth-header .brand-logo { width: clamp(4.5rem, 5.7vw, 5.25rem); }
+.auth-header p { margin: 0; color: #a3a8af; font-size: 0.8rem; }
+.auth-header p a { margin-left: 0.5rem; color: var(--color-hero); font-weight: 800; text-decoration: none; }
+.auth-main { display: flex; flex: 1; width: 100%; }
+.auth-shell .form-field { min-width: 0; }
+.form-field__label { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.65rem; }
+.form-field__label label { font-weight: 600; }
+.form-field__control { position: relative; display: flex; align-items: center; gap: 0.75rem; }
+.auth-shell input { display: block; width: 100%; min-width: 0; padding: 0.9rem 1.2rem; border: 1px solid transparent; border-radius: 0.8rem; background: var(--auth-input); color: var(--color-ink); font: inherit; }
+.auth-shell input::placeholder { color: #979da6; }
+.auth-shell input[aria-invalid='true'] { border-color: #b91c1c; }
+.field-hint, .field-error { margin: 0.5rem 0 0; font-size: 0.75rem; line-height: 1.6; }
+.field-hint { color: #6c778a; }
+.field-error { color: #b91c1c; }
+.auth-shell .button { border-radius: 0.8rem; background: var(--auth-action); }
+.auth-link-button { padding: 0; border: 0; background: none; color: var(--color-hero); font: inherit; font-size: 0.75rem; cursor: pointer; text-underline-offset: 3px; }
+.auth-link-button:hover { text-decoration: underline; }
+.auth-preview-note { display: flex; flex-direction: column; align-items: center; gap: 0.65rem; margin-top: 1.25rem; padding: 1rem; border: 1px solid #d2dbec; border-radius: 0.9rem; background: rgb(255 255 255 / 85%); color: #596b86; font-size: 0.75rem; line-height: 1.7; text-align: center; }
+.auth-preview-note p { margin: 0; }
+.auth-preview-note strong { color: var(--color-ink); }
+.auth-preview-note a { color: var(--color-ink); font-size: 0.875rem; font-weight: 800; text-underline-offset: 4px; }
+.auth-status { margin: 0.75rem 0 0; color: var(--color-ink); font-size: 0.8rem; line-height: 1.7; }
+.auth-status:empty { display: none; }
+@media (max-width: 47.99rem) {
+  .auth-header { min-height: 4rem; padding: 1.25rem 1.5rem; }
+  .auth-header .brand-logo { width: 4rem; }
+  .auth-header p { display: none; }
+  .auth-background__top { width: 80%; top: -5%; right: -25%; }
+  .auth-background__right { display: none; }
+  .auth-background__bottom { width: 70%; bottom: -4%; left: -38%; }
+  .auth-background__small { width: 56%; top: 55%; left: -24%; }
+  .auth-shell--signup .auth-background__top { width: 95%; top: -10%; right: 20%; }
+  .auth-shell--signup .auth-background__right { display: block; width: 65%; top: 35%; right: -38%; }
+  .auth-shell--signup .auth-background__bottom { width: 100%; bottom: -18%; left: 45%; }
+  .auth-shell--signup .auth-background__small { display: none; }
+}

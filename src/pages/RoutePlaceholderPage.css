@@ -1,0 +1,13 @@
+/* Route scaffold, not a claimed Figma screen. */
+.route-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-8) var(--page-gutter);
+  text-align: center;
+}
+.route-placeholder h1, .route-placeholder p { margin: 0; }
+.route-placeholder__eyebrow { font-weight: var(--font-extrabold); }
+.route-placeholder .button { margin-top: var(--space-5); }

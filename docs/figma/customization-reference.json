@@ -1,0 +1,957 @@
+{
+  "fileKey": "a9SBfEEq9DY4PA857328Zr",
+  "recordedOn": "2026-10-28",
+  "sessionId": "87a96347-dbe0-450e-855e-fd1819184d92",
+  "boards": [
+    "965:443",
+    "965:442",
+    "974:1620",
+    "534:425"
+  ],
+  "screenshots": "Reused the already inspected Page 1 spatial crops; no screenshot repeated during implementation.",
+  "method": "Read-only exportAsync(SVG_STRING, contentsOnly:true) per native layer. Exact duplicate SVG strings share one file. No source Figma edits, grouping, cloning, path redraw, root/viewBox edit or recoloring. Raster hat native PNG WIDTH=256 preserves ratio/alpha and has original edge artifacts; unavailable in shop.",
+  "nativeLayerIds": [
+    "965:512",
+    "965:518",
+    "965:516",
+    "965:522",
+    "965:513",
+    "965:519",
+    "965:515",
+    "965:521",
+    "965:517",
+    "965:523",
+    "973:1594",
+    "975:52",
+    "975:54",
+    "975:55",
+    "976:79",
+    "976:80",
+    "976:83",
+    "976:84",
+    "976:88",
+    "976:89",
+    "976:90",
+    "976:91",
+    "976:92",
+    "976:93",
+    "976:94",
+    "976:95",
+    "976:96",
+    "976:97",
+    "976:98",
+    "975:23",
+    "975:26",
+    "975:27",
+    "975:28",
+    "975:30",
+    "975:31",
+    "975:32",
+    "975:33",
+    "975:71",
+    "975:72",
+    "975:73",
+    "975:74",
+    "975:76",
+    "975:77",
+    "974:1651",
+    "975:51",
+    "975:37",
+    "975:39",
+    "975:40",
+    "975:41",
+    "975:42",
+    "975:43",
+    "975:44",
+    "975:45",
+    "975:46",
+    "975:47",
+    "975:48",
+    "975:50",
+    "974:1669",
+    "974:1667",
+    "974:1658",
+    "974:1657",
+    "974:1618",
+    "974:1617",
+    "974:1655",
+    "530:290",
+    "530:291",
+    "530:293",
+    "974:1662",
+    "974:1665",
+    "974:1666",
+    "530:300",
+    "530:307",
+    "530:303",
+    "530:304",
+    "530:305",
+    "530:306",
+    "530:308",
+    "530:309",
+    "530:310",
+    "530:311",
+    "530:312",
+    "530:313",
+    "530:314",
+    "530:315",
+    "530:316",
+    "530:317",
+    "530:318",
+    "530:319",
+    "530:368",
+    "971:630",
+    "971:634",
+    "974:1660",
+    "973:1595",
+    "973:1598"
+  ],
+  "svgBindings": {
+    "965:512": {
+      "file": "src/assets/items/figma/965-512.svg",
+      "bounds": {
+        "x": -126444,
+        "y": -8972,
+        "width": 1058,
+        "height": 948
+      }
+    },
+    "965:518": {
+      "file": "src/assets/items/figma/965-518.svg",
+      "bounds": {
+        "x": -126810,
+        "y": -8354,
+        "width": 1790,
+        "height": 1563
+      }
+    },
+    "965:516": {
+      "file": "src/assets/items/figma/965-516.svg",
+      "bounds": {
+        "x": -119385,
+        "y": -8972,
+        "width": 1058,
+        "height": 948
+      }
+    },
+    "965:522": {
+      "file": "src/assets/items/figma/965-522.svg",
+      "bounds": {
+        "x": -119751,
+        "y": -8354,
+        "width": 1790,
+        "height": 1563
+      }
+    },
+    "965:513": {
+      "file": "src/assets/items/figma/965-513.svg",
+      "bounds": {
+        "x": -126444,
+        "y": -5151,
+        "width": 1058,
+        "height": 948
+      }
+    },
+    "965:519": {
+      "file": "src/assets/items/figma/965-519.svg",
+      "bounds": {
+        "x": -126810,
+        "y": -4533,
+        "width": 1790,
+        "height": 1563
+      }
+    },
+    "965:515": {
+      "file": "src/assets/items/figma/965-515.svg",
+      "bounds": {
+        "x": -123018,
+        "y": -5151,
+        "width": 1058,
+        "height": 948
+      }
+    },
+    "965:521": {
+      "file": "src/assets/items/figma/965-521.svg",
+      "bounds": {
+        "x": -123384,
+        "y": -4533,
+        "width": 1790,
+        "height": 1563
+      }
+    },
+    "965:517": {
+      "file": "src/assets/items/figma/965-517.svg",
+      "bounds": {
+        "x": -119385,
+        "y": -5151,
+        "width": 1058,
+        "height": 948
+      }
+    },
+    "965:523": {
+      "file": "src/assets/items/figma/965-523.svg",
+      "bounds": {
+        "x": -119751,
+        "y": -4533,
+        "width": 1790,
+        "height": 1563
+      }
+    },
+    "973:1594": {
+      "file": "src/assets/items/figma/973-1594.svg",
+      "bounds": {
+        "x": -114068.5078125,
+        "y": -8127.49658203125,
+        "width": 1944.015625,
+        "height": 1232.99853515625
+      }
+    },
+    "975:52": {
+      "file": "src/assets/items/figma/975-52.svg",
+      "bounds": {
+        "x": -113278,
+        "y": -7511,
+        "width": 362,
+        "height": 362
+      }
+    },
+    "975:54": {
+      "file": "src/assets/items/figma/975-54.svg",
+      "bounds": {
+        "x": -113327,
+        "y": -7511,
+        "width": 141,
+        "height": 141
+      }
+    },
+    "975:55": {
+      "file": "src/assets/items/figma/975-54.svg",
+      "bounds": {
+        "x": -113009,
+        "y": -7511,
+        "width": 141,
+        "height": 141
+      }
+    },
+    "976:79": {
+      "file": "src/assets/items/figma/976-79.svg",
+      "bounds": {
+        "x": -110506.1328125,
+        "y": -8076.1142578125,
+        "width": 814.6953125,
+        "height": 1126.76806640625
+      }
+    },
+    "976:80": {
+      "file": "src/assets/items/figma/976-80.svg",
+      "bounds": {
+        "x": -109693.5703125,
+        "y": -8078.70068359375,
+        "width": 845.8125,
+        "height": 1126.0439453125
+      }
+    },
+    "976:83": {
+      "file": "src/assets/items/figma/976-83.svg",
+      "bounds": {
+        "x": -110644.8671875,
+        "y": -7955.23681640625,
+        "width": 514.5,
+        "height": 981.9462890625
+      }
+    },
+    "976:84": {
+      "file": "src/assets/items/figma/976-84.svg",
+      "bounds": {
+        "x": -109212.640625,
+        "y": -7915.07275390625,
+        "width": 514.125,
+        "height": 941.58349609375
+      }
+    },
+    "976:88": {
+      "file": "src/assets/items/figma/976-88.svg",
+      "bounds": {
+        "x": -109863.7734375,
+        "y": -7989.85595703125,
+        "width": 353.09375,
+        "height": 1080.03515625
+      }
+    },
+    "976:89": {
+      "file": "src/assets/items/figma/976-89.svg",
+      "bounds": {
+        "x": -109744,
+        "y": -7707,
+        "width": 125,
+        "height": 125
+      }
+    },
+    "976:90": {
+      "file": "src/assets/items/figma/976-89.svg",
+      "bounds": {
+        "x": -109744,
+        "y": -7455,
+        "width": 125,
+        "height": 125
+      }
+    },
+    "976:91": {
+      "file": "src/assets/items/figma/976-89.svg",
+      "bounds": {
+        "x": -109744,
+        "y": -7165,
+        "width": 125,
+        "height": 125
+      }
+    },
+    "976:92": {
+      "file": "src/assets/items/figma/976-92.svg",
+      "bounds": {
+        "x": -110233.921875,
+        "y": -8038.2490234375,
+        "width": 1108.8125,
+        "height": 230.6669921875
+      }
+    },
+    "976:93": {
+      "file": "src/assets/items/figma/976-93.svg",
+      "bounds": {
+        "x": -110356.921875,
+        "y": -7362.13134765625,
+        "width": 131.84375,
+        "height": 268.7626953125
+      }
+    },
+    "976:94": {
+      "file": "src/assets/items/figma/976-94.svg",
+      "bounds": {
+        "x": -109124.921875,
+        "y": -7338.63134765625,
+        "width": 131.84375,
+        "height": 268.7626953125
+      }
+    },
+    "976:95": {
+      "file": "src/assets/items/figma/976-95.svg",
+      "bounds": {
+        "x": -109490.125,
+        "y": -8039.4990234375,
+        "width": 325.25,
+        "height": 192.998046875
+      }
+    },
+    "976:96": {
+      "file": "src/assets/items/figma/976-96.svg",
+      "bounds": {
+        "x": -110202.46875,
+        "y": -8050.712890625,
+        "width": 313.9375,
+        "height": 215.42578125
+      }
+    },
+    "976:97": {
+      "file": "src/assets/items/figma/976-97.svg",
+      "bounds": {
+        "x": -110213.078125,
+        "y": -8069.58740234375,
+        "width": 69.15625,
+        "height": 52.6748046875
+      }
+    },
+    "976:98": {
+      "file": "src/assets/items/figma/976-98.svg",
+      "bounds": {
+        "x": -109209.328125,
+        "y": -8068.3154296875,
+        "width": 70.65625,
+        "height": 55.130859375
+      }
+    },
+    "975:23": {
+      "file": "src/assets/items/figma/975-23.svg",
+      "bounds": {
+        "x": -106950.5,
+        "y": -8088.50390625,
+        "width": 1839.0234375,
+        "height": 1280.00390625
+      }
+    },
+    "975:26": {
+      "file": "src/assets/items/figma/975-26.svg",
+      "bounds": {
+        "x": -106666.765625,
+        "y": -8089.55908203125,
+        "width": 661.734375,
+        "height": 467.27001953125
+      }
+    },
+    "975:27": {
+      "file": "src/assets/items/figma/975-27.svg",
+      "bounds": {
+        "x": -106074.1640625,
+        "y": -8089.02001953125,
+        "width": 672.0234375,
+        "height": 467.14501953125
+      }
+    },
+    "975:28": {
+      "file": "src/assets/items/figma/975-28.svg",
+      "bounds": {
+        "x": -106266.8203125,
+        "y": -7696.87939453125,
+        "width": 407.296875,
+        "height": 892.87939453125
+      }
+    },
+    "975:30": {
+      "file": "src/assets/items/figma/975-30.svg",
+      "bounds": {
+        "x": -106236.9765625,
+        "y": -7715.580078125,
+        "width": 413.9453125,
+        "height": 867.16015625
+      }
+    },
+    "975:31": {
+      "file": "src/assets/items/figma/975-31.svg",
+      "bounds": {
+        "x": -106112,
+        "y": -7597,
+        "width": 148,
+        "height": 148
+      }
+    },
+    "975:32": {
+      "file": "src/assets/items/figma/975-31.svg",
+      "bounds": {
+        "x": -106112,
+        "y": -7356,
+        "width": 148,
+        "height": 148
+      }
+    },
+    "975:33": {
+      "file": "src/assets/items/figma/975-31.svg",
+      "bounds": {
+        "x": -106104,
+        "y": -7087,
+        "width": 148,
+        "height": 148
+      }
+    },
+    "975:71": {
+      "file": "src/assets/items/figma/975-71.svg",
+      "bounds": {
+        "x": -114018.140625,
+        "y": -4265.61572265625,
+        "width": 1849.5390625,
+        "height": 1092.2841796875
+      }
+    },
+    "975:72": {
+      "file": "src/assets/items/figma/975-72.svg",
+      "bounds": {
+        "x": -113749.5234375,
+        "y": -4107.5,
+        "width": 1301.03125,
+        "height": 910
+      }
+    },
+    "975:73": {
+      "file": "src/assets/items/figma/975-73.svg",
+      "bounds": {
+        "x": -113867.3984375,
+        "y": -4056.880859375,
+        "width": 1537.390625,
+        "height": 209.6748046875
+      }
+    },
+    "975:74": {
+      "file": "src/assets/items/figma/975-74.svg",
+      "bounds": {
+        "x": -113814.109375,
+        "y": -4114.06103515625,
+        "width": 1438.5390625,
+        "height": 182.74365234375
+      }
+    },
+    "975:76": {
+      "file": "src/assets/items/figma/975-76.svg",
+      "bounds": {
+        "x": -113983.3828125,
+        "y": -4155.63134765625,
+        "width": 1787.75,
+        "height": 653.23291015625
+      }
+    },
+    "975:77": {
+      "file": "src/assets/items/figma/975-77.svg",
+      "bounds": {
+        "x": -113148,
+        "y": -3835,
+        "width": 158.0078125,
+        "height": 510.5
+      }
+    },
+    "974:1651": {
+      "file": "src/assets/items/figma/974-1651.svg",
+      "bounds": {
+        "x": -110642.5078125,
+        "y": -4270.49658203125,
+        "width": 1944.015625,
+        "height": 1232.99853515625
+      }
+    },
+    "975:51": {
+      "file": "src/assets/items/figma/975-51.svg",
+      "bounds": {
+        "x": -110010.5,
+        "y": -3885.13232421875,
+        "width": 566.9921875,
+        "height": 385.42724609375
+      }
+    },
+    "975:37": {
+      "file": "src/assets/items/figma/975-37.svg",
+      "bounds": {
+        "x": -107010.921875,
+        "y": -4246.65869140625,
+        "width": 1955.5859375,
+        "height": 1297.969970703125
+      }
+    },
+    "975:39": {
+      "file": "src/assets/items/figma/975-39.svg",
+      "bounds": {
+        "x": -106656.7890625,
+        "y": -4276.865234375,
+        "width": 664.5625,
+        "height": 363.5810546875
+      }
+    },
+    "975:40": {
+      "file": "src/assets/items/figma/975-40.svg",
+      "bounds": {
+        "x": -106077.765625,
+        "y": -4276.49462890625,
+        "width": 664.5625,
+        "height": 363.5810546875
+      }
+    },
+    "975:41": {
+      "file": "src/assets/items/figma/975-41.svg",
+      "bounds": {
+        "x": -106150.4609375,
+        "y": -4035.170166015625,
+        "width": 103.921875,
+        "height": 1031.840576171875
+      }
+    },
+    "975:42": {
+      "file": "src/assets/items/figma/975-42.svg",
+      "bounds": {
+        "x": -106163.3515625,
+        "y": -4024.95703125,
+        "width": 187.234375,
+        "height": 1029.354248046875
+      }
+    },
+    "975:43": {
+      "file": "src/assets/items/figma/975-43.svg",
+      "bounds": {
+        "x": -106133,
+        "y": -4123,
+        "width": 179,
+        "height": 179
+      }
+    },
+    "975:44": {
+      "file": "src/assets/items/figma/975-44.svg",
+      "bounds": {
+        "x": -106425,
+        "y": -3803,
+        "width": 206,
+        "height": 206
+      }
+    },
+    "975:45": {
+      "file": "src/assets/items/figma/975-44.svg",
+      "bounds": {
+        "x": -105908,
+        "y": -3794,
+        "width": 206,
+        "height": 206
+      }
+    },
+    "975:46": {
+      "file": "src/assets/items/figma/975-44.svg",
+      "bounds": {
+        "x": -106425,
+        "y": -3489,
+        "width": 206,
+        "height": 206
+      }
+    },
+    "975:47": {
+      "file": "src/assets/items/figma/975-44.svg",
+      "bounds": {
+        "x": -105908,
+        "y": -3480,
+        "width": 206,
+        "height": 206
+      }
+    },
+    "975:48": {
+      "file": "src/assets/items/figma/975-48.svg",
+      "bounds": {
+        "x": -106282,
+        "y": -3760,
+        "width": 450.875,
+        "height": 138.1875
+      }
+    },
+    "975:50": {
+      "file": "src/assets/items/figma/975-48.svg",
+      "bounds": {
+        "x": -106285,
+        "y": -3446,
+        "width": 450.875,
+        "height": 138.1875
+      }
+    },
+    "974:1669": {
+      "file": "src/assets/items/figma/974-1669.svg",
+      "bounds": {
+        "x": -122053.078125,
+        "y": 344.8275451660156,
+        "width": 1455.09375,
+        "height": 1168.6170654296875
+      }
+    },
+    "974:1667": {
+      "file": "src/assets/items/figma/974-1667.svg",
+      "bounds": {
+        "x": -121976.015625,
+        "y": 432.5001220703125,
+        "width": 1281.6796875,
+        "height": 1069.55712890625
+      }
+    },
+    "974:1658": {
+      "file": "src/assets/items/figma/974-1658.svg",
+      "bounds": {
+        "x": -118872.4765625,
+        "y": 96.50337982177734,
+        "width": 1586.9765625,
+        "height": 1221.345947265625
+      }
+    },
+    "974:1657": {
+      "file": "src/assets/items/figma/974-1657.svg",
+      "bounds": {
+        "x": -118842.4765625,
+        "y": 274.51019287109375,
+        "width": 1526.9765625,
+        "height": 1116.009033203125
+      }
+    },
+    "974:1618": {
+      "file": "src/assets/items/figma/974-1618.svg",
+      "bounds": {
+        "x": -124815.5,
+        "y": 3717.512451171875,
+        "width": 836.96875,
+        "height": 567.985107421875
+      }
+    },
+    "974:1617": {
+      "file": "src/assets/items/figma/974-1617.svg",
+      "bounds": {
+        "x": -121857,
+        "y": 3730.001953125,
+        "width": 1030.0078125,
+        "height": 612.998046875
+      }
+    },
+    "974:1655": {
+      "file": "src/assets/items/figma/974-1655.svg",
+      "bounds": {
+        "x": -118748.2265625,
+        "y": 3702.695068359375,
+        "width": 1337.0703125,
+        "height": 1531.996826171875
+      }
+    },
+    "530:290": {
+      "file": "src/assets/items/figma/530-290.svg",
+      "bounds": {
+        "x": -126728,
+        "y": -18331.25,
+        "width": 297,
+        "height": 297
+      }
+    },
+    "530:291": {
+      "file": "src/assets/items/figma/530-290.svg",
+      "bounds": {
+        "x": -125786,
+        "y": -18331.25,
+        "width": 297,
+        "height": 297
+      }
+    },
+    "530:293": {
+      "file": "src/assets/items/figma/530-293.svg",
+      "bounds": {
+        "x": -126187,
+        "y": -17890.25,
+        "width": 157,
+        "height": 134
+      }
+    },
+    "974:1662": {
+      "file": "src/assets/items/figma/974-1662.svg",
+      "bounds": {
+        "x": -123406.5,
+        "y": -17687.498046875,
+        "width": 1504.0078125,
+        "height": 1093.912109375
+      }
+    },
+    "974:1665": {
+      "file": "src/assets/items/figma/974-1665.svg",
+      "bounds": {
+        "x": -122625.4140625,
+        "y": -17147.33203125,
+        "width": 100.84375,
+        "height": 134.982421875
+      }
+    },
+    "974:1666": {
+      "file": "src/assets/items/figma/974-1666.svg",
+      "bounds": {
+        "x": -122356.4453125,
+        "y": -17176.35546875,
+        "width": 115.9375,
+        "height": 95.8671875
+      }
+    },
+    "530:300": {
+      "file": "src/assets/items/figma/530-300.svg",
+      "bounds": {
+        "x": -119110,
+        "y": -17402.25,
+        "width": 120,
+        "height": 116
+      }
+    },
+    "530:307": {
+      "file": "src/assets/items/figma/530-307.svg",
+      "bounds": {
+        "x": -119094,
+        "y": -17386.25,
+        "width": 88,
+        "height": 84
+      }
+    },
+    "530:303": {
+      "file": "src/assets/items/figma/530-303.svg",
+      "bounds": {
+        "x": -119066.796875,
+        "y": -17372.845703125,
+        "width": 18.7734375,
+        "height": 18.0859375
+      }
+    },
+    "530:304": {
+      "file": "src/assets/items/figma/530-303.svg",
+      "bounds": {
+        "x": -119040.2421875,
+        "y": -17359.830078125,
+        "width": 18.7734375,
+        "height": 18.0859375
+      }
+    },
+    "530:305": {
+      "file": "src/assets/items/figma/530-303.svg",
+      "bounds": {
+        "x": -119053.03125,
+        "y": -17333.775390625,
+        "width": 18.7734375,
+        "height": 18.0859375
+      }
+    },
+    "530:306": {
+      "file": "src/assets/items/figma/530-303.svg",
+      "bounds": {
+        "x": -119079.5859375,
+        "y": -17346.810546875,
+        "width": 18.7734375,
+        "height": 18.0859375
+      }
+    },
+    "530:308": {
+      "file": "src/assets/items/figma/530-308.svg",
+      "bounds": {
+        "x": -119136,
+        "y": -17119.25,
+        "width": 171,
+        "height": 165
+      }
+    },
+    "530:309": {
+      "file": "src/assets/items/figma/530-309.svg",
+      "bounds": {
+        "x": -119113,
+        "y": -17096.25,
+        "width": 125,
+        "height": 119
+      }
+    },
+    "530:310": {
+      "file": "src/assets/items/figma/530-310.svg",
+      "bounds": {
+        "x": -119074.4375,
+        "y": -17077.376953125,
+        "width": 26.75,
+        "height": 25.7734375
+      }
+    },
+    "530:311": {
+      "file": "src/assets/items/figma/530-310.svg",
+      "bounds": {
+        "x": -119036.5859375,
+        "y": -17058.798828125,
+        "width": 26.75,
+        "height": 25.7734375
+      }
+    },
+    "530:312": {
+      "file": "src/assets/items/figma/530-310.svg",
+      "bounds": {
+        "x": -119054.8203125,
+        "y": -17021.673828125,
+        "width": 26.75,
+        "height": 25.7734375
+      }
+    },
+    "530:313": {
+      "file": "src/assets/items/figma/530-310.svg",
+      "bounds": {
+        "x": -119092.65625,
+        "y": -17040.248046875,
+        "width": 26.75,
+        "height": 25.7734375
+      }
+    },
+    "530:314": {
+      "file": "src/assets/items/figma/530-314.svg",
+      "bounds": {
+        "x": -119167,
+        "y": -16772.25,
+        "width": 235,
+        "height": 227
+      }
+    },
+    "530:315": {
+      "file": "src/assets/items/figma/530-315.svg",
+      "bounds": {
+        "x": -119136,
+        "y": -16741.25,
+        "width": 173,
+        "height": 165
+      }
+    },
+    "530:316": {
+      "file": "src/assets/items/figma/530-316.svg",
+      "bounds": {
+        "x": -119082.453125,
+        "y": -16714.74609375,
+        "width": 36.734375,
+        "height": 35.39453125
+      }
+    },
+    "530:317": {
+      "file": "src/assets/items/figma/530-316.svg",
+      "bounds": {
+        "x": -119030.484375,
+        "y": -16689.23828125,
+        "width": 36.734375,
+        "height": 35.39453125
+      }
+    },
+    "530:318": {
+      "file": "src/assets/items/figma/530-316.svg",
+      "bounds": {
+        "x": -119055.515625,
+        "y": -16638.25390625,
+        "width": 36.734375,
+        "height": 35.39453125
+      }
+    },
+    "530:319": {
+      "file": "src/assets/items/figma/530-316.svg",
+      "bounds": {
+        "x": -119107.4765625,
+        "y": -16663.7578125,
+        "width": 36.734375,
+        "height": 35.39453125
+      }
+    },
+    "530:368": {
+      "file": "src/assets/items/figma/530-368.svg",
+      "bounds": {
+        "x": -126619,
+        "y": -14262,
+        "width": 1000,
+        "height": 459.1328125
+      }
+    },
+    "971:630": {
+      "file": "src/assets/items/figma/971-630.svg",
+      "bounds": {
+        "x": -126010,
+        "y": -12688,
+        "width": 750,
+        "height": 442
+      }
+    },
+    "971:634": {
+      "file": "src/assets/items/figma/971-630.svg",
+      "bounds": {
+        "x": -126979,
+        "y": -12644,
+        "width": 750,
+        "height": 442
+      }
+    },
+    "974:1660": {
+      "file": "src/assets/items/figma/974-1660.svg",
+      "bounds": {
+        "x": -123433.5,
+        "y": -13852.5,
+        "width": 1724.0234375,
+        "height": 1225.9921875
+      }
+    },
+    "973:1595": {
+      "file": "src/assets/items/figma/973-1595.svg",
+      "bounds": {
+        "x": -119947.5,
+        "y": -13805.5,
+        "width": 1473.421875,
+        "height": 960.83203125
+      }
+    },
+    "973:1598": {
+      "file": "src/assets/items/figma/973-1598.svg",
+      "bounds": {
+        "x": -119763,
+        "y": -13161,
+        "width": 105,
+        "height": 105
+      }
+    }
+  }
+}

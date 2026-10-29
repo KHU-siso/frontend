@@ -1,0 +1,466 @@
+{
+  "nodeId": "971:733",
+  "sourceImage": "src/assets/items/pastel/971-733-source.png",
+  "size": [
+    1536,
+    1024
+  ],
+  "rowBands": [
+    [
+      0,
+      170
+    ],
+    [
+      170,
+      335
+    ],
+    [
+      335,
+      418
+    ],
+    [
+      418,
+      561
+    ],
+    [
+      561,
+      694
+    ],
+    [
+      694,
+      816
+    ],
+    [
+      816,
+      932
+    ],
+    [
+      932,
+      1024
+    ]
+  ],
+  "rows": [
+    [
+      [
+        "blue-ong-cap",
+        "파란 옹이 야구모자",
+        "headwear"
+      ],
+      [
+        "red-beret",
+        "빨간 베레모",
+        "headwear",
+        "red-beret"
+      ],
+      [
+        "yellow-ong-bucket-hat",
+        "노란 옹이 버킷햇",
+        "headwear"
+      ],
+      [
+        "purple-pom-beanie",
+        "보라 방울 비니",
+        "headwear"
+      ],
+      [
+        "cream-bear-cap",
+        "크림 곰무늬 모자",
+        "headwear"
+      ],
+      [
+        "green-ong-cap",
+        "초록 옹이 야구모자",
+        "headwear"
+      ],
+      [
+        "pink-ribbon-cap",
+        "분홍 리본 야구모자",
+        "headwear"
+      ],
+      [
+        "navy-ong-cap",
+        "남색 옹이 야구모자",
+        "headwear"
+      ]
+    ],
+    [
+      [
+        "blue-earflap-hat",
+        "파란 털 귀달이 모자",
+        "headwear"
+      ],
+      [
+        "pink-cat-headband",
+        "분홍 고양이 머리띠",
+        "headwear"
+      ],
+      [
+        "yellow-rabbit-headband",
+        "노란 토끼 머리띠",
+        "headwear"
+      ],
+      [
+        "blue-headphones",
+        "파란 헤드폰",
+        "headwear",
+        "blue-headphones"
+      ],
+      [
+        "red-backward-cap",
+        "빨간 뒤집어 쓴 모자",
+        "headwear"
+      ],
+      [
+        "cream-bonnet",
+        "크림 보닛",
+        "headwear",
+        "cream-bonnet"
+      ],
+      [
+        "blue-bear-beanie",
+        "파란 곰 귀 비니",
+        "headwear"
+      ],
+      [
+        "black-cat-beanie",
+        "검은 고양이 비니",
+        "headwear"
+      ],
+      [
+        "beige-brim-hat",
+        "파란 띠 챙모자",
+        "headwear",
+        "beige-brim-hat"
+      ],
+      [
+        "brown-aviator-hat",
+        "갈색 고글 비행모",
+        "headwear"
+      ]
+    ],
+    [
+      [
+        "pink-hair-bow",
+        "분홍 머리 리본",
+        "headwear"
+      ],
+      [
+        "red-hair-bow",
+        "빨간 머리 리본",
+        "headwear"
+      ],
+      [
+        "yellow-hair-bow",
+        "노란 머리 리본",
+        "headwear"
+      ],
+      [
+        "purple-hair-bow",
+        "보라 머리 리본",
+        "headwear"
+      ],
+      [
+        "blue-hair-bow",
+        "파란 머리 리본",
+        "headwear"
+      ],
+      [
+        "daisy-badge",
+        "데이지 장식",
+        "badge"
+      ],
+      [
+        "blossom-badge",
+        "분홍 꽃 장식",
+        "badge"
+      ],
+      [
+        "cherry-badge",
+        "체리 장식",
+        "badge"
+      ],
+      [
+        "star-badge",
+        "별 장식",
+        "badge"
+      ],
+      [
+        "heart-badge",
+        "하트 장식",
+        "badge"
+      ],
+      [
+        "snowflake-badge",
+        "눈꽃 장식",
+        "badge"
+      ],
+      [
+        "clover-badge",
+        "클로버 장식",
+        "badge"
+      ],
+      [
+        "carrot-badge",
+        "당근 장식",
+        "badge"
+      ],
+      [
+        "ong-badge",
+        "흰 옹이 장식",
+        "badge"
+      ]
+    ],
+    [
+      [
+        "cream-drawstring-hoodie",
+        "크림 끈 후드",
+        "outfit"
+      ],
+      [
+        "blue-ong-hoodie",
+        "파란 옹이 후드",
+        "outfit"
+      ],
+      [
+        "yellow-hoodie",
+        "노란 끈 후드",
+        "outfit",
+        "yellow-hoodie"
+      ],
+      [
+        "purple-bag-hoodie",
+        "보라 후드·가방 세트",
+        "outfit",
+        null,
+        [
+          "outfit",
+          "bag"
+        ]
+      ],
+      [
+        "cherry-cardigan",
+        "체리 크림 가디건",
+        "outfit"
+      ],
+      [
+        "red-collar-cardigan",
+        "빨간 흰 깃 가디건",
+        "outfit"
+      ],
+      [
+        "navy-sailor-top",
+        "남색 세일러 리본 상의",
+        "outfit"
+      ],
+      [
+        "pink-heart-sweater",
+        "분홍 하트 니트",
+        "outfit"
+      ]
+    ],
+    [
+      [
+        "green-ong-varsity",
+        "초록 옹이 배색 재킷",
+        "outfit"
+      ],
+      [
+        "brown-toggle-coat",
+        "갈색 토글 코트",
+        "outfit",
+        "brown-toggle-coat"
+      ],
+      [
+        "blue-collar-jacket",
+        "파란 둥근 깃 재킷",
+        "outfit",
+        "blue-collar-jacket"
+      ],
+      [
+        "cream-bear-bag-hoodie",
+        "크림 후드·곰 가방 세트",
+        "outfit",
+        null,
+        [
+          "outfit",
+          "bag"
+        ]
+      ],
+      [
+        "navy-scarf-coat",
+        "남색 코트·체크 목도리 세트",
+        "outfit",
+        null,
+        [
+          "outfit",
+          "neckAccessory"
+        ]
+      ],
+      [
+        "pink-fur-cape",
+        "분홍 털 깃 리본 케이프",
+        "outfit"
+      ],
+      [
+        "blue-cloud-sweater",
+        "파란 구름 니트",
+        "outfit"
+      ],
+      [
+        "cream-stripe-sweater",
+        "크림 줄무늬 니트",
+        "outfit"
+      ]
+    ],
+    [
+      [
+        "cream-ong-bag",
+        "크림 옹이 크로스백",
+        "bag"
+      ],
+      [
+        "red-bag",
+        "빨간 크로스백",
+        "bag",
+        "red-bag"
+      ],
+      [
+        "yellow-star-bag",
+        "노란 별 가방",
+        "bag"
+      ],
+      [
+        "purple-ong-backpack",
+        "보라 옹이 백팩",
+        "bag"
+      ],
+      [
+        "blue-ong-bag",
+        "파란 옹이 크로스백",
+        "bag"
+      ],
+      [
+        "brown-bear-bag",
+        "갈색 곰 가방",
+        "bag"
+      ],
+      [
+        "pink-heart-bag",
+        "분홍 하트 가방",
+        "bag"
+      ],
+      [
+        "black-ong-bag",
+        "검은 옹이 크로스백",
+        "bag"
+      ],
+      [
+        "cream-bow-tote",
+        "파란 리본 크림 토트백",
+        "bag"
+      ],
+      [
+        "green-frog-bag",
+        "초록 개구리 가방",
+        "bag"
+      ]
+    ],
+    [
+      [
+        "blue-fringe-scarf",
+        "파란 술 목도리",
+        "neckAccessory"
+      ],
+      [
+        "red-fringe-scarf",
+        "빨간 술 목도리",
+        "neckAccessory"
+      ],
+      [
+        "yellow-check-scarf",
+        "노란 체크 목도리",
+        "neckAccessory"
+      ],
+      [
+        "purple-scarf",
+        "보라 목도리",
+        "neckAccessory"
+      ],
+      [
+        "cream-scarf",
+        "크림 머플러",
+        "neckAccessory",
+        "cream-scarf"
+      ],
+      [
+        "green-bow",
+        "초록 매듭 스카프",
+        "neckAccessory",
+        "green-bow"
+      ],
+      [
+        "pink-heart-scarf",
+        "분홍 하트 목도리",
+        "neckAccessory"
+      ],
+      [
+        "navy-stripe-scarf",
+        "남색 줄무늬 목도리",
+        "neckAccessory"
+      ],
+      [
+        "cream-fur-neck-ribbon",
+        "크림 털 리본 목장식",
+        "neckAccessory"
+      ],
+      [
+        "red-bow-tie",
+        "빨간 나비넥타이",
+        "neckAccessory"
+      ]
+    ],
+    [
+      [
+        "round-glasses",
+        "동그란 안경",
+        "faceAccessory",
+        "round-glasses"
+      ],
+      [
+        "red-round-glasses",
+        "빨간 동그란 안경",
+        "faceAccessory"
+      ],
+      [
+        "yellow-frame-glasses",
+        "노란 테 안경",
+        "faceAccessory"
+      ],
+      [
+        "purple-cat-sunglasses",
+        "보라 캣아이 선글라스",
+        "faceAccessory"
+      ],
+      [
+        "pink-heart-sunglasses",
+        "분홍 하트 선글라스",
+        "faceAccessory"
+      ],
+      [
+        "silver-round-glasses",
+        "은색 동그란 안경",
+        "faceAccessory"
+      ],
+      [
+        "blue-sunglasses",
+        "파란 선글라스",
+        "faceAccessory"
+      ],
+      [
+        "white-cat-glasses",
+        "흰 캣아이 안경",
+        "faceAccessory"
+      ]
+    ]
+  ]
+}

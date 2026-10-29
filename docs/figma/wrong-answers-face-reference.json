@@ -1,0 +1,11 @@
+{
+  "fileKey": "a9SBfEEq9DY4PA857328Zr",
+  "nodeId": "278:602",
+  "verification": "get_design_context with screenshot, 2026-10-28",
+  "scope": "First visible wrong-answer card's right face only; existing controls and data are retained.",
+  "assets": [
+    { "nodeId": "292:63", "name": "Union", "file": "src/assets/review/wrong-card-union.svg", "canvas": [4955, 1772], "usage": "Unmodified SVG background, proportional CSS viewport of the right face lobe; no path extraction or redraw." },
+    { "nodeIds": ["292:101", "292:102"], "file": "src/assets/review/wrong-card-eye.svg", "canvas": [42, 42], "usage": "Same original eye SVG at both design positions." }
+  ],
+  "responsive": "Face sizes and reserved side gutter are development adaptations. Mobile-specific Figma nodes were not requested."
+}

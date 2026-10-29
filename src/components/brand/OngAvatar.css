@@ -1,0 +1,19 @@
+.ong-avatar { position: relative; isolation: isolate; width: 100%; aspect-ratio: 1660 / 2448; }
+.ong-avatar > img { position: absolute; height: auto; }
+.ong-avatar__head, .ong-avatar__color-head { width: 46.39%; left: 26.81%; top: 18.1%; }
+.ong-avatar__body, .ong-avatar__color-body { width: 78.49%; left: 10.72%; top: 38.73%; }
+.ong-avatar__head, .ong-avatar__body { z-index: 20; }
+.ong-avatar__eye-left { z-index: 40; width: 4.28%; left: 37.05%; top: 30.02%; }
+.ong-avatar__eye-right { z-index: 40; width: 4.4%; left: 57.17%; top: 30.02%; }
+.ong-avatar__shadow { width: 43.52%; left: 28.26%; top: 85.09%; transform: rotate(-0.91deg) skewX(-0.29deg); }
+.ong-avatar__wearable { position: absolute; pointer-events: none; }
+.ong-avatar__wearable--split { display: contents; }
+.ong-avatar__wearable-part { position: absolute; }
+.ong-avatar__color-layer { position: absolute; z-index: 21; display: block; mask-repeat: no-repeat; mask-size: 100% 100%; }
+.ong-avatar__color-head { aspect-ratio: 770 / 748; }
+.ong-avatar__color-body { aspect-ratio: 1303 / 1233; }
+/* Real Figma color SVGs cover the original body mask without changing its outline.
+   object-fit preserves each source asset's ratio; the mask is the existing Ong SVG. */
+.ong-avatar__color-layer img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.item-artwork { position: relative; width: 100%; }
+.item-artwork img { position: absolute; display: block; height: auto; }
