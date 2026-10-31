@@ -3,6 +3,7 @@ import { lazy, Suspense } from 'react'
 import PublicLayout from '../layouts/PublicLayout.jsx'
 import LandingPage from '../pages/LandingPage.jsx'
 import RoutePlaceholderPage from '../pages/RoutePlaceholderPage.jsx'
+import FaqPage from '../pages/FaqPage.jsx'
 import AuthLayout from '../layouts/AuthLayout.jsx'
 import AppLayout from '../layouts/AppLayout.jsx'
 import LoginPage from '../pages/auth/LoginPage.jsx'
@@ -26,7 +27,6 @@ const SubjectHomePage = lazy(() => import('../pages/materials/SubjectHomePage.js
 const futurePages = [
   ['/about', '소개'],
   ['/support', '고객센터'],
-  ['/faq', '자주 묻는 질문'],
 ]
 
 export default function AppRoutes() {
@@ -61,6 +61,7 @@ export default function AppRoutes() {
         {futurePages.map(([path, title]) => (
           <Route key={path} path={path} element={<RoutePlaceholderPage title={title} />} />
         ))}
+        <Route path="/faq" element={<FaqPage />} />
         <Route path="*" element={<RoutePlaceholderPage notFound />} />
       </Route>
     </Routes>

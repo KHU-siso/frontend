@@ -197,3 +197,9 @@ button.quick-action { font: inherit; font-size: 0.8125rem; }
 .schedule-repeat legend { margin-bottom: 0.6rem; padding: 0; font-size: 0.875rem; font-weight: 600; }
 .schedule-repeat label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; }
 .schedule-form .schedule-repeat input[type='radio'] { width: 1rem; height: 1rem; flex: none; accent-color: var(--color-hero); }
+
+.timetable-delete { background: #b91c1c; color: #fff; }
+.timetable-delete-confirm { display: grid; gap: 0.75rem; margin-top: 1rem; padding: 1rem; border: 1px solid #d2dbec; border-radius: 1rem; background: #f4f7fc; }
+.timetable-delete-confirm p { margin: 0; line-height: 1.6; overflow-wrap: anywhere; }
+.timetable-delete-confirm .schedule-actions { flex-wrap: wrap; gap: 0.5rem; }
+.timetable-delete-confirm .schedule-actions > * { min-height: 2.75rem; }

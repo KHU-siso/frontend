@@ -47,6 +47,8 @@ export default function SubjectsProvider({ children }) {
     pendingSave.current = false
     return putState('subjects', dataRef.current, options).then(() => setError('')).catch(failure => setError(`서버에 저장하지 못했습니다: ${failure.message}`))
   }, [])
+  // 삭제처럼 바로 서버에 남겨야 하는 변경용: 400ms 디바운스를 기다리지 않고 즉시 저장한다.
+  const saveNowIfLoaded = useCallback(() => loadedRef.current ? saveNow() : Promise.resolve(), [saveNow])
   const flushSave = useCallback(() => {
     clearTimeout(saveTimer.current)
     pendingSave.current = true
@@ -168,5 +170,5 @@ export default function SubjectsProvider({ children }) {
     if (!Number.isInteger(session) || session < 1 || session > (subject.sessionsPerWeek ?? 1)) throw new Error('과목의 주당 수업 횟수에 맞는 회차를 선택해주세요.')
     commit(current => ({ ...current, attendance: { ...current.attendance, [subjectId]: { ...current.attendance?.[subjectId], [week]: { ...current.attendance?.[subjectId]?.[week], [session]: status } } } }))
   }
-  return <SubjectsContext.Provider value={{ data, semester, setSemester, semesters, materials, filesStatus, now, error, commit, saveSubject, removeSubject, saveRecord, removeRecord, saveDraft, addFile, removeFile, readMaterial, saveAttendance }}>{children}</SubjectsContext.Provider>
+  return <SubjectsContext.Provider value={{ data, semester, setSemester, semesters, materials, filesStatus, now, error, commit, saveNow: saveNowIfLoaded, saveSubject, removeSubject, saveRecord, removeRecord, saveDraft, addFile, removeFile, readMaterial, saveAttendance }}>{children}</SubjectsContext.Provider>
 }

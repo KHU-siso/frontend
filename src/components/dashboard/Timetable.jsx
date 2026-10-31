@@ -83,6 +83,20 @@ function AddPersonalEvent({ onAdd, onClose }) {
   )
 }
 
+// 시간표 블록 하나만 지운다(calendarEvents 항목 1개). 과목 수업 블록이어도 과목 자체와 그 과제·시험·노트·자료는 그대로 남는다.
+function DeleteBlock({ event, onDelete }) {
+  const [confirming, setConfirming] = useState(false)
+  const personal = event.kind === 'personal'
+  if (!confirming) return <button className="button timetable-delete" type="button" onClick={() => setConfirming(true)}>삭제</button>
+  return (
+    <div className="timetable-delete-confirm" role="alertdialog" aria-label="삭제 확인">
+      <p><strong>정말 삭제할까요?</strong></p>
+      <p>{personal ? (event.date ? '이 날짜의 일정이 시간표에서 사라져요.' : '매주 반복되는 이 일정이 시간표에서 모두 사라져요.') : '이 시간대의 수업 블록만 시간표에서 지워져요. 과목과 과제·시험·노트·자료는 그대로 남아요.'}</p>
+      <div className="schedule-actions"><button className="schedule-cancel" type="button" onClick={() => setConfirming(false)}>취소</button><button className="button timetable-delete" type="button" onClick={onDelete}>삭제하기</button></div>
+    </div>
+  )
+}
+
 export default function Timetable({ events, allEvents = events, exams = [], weekItems = [], weekOffset = 0, onWeekChange, examTarget = '/materials?add=1', onAdd, onAddPersonal, onRemoveEvent, onCancelClass, now }) {
   const { weekDates, weekLabels, weekRange } = weekDisplay(now, weekOffset)
   const [adding, setAdding] = useState(false)
@@ -110,7 +124,7 @@ export default function Timetable({ events, allEvents = events, exams = [], week
       </div>
       {addingPersonal && <AddPersonalEvent onAdd={onAddPersonal} onClose={() => setAddingPersonal(false)} />}
       {adding && <AddSchedule events={allEvents} weekLabels={weekLabels} onAdd={onAdd} onClose={() => setAdding(false)} />}
-      {selected && <Modal title={selected.name} onClose={() => setSelected(null)}><p>{selected.date && selected.time ? `${selected.date} · ${selected.time}` : selected.date ? `${selected.date} · ${timeLabel(selected.start)}–${timeLabel(selected.end)}` : `${weekLabels[selected.day]} · ${timeLabel(selected.start)}–${timeLabel(selected.end)}`}</p>{selected.location && <p>{selected.location}</p>}{selected.kind === 'personal' && <><p>{selected.date ? '특정 날짜 일정' : '매주 반복 일정'}</p><button className="button" type="button" onClick={() => { onRemoveEvent(selected.id); setSelected(null) }}>일정 삭제</button></>}{selected.subjectId && <Link className="button" to={`/materials/${selected.subjectId}${selected.examId ? '#exams' : ''}`}>과목 홈에서 확인</Link>}</Modal>}
+      {selected && <Modal title={selected.name} onClose={() => setSelected(null)}><p>{selected.date && selected.time ? `${selected.date} · ${selected.time}` : selected.date ? `${selected.date} · ${timeLabel(selected.start)}–${timeLabel(selected.end)}` : `${weekLabels[selected.day]} · ${timeLabel(selected.start)}–${timeLabel(selected.end)}`}</p>{selected.location && <p>{selected.location}</p>}{selected.kind === 'personal' && <p>{selected.date ? '특정 날짜 일정' : '매주 반복 일정'}</p>}{!selected.examId && <DeleteBlock event={selected} onDelete={() => { onRemoveEvent(selected.id); setSelected(null) }} />}{selected.subjectId && <Link className="button" to={`/materials/${selected.subjectId}${selected.examId ? '#exams' : ''}`}>과목 홈에서 확인</Link>}</Modal>}
     </section>
   )
 }

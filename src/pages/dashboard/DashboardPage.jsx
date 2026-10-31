@@ -17,7 +17,7 @@ import { useDemo } from '../../state/DemoContext.js'
 export default function DashboardPage() {
   const { state } = useDemo()
   const { user } = useAuth()
-  const { data, now, commit, error } = useSubjects()
+  const { data, now, commit, error, saveNow } = useSubjects()
   const [saveError, setSaveError] = useState('')
   const items = todoItems(data, now)
   const [weekOffset, setWeekOffset] = useState(0)
@@ -70,7 +70,7 @@ export default function DashboardPage() {
         </section>
         <DashboardTasks items={items} firstSubjectId={data.subjects[0]?.id} onToggle={toggleTask} onAddTask={() => setPicker('task')} />
         </div>
-        <Timetable allEvents={data.calendarEvents} examTarget={data.subjects[0] ? `/materials/${data.subjects[0].id}#exams` : '/materials?add=1'} events={events} exams={exams} weekItems={weekItems} weekOffset={weekOffset} onWeekChange={setWeekOffset} now={now} onCancelClass={() => setCancelling(true)} onAdd={event => change(current => ({ ...current, calendarEvents: [...current.calendarEvents, event] }))} onAddPersonal={event => change(current => ({ ...current, calendarEvents: [...current.calendarEvents, event] }))} onRemoveEvent={id => change(current => ({ ...current, calendarEvents: current.calendarEvents.filter(event => event.id !== id) }))} />
+        <Timetable allEvents={data.calendarEvents} examTarget={data.subjects[0] ? `/materials/${data.subjects[0].id}#exams` : '/materials?add=1'} events={events} exams={exams} weekItems={weekItems} weekOffset={weekOffset} onWeekChange={setWeekOffset} now={now} onCancelClass={() => setCancelling(true)} onAdd={event => change(current => ({ ...current, calendarEvents: [...current.calendarEvents, event] }))} onAddPersonal={event => change(current => ({ ...current, calendarEvents: [...current.calendarEvents, event] }))} onRemoveEvent={id => { change(current => ({ ...current, calendarEvents: current.calendarEvents.filter(event => event.id !== id) })); saveNow() }} />
       </div>
       {picker && <SubjectPickerModal title={{ study: '어떤 과목의 문제를 풀까요?', task: '어떤 과목의 과제를 등록할까요?', chat: '어떤 과목의 AI 채팅을 열까요?' }[picker]} subjects={data.subjects} onClose={() => setPicker(null)}
         onPick={subject => { setPicker(null); if (picker === 'task') setTaskSubject(subject); else navigate(picker === 'chat' ? `/materials/${subject.id}#chat` : picker === 'study' ? `/study/setup?course=${subject.id}` : `/materials/${subject.id}`) }} />}
