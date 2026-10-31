@@ -174,3 +174,4 @@ button.quick-action { font: inherit; font-size: 0.8125rem; }
 .subject-picker button:hover, .subject-picker button:focus-visible { border-color: var(--color-hero); background: #e3ecf8; }
 .subject-picker small { color: #61799a; font-size: 0.75rem; }
 .subject-picker-empty { display: grid; justify-items: center; gap: 1rem; padding: 1rem 0; text-align: center; }
+.timetable-heading .timetable-week-nav .timetable-cancel-class { width: auto; padding: 0 0.6rem; margin-left: 0.3rem; background: #082d66; color: white; font-size: 0.6875rem; }

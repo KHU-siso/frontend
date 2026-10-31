@@ -1,4 +1,4 @@
-import { dDay, deadlineAt, dueState, todayInSeoul, weekAt, weekOf } from './subjectDates.js'
+import { dDay, daysUntil, deadlineAt, dueState, todayInSeoul, weekAt, weekOf } from './subjectDates.js'
 import { subjectSummary } from './subjectStore.js'
 import { cancelledDatesIn, eventSubject, isCancelled } from './cancellations.js'
 
@@ -33,4 +33,22 @@ export function subjectTimetable(data, now, weekOffset = 0) {
     ...data.assignments.filter(task => days.includes(task.date)).map(task => ({ id: `task:${task.id}`, kind: 'task', subjectId: task.subjectId, title: task.title, subjectName: byId[task.subjectId]?.name || '삭제된 과목', date: task.date, time: task.time, done: Boolean(task.completed) })),
   ].sort((a, b) => deadlineAt(a) - deadlineAt(b))
   return { events, exams, weekItems }
+}
+
+// 대시보드 "해야 할 일": 과목이 아니라 개별 일(과제·시험) 단위 목록.
+// 지난 미완료 과제 → 마감 임박순, 완료한 과제는 맨 아래. 지난 시험은 할 일이 아니라 제외한다.
+export function todoItems(data, now) {
+  const today = todayInSeoul(new Date(now))
+  const byId = Object.fromEntries(data.subjects.map(subject => [subject.id, subject]))
+  const info = (item, kind) => {
+    const subject = byId[item.subjectId]
+    const days = daysUntil(item.date, today)
+    const overdue = !item.completed && deadlineAt(item) < now
+    return { id: `${kind}:${item.id}`, rawId: item.id, kind, title: item.title, subjectId: item.subjectId, subjectName: subject ? `${subject.name} · ${subject.teacher}` : '삭제된 과목', date: item.date, time: item.time, done: kind === 'task' && Boolean(item.completed), overdue, urgent: !overdue && !item.completed && days <= 1, dayLabel: overdue ? '기한 지남' : days === 0 ? '오늘' : days === 1 ? '내일' : `D-${days}`, at: deadlineAt(item) }
+  }
+  const rank = item => item.done ? 2 : item.overdue ? 0 : 1
+  return [
+    ...data.assignments.map(task => info(task, 'task')),
+    ...data.exams.filter(exam => deadlineAt(exam) >= now).map(exam => info(exam, 'exam')),
+  ].sort((a, b) => rank(a) - rank(b) || a.at - b.at)
 }

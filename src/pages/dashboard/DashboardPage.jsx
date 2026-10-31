@@ -8,9 +8,9 @@ import SubjectPickerModal from '../../components/subjects/SubjectPickerModal.jsx
 import Timetable from '../../components/dashboard/Timetable.jsx'
 import { useAuth } from '../../state/AuthContext.js'
 import { useSubjects } from '../../state/SubjectsContext.js'
-import { dashboardSubjects, subjectTimetable } from '../../data/subjectDashboard.js'
+import { subjectTimetable, todoItems } from '../../data/subjectDashboard.js'
 import { cancelledDatesIn, classDaysOf, replaceCancellations } from '../../data/cancellations.js'
-import { todayInSeoul, weekDisplay, weekOf } from '../../data/subjectDates.js'
+import { weekAt, weekDisplay } from '../../data/subjectDates.js'
 import './DashboardPage.css'
 import { useDemo } from '../../state/DemoContext.js'
 
@@ -19,18 +19,19 @@ export default function DashboardPage() {
   const { user } = useAuth()
   const { data, now, commit, error } = useSubjects()
   const [saveError, setSaveError] = useState('')
-  const courses = dashboardSubjects(data, now)
+  const items = todoItems(data, now)
   const [weekOffset, setWeekOffset] = useState(0)
   const { events, exams, weekItems } = subjectTimetable(data, now, weekOffset)
   function change(updater) { try { commit(updater); setSaveError('') } catch (failure) { setSaveError(failure.message) } }
   const [view, setView] = useState('overview')
-  const [cancelling, setCancelling] = useState(null)
+  const [cancelling, setCancelling] = useState(false)
   const [picker, setPicker] = useState(null) // 'study' | 'task' | 'chat'
   const [taskSubject, setTaskSubject] = useState(null)
   const [quickNotice, setQuickNotice] = useState('')
   const navigate = useNavigate()
-  const thisWeek = weekOf(todayInSeoul(new Date(now)))
-  const cancelSubject = data.subjects.find(subject => subject.id === cancelling)
+  const viewedWeek = weekAt(now, weekOffset)
+  const viewedLabels = weekDisplay(now, weekOffset)
+  function toggleTask(id) { change(current => ({ ...current, assignments: current.assignments.map(task => task.id === id ? { ...task, completed: !task.completed, updatedAt: new Date().toISOString() } : task) })) }
   const goal = state.profile.goalMinutes
   const pendingCount = data.assignments.filter(item => !item.completed).length
   const hasSubjects = data.subjects.length > 0
@@ -67,14 +68,14 @@ export default function DashboardPage() {
             <button type="button" className="quick-action quick-action--3" onClick={() => setPicker('chat')}>AI chat</button>
           </div>
         </section>
-        <DashboardTasks courses={courses} hasSubjects={hasSubjects} onCancelClass={setCancelling} />
+        <DashboardTasks items={items} firstSubjectId={data.subjects[0]?.id} onToggle={toggleTask} onAddTask={() => setPicker('task')} />
         </div>
-        <Timetable allEvents={data.calendarEvents} examTarget={data.subjects[0] ? `/materials/${data.subjects[0].id}#exams` : '/materials?add=1'} events={events} exams={exams} weekItems={weekItems} weekOffset={weekOffset} onWeekChange={setWeekOffset} now={now} onAdd={event => change(current => ({ ...current, calendarEvents: [...current.calendarEvents, event] }))} />
+        <Timetable allEvents={data.calendarEvents} examTarget={data.subjects[0] ? `/materials/${data.subjects[0].id}#exams` : '/materials?add=1'} events={events} exams={exams} weekItems={weekItems} weekOffset={weekOffset} onWeekChange={setWeekOffset} now={now} onCancelClass={() => setCancelling(true)} onAdd={event => change(current => ({ ...current, calendarEvents: [...current.calendarEvents, event] }))} />
       </div>
       {picker && <SubjectPickerModal title={{ study: '어떤 과목을 학습할까요?', task: '어떤 과목의 과제를 등록할까요?', chat: '어떤 과목의 AI 채팅을 열까요?' }[picker]} subjects={data.subjects} onClose={() => setPicker(null)}
         onPick={subject => { setPicker(null); if (picker === 'task') setTaskSubject(subject); else navigate(picker === 'chat' ? `/materials/${subject.id}#chat` : `/materials/${subject.id}`) }} />}
       {taskSubject && <AssignmentQuickModal subject={taskSubject} onSaved={title => setQuickNotice(`'${title}' 과제를 등록했어요.`)} onClose={() => setTaskSubject(null)} />}
-      {cancelSubject && <CancelClassModal title={cancelSubject.name} options={classDaysOf(data, cancelSubject, thisWeek, weekDisplay(now).weekLabels)} cancelled={cancelledDatesIn(data.cancellations, cancelSubject.id, thisWeek)} onSave={dates => change(current => replaceCancellations(current, cancelSubject.id, thisWeek, dates))} onClose={() => setCancelling(null)} />}
+      {cancelling && <CancelClassModal subjects={data.subjects} weekRange={viewedLabels.weekRange} optionsFor={subject => classDaysOf(data, subject, viewedWeek, viewedLabels.weekLabels)} cancelledFor={subject => cancelledDatesIn(data.cancellations, subject.id, viewedWeek)} onSave={(subject, dates) => change(current => replaceCancellations(current, subject.id, viewedWeek, dates))} onClose={() => setCancelling(false)} />}
     </div>
   )
 }
