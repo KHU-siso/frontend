@@ -106,6 +106,9 @@ export const listWrongNotes = () => apiFetch('/api/wrong-notes')
 // 채팅
 export const listConversations = () => apiFetch('/api/chat/conversations')
 export const createConversation = (document_id, title) => apiFetch('/api/chat/conversations', { method: 'POST', body: { document_id: document_id ?? null, title: title ?? null } })
+export const listSubjectChats = () => apiFetch('/api/chat/subjects')
+export const openSubjectChat = (subjectId, title) => apiFetch(`/api/chat/subjects/${encodeURIComponent(subjectId)}/conversation`, { method: 'POST', body: { title } })
+export const deleteSubjectChat = subjectId => apiFetch(`/api/chat/subjects/${encodeURIComponent(subjectId)}`, { method: 'DELETE' })
 export const listMessages = id => apiFetch(`/api/chat/conversations/${id}/messages`)
 export const sendMessage = (id, content) => apiFetch(`/api/chat/conversations/${id}/messages`, { method: 'POST', body: { content } })
 

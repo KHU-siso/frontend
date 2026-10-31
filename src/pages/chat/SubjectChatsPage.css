@@ -1,0 +1,11 @@
+.subject-chats__list { display: grid; gap: 0.75rem; margin: 0; padding: 0; list-style: none; }
+.subject-chats__list a { display: grid; grid-template-columns: minmax(0, 14rem) minmax(0, 1fr) auto; align-items: center; gap: 1rem; padding: 1rem 1.25rem; border: 1px solid #d7dee9; border-radius: 1rem; background: white; color: var(--color-ink); text-decoration: none; }
+.subject-chats__list a:hover, .subject-chats__list a:focus-visible { border-color: var(--color-hero); background: #f3f7fd; }
+.subject-chats__name { display: grid; gap: 0.2rem; min-width: 0; }
+.subject-chats__name small { color: #61799a; font-size: 0.75rem; }
+.subject-chats__last { overflow: hidden; color: #486b98; font-size: 0.8125rem; text-overflow: ellipsis; white-space: nowrap; }
+.subject-chats__meta { color: #70829c; font-size: 0.6875rem; white-space: nowrap; }
+@media (max-width: 640px) {
+  .subject-chats__list a { grid-template-columns: minmax(0, 1fr); gap: 0.35rem; }
+  .subject-chats__meta { white-space: normal; }
+}

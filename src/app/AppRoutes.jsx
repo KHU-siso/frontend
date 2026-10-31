@@ -8,7 +8,7 @@ import AppLayout from '../layouts/AppLayout.jsx'
 import LoginPage from '../pages/auth/LoginPage.jsx'
 import SignupPage from '../pages/auth/SignupPage.jsx'
 import DashboardPage from '../pages/dashboard/DashboardPage.jsx'
-import ChatPage from '../pages/chat/ChatPage.jsx'
+import SubjectChatsPage from '../pages/chat/SubjectChatsPage.jsx'
 import MaterialsPage from '../pages/materials/MaterialsPage.jsx'
 import StudyLayout from '../layouts/StudyLayout.jsx'
 import StudySetupPage from '../pages/study/StudySetupPage.jsx'
@@ -38,7 +38,6 @@ export default function AppRoutes() {
         <Route path="/signup" element={<SignupPage />} />
       </Route>
       <Route element={<RequireAuth />}>
-      <Route path="/chat" element={<ChatPage />} />
       <Route element={<StudyLayout />}>
         <Route path="/wrong-answers" element={<WrongAnswersPage />} />
         <Route path="/study/setup" element={<StudySetupPage />} />
@@ -49,6 +48,8 @@ export default function AppRoutes() {
       </Route>
       <Route element={<AppLayout />}>
         <Route path="/dashboard" element={<DashboardPage />} />
+        <Route path="/chat" element={<SubjectChatsPage />} />
+        <Route path="/chat" element={<SubjectChatsPage />} />
         <Route path="/materials" element={<MaterialsPage />} />
         <Route path="/materials/:subjectId" element={<Suspense fallback={<p className="service-page" role="status">과목 홈을 불러오는 중…</p>}><SubjectHomePage /></Suspense>} />
         <Route path="/shop" element={<WardrobePage />} />

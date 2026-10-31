@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { SubjectsContext } from './SubjectsContext.js'
 import { createSubjectState, parseSubjectState, validateRecord, validateSubject } from '../data/subjectStore.js'
 import { useAuth } from './AuthContext.js'
-import { deleteDocument, documentFile, getState, listDocuments, putState, uploadDocument } from '../services/api.js'
+import { deleteDocument, deleteSubjectChat, documentFile, getState, listDocuments, putState, uploadDocument } from '../services/api.js'
 import { fileRepository } from '../services/subjectFiles.js'
 import { ATTENDANCE_OPTIONS, ATTENDANCE_WEEKS } from '../data/attendance.js'
 import { currentSemester } from '../data/subjectDates.js'
@@ -119,6 +119,7 @@ export default function SubjectsProvider({ children }) {
   const removeSubject = async id => {
     commit(current => ({ ...current, subjects: current.subjects.filter(subject => subject.id !== id), notes: current.notes.filter(item => item.subjectId !== id), exams: current.exams.filter(item => item.subjectId !== id), assignments: current.assignments.filter(item => item.subjectId !== id), drafts: Object.fromEntries(Object.entries(current.drafts).filter(([, draft]) => draft.subjectId !== id)), attendance: Object.fromEntries(Object.entries(current.attendance || {}).filter(([subjectId]) => subjectId !== id)), calendarEvents: current.calendarEvents.filter(item => item.subjectId !== id), cancellations: current.cancellations.filter(item => item.subjectId !== id), pendingFileDeletions: [...new Set([...current.pendingFileDeletions, id])] }))
     for (const item of materialsRef.current.filter(item => item.subjectId === id && item.server)) await deleteDocument(item.docId).catch(() => {})
+    deleteSubjectChat(id).catch(() => {})
     setMaterials(current => current.filter(item => item.subjectId !== id))
     try { await fileRepository.removeSubject(id); commit(current => ({ ...current, pendingFileDeletions: current.pendingFileDeletions.filter(value => value !== id) })); return '' }
     catch { return '과목과 연결 기록은 삭제했습니다. 파일 저장소 정리는 다음 실행 때 다시 시도합니다.' }
