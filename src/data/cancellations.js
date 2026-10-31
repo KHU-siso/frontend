@@ -2,7 +2,7 @@ import { normalizedName } from './subjectStore.js'
 
 // 휴강은 (과목, 날짜) 단위로 저장한다. 주간 시간표의 수업은 요일 반복 일정이라, 날짜를 함께 저장해야
 // 다른 주에는 영향이 없다.
-export const eventSubject = (event, subjects) => subjects.find(subject => subject.id === event.subjectId) || (event.subjectId ? undefined : subjects.find(subject => normalizedName(subject.name) === normalizedName(event.name)))
+export const eventSubject = (event, subjects) => event.kind === 'personal' ? undefined : subjects.find(subject => subject.id === event.subjectId) || (event.subjectId ? undefined : subjects.find(subject => normalizedName(subject.name) === normalizedName(event.name)))
 export const isCancelled = (cancellations, subjectId, date) => cancellations.some(item => item.subjectId === subjectId && item.date === date)
 export const cancelledDatesIn = (cancellations, subjectId, dates) => dates.filter(date => isCancelled(cancellations, subjectId, date))
 

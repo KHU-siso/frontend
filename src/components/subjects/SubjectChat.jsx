@@ -4,9 +4,9 @@ import Button from '../common/Button.jsx'
 import { listMessages, listSubjectChats, openSubjectChat, sendMessage } from '../../services/api.js'
 import { useSubjects } from '../../state/SubjectsContext.js'
 
-// 과목 홈의 전용 AI 채팅. 대화 기록은 과목별로 서버에 저장되고, 답변은 이 과목에 올린 PDF 자료만 참고한다.
+// 과목 홈의 전용 AI 채팅. 대화 기록은 과목별로 서버에 저장되고, 답변은 이 과목에 올린 PDF 자료와 직접 쓴 학습 노트를 참고한다.
 export default function SubjectChat({ subject }) {
-  const { materials } = useSubjects()
+  const { materials, data } = useSubjects()
   const { hash } = useLocation()
   const [conversationId, setConversationId] = useState(null)
   const [messages, setMessages] = useState([])
@@ -18,6 +18,9 @@ export default function SubjectChat({ subject }) {
   const logRef = useRef(null)
   // 서버가 검색할 수 있는 자료는 업로드된 PDF뿐이다.
   const searchable = materials.filter(item => item.subjectId === subject.id && item.server).length
+  // 같은 과목에 직접 쓴 학습 노트(본문이 있는 것)도 서버가 채팅 근거로 함께 쓴다.
+  const noteCount = data.notes.filter(item => item.subjectId === subject.id && item.body?.trim()).length
+  const basis = searchable && noteCount ? `이 과목에 올린 자료 ${searchable}개와 내 노트 ${noteCount}개를 바탕으로 답해요.` : searchable ? `이 과목에 올린 자료 ${searchable}개를 바탕으로 답해요.` : noteCount ? `내 노트 ${noteCount}개를 바탕으로 답해요. 강의자료 PDF를 올리면 자료도 함께 참고해요.` : '이 과목에 올린 PDF 자료와 노트가 없어 일반적인 지식으로 답해요. 강의자료를 올리거나 노트를 쓰면 그 내용을 바탕으로 답해요.'
 
   useEffect(() => {
     let active = true
@@ -51,7 +54,7 @@ export default function SubjectChat({ subject }) {
 
   return (
     <section className="subject-chat" id="chat" aria-labelledby="subject-chat-heading">
-      <header><h2 id="subject-chat-heading">AI 채팅</h2><p>{searchable ? `이 과목에 올린 자료 ${searchable}개를 바탕으로 답해요.` : '이 과목에 올린 PDF 자료가 없어 일반적인 지식으로 답해요. 강의자료를 올리면 자료를 바탕으로 답해요.'}</p></header>
+      <header><h2 id="subject-chat-heading">AI 채팅</h2><p>{basis}</p></header>
       <div className="subject-chat__log" ref={logRef} role="log" aria-live="polite" aria-label={`${subject.name} 대화 내용`}>
         {loading ? <p className="subject-chat__empty">대화를 불러오는 중…</p> : !messages.length && <p className="subject-chat__empty">{subject.name}에 대해 궁금한 점을 물어보세요.</p>}
         {messages.map(message => <article key={message.id} className={`subject-chat__message subject-chat__message--${message.role}`}><strong>{message.role === 'user' ? '나' : '옹이'}</strong><p>{message.content}</p></article>)}

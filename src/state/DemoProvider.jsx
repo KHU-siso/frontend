@@ -29,7 +29,7 @@ export default function DemoProvider({ children }) {
       dispatch({ type: 'HYDRATE', values: {
         profile: { nickname: user.nickname, email: user.email, department: extra.department || '', year: extra.year || '', goalMinutes: extra.goalMinutes || null },
         // 과제 마감 알림은 계정(users.deadline_email_enabled)에 저장된 값이 기준이다.
-        notifications: { ...defaultNotifications, study: extra.notifications?.study ?? defaultNotifications.study, deadline: user.deadline_email_enabled ?? defaultNotifications.deadline },
+        notifications: { ...defaultNotifications, study: extra.notifications?.study ?? defaultNotifications.study, freeTime: extra.notifications?.freeTime ?? defaultNotifications.freeTime, deadline: user.deadline_email_enabled ?? defaultNotifications.deadline },
       } })
     }).catch(() => active && dispatch({ type: 'STORAGE_FAILED' }))
     return () => { active = false }

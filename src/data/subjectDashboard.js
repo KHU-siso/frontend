@@ -14,8 +14,9 @@ export function subjectTimetable(data, now, weekOffset = 0) {
   const days = weekAt(now, weekOffset)
   const byId = Object.fromEntries(data.subjects.map(subject => [subject.id, subject]))
   const events = data.calendarEvents
+    .filter(event => !event.date || days[event.day] === event.date) // 날짜가 있는 일정(일정 추가 · 특정 날짜)은 해당 주에만 표시
     .filter(event => { const subject = eventSubject(event, data.subjects); return !(subject && isCancelled(data.cancellations, subject.id, days[event.day])) })
-    .map(event => ({ ...event, name: byId[event.subjectId]?.name || event.name }))
+    .map(event => ({ ...event, name: event.kind === 'personal' ? event.name : byId[event.subjectId]?.name || event.name }))
   for (const exam of data.exams) {
     const day = days.indexOf(exam.date)
     if (day < 0 || !exam.time) continue

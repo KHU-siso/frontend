@@ -57,7 +57,7 @@ export default function MyPage() {
   const [modal, setModal] = useState(() => params.get('goal') ? 'goal' : null)
   const [goal, setGoal] = useState(state.profile.goalMinutes || 120)
   const [notice, setNotice] = useState('')
-  const settings = [['deadline', '과제 마감 알림', '마감 24시간 전에 이메일로 알려드릴게요.'], ['study', '학습 시간 알림', '설정한 학습 목표 시간에 알림을 보내드려요.']]
+  const settings = [['deadline', '과제 마감 알림', '마감 24시간 전에 이메일로 알려드릴게요.'], ['study', '학습 시간 알림', '설정한 학습 목표 시간에 알림을 보내드려요.'], ['freeTime', '빈 시간 학습 알림', '오늘·내일 시간표의 빈 시간이 시작되기 10분 전에 공부 알림과 짧은 퀴즈를 이메일로 보내드려요. 하루 최대 3통까지만 보내요.']]
   return <div className="service-page mypage">
     <PageTitle title="마이페이지" description="계정 정보와 학습 설정을 관리하세요." />
     <section className="service-card profile-card"><OngPeek /><div className="profile-initial" aria-hidden="true">{state.profile.nickname.slice(0, 1)}</div><div><h2>{state.profile.nickname}</h2><p>{state.profile.email}</p>{state.profile.department || state.profile.year ? <>{state.profile.department && <span className="service-badge">{state.profile.department}</span>} {state.profile.year && <span className="service-badge">{state.profile.year}</span>}</> : <button className="service-badge service-badge--hint" type="button" onClick={() => setModal('profile')}>학과와 학년을 입력해 주세요</button>}</div><button className="service-plain-button" type="button" onClick={() => setModal('profile')}>프로필 수정</button></section>

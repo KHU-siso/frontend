@@ -189,3 +189,11 @@ button.quick-action { font: inherit; font-size: 0.8125rem; }
 .subject-picker small { color: #61799a; font-size: 0.75rem; }
 .subject-picker-empty { display: grid; justify-items: center; gap: 1rem; padding: 1rem 0; text-align: center; }
 .timetable-heading .timetable-week-nav .timetable-cancel-class { width: auto; padding: 0 0.6rem; margin-left: 0.3rem; background: #082d66; color: white; font-size: 0.6875rem; }
+
+/* 일정 추가: 과목 수업과 구분되도록 점선 테두리 + 줄무늬 질감 */
+.timetable-heading .timetable-week-nav .timetable-add-event { width: auto; padding: 0 0.6rem; margin-left: 0.2rem; border: 1px solid #082d66; background: white; color: #082d66; font-size: 0.6875rem; }
+.timetable-event--personal { border: 1.5px dashed #082d66aa; background-image: repeating-linear-gradient(135deg, #ffffff55 0 4px, transparent 4px 8px); }
+.schedule-repeat { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin: 0; padding: 0; border: 0; }
+.schedule-repeat legend { margin-bottom: 0.6rem; padding: 0; font-size: 0.875rem; font-weight: 600; }
+.schedule-repeat label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; }
+.schedule-form .schedule-repeat input[type='radio'] { width: 1rem; height: 1rem; flex: none; accent-color: var(--color-hero); }
