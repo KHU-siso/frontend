@@ -12,7 +12,6 @@ export default function PublicLayout() {
         <nav aria-label="서비스 안내">
           <NavLink to="/faq">자주 묻는 질문(FAQ)</NavLink>
           <NavLink to="/support">고객센터</NavLink>
-          <NavLink to="/community">커뮤니티</NavLink>
         </nav>
       </footer>
     </div>

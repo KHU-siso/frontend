@@ -5,7 +5,7 @@ import separator from '../assets/moram/benefit-separator.svg'
 import './LandingPage.css'
 
 const INTRO_DURATION_MS = 5000
-const benefits = ['학생 전용 무료 플랜', '신용카드 불필요', '모든 대학교 지원']
+const benefits = ['학생 전용 무료 플랜', '신용카드 불필요']
 
 export default function LandingPage() {
   const [showIntro, setShowIntro] = useState(true)

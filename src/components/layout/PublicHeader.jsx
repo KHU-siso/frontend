@@ -4,7 +4,6 @@ import BrandLogo from '../brand/BrandLogo.jsx'
 const secondaryLinks = [
   ['/support', '고객센터'],
   ['/faq', '자주 묻는 질문(FAQ)'],
-  ['/community', '커뮤니티'],
 ]
 
 export default function PublicHeader() {

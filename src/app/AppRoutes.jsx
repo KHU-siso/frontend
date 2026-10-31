@@ -27,7 +27,6 @@ const futurePages = [
   ['/about', '소개'],
   ['/support', '고객센터'],
   ['/faq', '자주 묻는 질문'],
-  ['/community', '커뮤니티'],
 ]
 
 export default function AppRoutes() {

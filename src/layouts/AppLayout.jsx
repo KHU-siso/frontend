@@ -44,7 +44,7 @@ export default function AppLayout() {
       {state.storageFailed && <div className="app-notice"><p role="alert">서버와 통신하지 못했습니다. 코인·착용 상태를 불러오지 못했을 수 있습니다.</p></div>}
       <main className="app-main" id="dashboard-content"><Outlet /></main>
       <footer className="app-footer">
-        <nav aria-label="서비스 안내"><Link to="/support">고객센터</Link><Link to="/faq">자주 묻는 질문(FAQ)</Link><Link to="/community">커뮤니티</Link></nav>
+        <nav aria-label="서비스 안내"><Link to="/support">고객센터</Link><Link to="/faq">자주 묻는 질문(FAQ)</Link></nav>
         <BrandLogo to="/dashboard" />
       </footer>
       {menuOpen && <AppNavigation headerRef={headerRef} onClose={() => setMenuOpen(false)} />}
