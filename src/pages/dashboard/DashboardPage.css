@@ -167,3 +167,10 @@
 .timetable-heading .timetable-week-nav .timetable-this-week { width: auto; padding: 0 0.6rem; font-size: 0.6875rem; }
 .timetable-heading .timetable-week-nav button:disabled { opacity: 0.45; cursor: default; }
 .timetable-heading .timetable-week-nav button:focus-visible { outline: 2px solid var(--color-hero); outline-offset: 2px; }
+button.quick-action { font: inherit; font-size: 0.8125rem; }
+.quick-notice { margin: 0; padding: 0.5rem 1rem; border-radius: 0.65rem; background: #e3f3de; color: #2e7d32; font-size: 0.8125rem; }
+.subject-picker { display: grid; gap: 0.5rem; margin: 0; padding: 0; list-style: none; max-height: 20rem; overflow-y: auto; }
+.subject-picker button { display: flex; align-items: center; justify-content: space-between; gap: 1rem; width: 100%; padding: 0.85rem 1rem; border: 1px solid #cad5e6; border-radius: 0.65rem; background: #f0f3fa; color: var(--color-ink); font: inherit; font-size: 0.9375rem; text-align: left; cursor: pointer; }
+.subject-picker button:hover, .subject-picker button:focus-visible { border-color: var(--color-hero); background: #e3ecf8; }
+.subject-picker small { color: #61799a; font-size: 0.75rem; }
+.subject-picker-empty { display: grid; justify-items: center; gap: 1rem; padding: 1rem 0; text-align: center; }

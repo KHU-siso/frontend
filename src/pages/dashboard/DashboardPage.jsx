@@ -1,8 +1,10 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import DashboardMascot from '../../components/dashboard/DashboardMascot.jsx'
 import DashboardTasks from '../../components/dashboard/DashboardTasks.jsx'
 import CancelClassModal from '../../components/dashboard/CancelClassModal.jsx'
+import AssignmentQuickModal from '../../components/dashboard/AssignmentQuickModal.jsx'
+import SubjectPickerModal from '../../components/subjects/SubjectPickerModal.jsx'
 import Timetable from '../../components/dashboard/Timetable.jsx'
 import { useAuth } from '../../state/AuthContext.js'
 import { useSubjects } from '../../state/SubjectsContext.js'
@@ -23,6 +25,10 @@ export default function DashboardPage() {
   function change(updater) { try { commit(updater); setSaveError('') } catch (failure) { setSaveError(failure.message) } }
   const [view, setView] = useState('overview')
   const [cancelling, setCancelling] = useState(null)
+  const [picker, setPicker] = useState(null) // 'study' | 'task' | 'chat'
+  const [taskSubject, setTaskSubject] = useState(null)
+  const [quickNotice, setQuickNotice] = useState('')
+  const navigate = useNavigate()
   const thisWeek = weekOf(todayInSeoul(new Date(now)))
   const cancelSubject = data.subjects.find(subject => subject.id === cancelling)
   const goal = state.profile.goalMinutes
@@ -35,6 +41,7 @@ export default function DashboardPage() {
         <p>{goal ? <>오늘의 목표 : {goal % 60 === 0 ? `${goal / 60}시간` : `${goal}분`} 학습하기{pendingCount ? ` · 남은 과제 ${pendingCount}개` : ''}</> : <>오늘의 목표를 설정해 보세요 · <Link className="dashboard-banner__link" to="/mypage?goal=1">목표 설정</Link></>}</p>
       </section>
       {(error || saveError) && <p role="alert" className="service-error">{error || saveError}</p>}
+      {quickNotice && <p className="quick-notice" role="status">{quickNotice}</p>}
       {!hasSubjects && <section className="dashboard-card start-guide" aria-labelledby="guide-heading">
         <h2 id="guide-heading">MORAM 시작하기</h2>
         <p>세 단계만 따라 하면 나만의 학습 공간이 준비돼요.</p>
@@ -53,12 +60,20 @@ export default function DashboardPage() {
         <div className="dashboard-center">
         <section className="dashboard-card dashboard-quick" aria-labelledby="quick-heading">
           <h2 id="quick-heading">빠른 실행</h2>
-          <div className="quick-actions">{[['/study/setup', '퀴즈하기'], ['/wrong-answers', '복습하기'], ['/materials', '강의자료실'], ['/chat', 'AI chat']].map(([to, label], i) => <Link className={`quick-action quick-action--${i}`} to={to} key={to}>{label}</Link>)}</div>
+          <div className="quick-actions">
+            <Link className="quick-action quick-action--0" to="/materials">강의자료실</Link>
+            <button type="button" className="quick-action quick-action--1" onClick={() => setPicker('study')}>학습하기</button>
+            <button type="button" className="quick-action quick-action--2" onClick={() => setPicker('task')}>과제 등록</button>
+            <button type="button" className="quick-action quick-action--3" onClick={() => setPicker('chat')}>AI chat</button>
+          </div>
         </section>
         <DashboardTasks courses={courses} hasSubjects={hasSubjects} onCancelClass={setCancelling} />
         </div>
         <Timetable allEvents={data.calendarEvents} examTarget={data.subjects[0] ? `/materials/${data.subjects[0].id}#exams` : '/materials?add=1'} events={events} exams={exams} weekItems={weekItems} weekOffset={weekOffset} onWeekChange={setWeekOffset} now={now} onAdd={event => change(current => ({ ...current, calendarEvents: [...current.calendarEvents, event] }))} />
       </div>
+      {picker && <SubjectPickerModal title={{ study: '어떤 과목을 학습할까요?', task: '어떤 과목의 과제를 등록할까요?', chat: '어떤 과목의 AI 채팅을 열까요?' }[picker]} subjects={data.subjects} onClose={() => setPicker(null)}
+        onPick={subject => { setPicker(null); if (picker === 'task') setTaskSubject(subject); else navigate(picker === 'chat' ? `/materials/${subject.id}#chat` : `/materials/${subject.id}`) }} />}
+      {taskSubject && <AssignmentQuickModal subject={taskSubject} onSaved={title => setQuickNotice(`'${title}' 과제를 등록했어요.`)} onClose={() => setTaskSubject(null)} />}
       {cancelSubject && <CancelClassModal title={cancelSubject.name} options={classDaysOf(data, cancelSubject, thisWeek, weekDisplay(now).weekLabels)} cancelled={cancelledDatesIn(data.cancellations, cancelSubject.id, thisWeek)} onSave={dates => change(current => replaceCancellations(current, cancelSubject.id, thisWeek, dates))} onClose={() => setCancelling(null)} />}
     </div>
   )
