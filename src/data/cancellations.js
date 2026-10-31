@@ -23,3 +23,19 @@ export function replaceCancellations(data, subjectId, dates, selected) {
   const keep = data.cancellations.filter(item => !(item.subjectId === subjectId && dates.includes(item.date)))
   return { ...data, cancellations: [...keep, ...selected.map(date => ({ subjectId, date }))] }
 }
+
+// 등록된 모든 휴강을 (과목명, 날짜, 시간) 목록으로. 시간은 그 요일의 해당 과목 수업 시간이고, 최근 날짜가 위.
+export function cancellationList(data) {
+  const names = ['일', '월', '화', '수', '목', '금', '토']
+  return data.cancellations.map(item => {
+    const subject = data.subjects.find(value => value.id === item.subjectId)
+    const day = new Date(`${item.date}T00:00:00Z`).getUTCDay()
+    const times = data.calendarEvents.filter(event => event.day === day && eventSubject(event, data.subjects)?.id === item.subjectId).map(event => `${hourLabel(event.start)}–${hourLabel(event.end)}`).join(', ')
+    return { key: `${item.subjectId}:${item.date}`, subjectId: item.subjectId, subjectName: subject?.name || '삭제된 과목', date: item.date, weekday: names[day], times }
+  }).sort((a, b) => b.date.localeCompare(a.date) || a.subjectName.localeCompare(b.subjectName, 'ko'))
+}
+
+// 휴강 하나를 취소(되돌리기).
+export function removeCancellation(data, subjectId, date) {
+  return { ...data, cancellations: data.cancellations.filter(item => !(item.subjectId === subjectId && item.date === date)) }
+}

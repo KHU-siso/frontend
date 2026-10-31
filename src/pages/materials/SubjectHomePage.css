@@ -23,12 +23,9 @@
 .subject-overview span { display: block; overflow: hidden; color: #71839b; font-size: 0.6875rem; line-height: 1.6; text-overflow: ellipsis; white-space: nowrap; }
 .subject-section-nav { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; padding-bottom: 0.9rem; margin-bottom: 1rem; border-bottom: 1px solid #dce4ef; }
 .subject-section-nav a { min-height: 2rem; padding-block: 0.3rem; color: #526e95; font-size: 0.8125rem; text-decoration: none; }
-.subject-home-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); grid-template-areas: 'notes exams' 'assignments materials'; align-items: start; gap: 1.25rem; }
+.subject-home-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; gap: 1.25rem; }
+.subject-col { display: grid; min-width: 0; gap: 1.25rem; }
 .subject-panel { padding: clamp(1rem, 2vw, 1.6rem); scroll-margin-top: 1rem; }
-.subject-panel--notes { grid-area: notes; }
-.subject-panel--exams { grid-area: exams; }
-.subject-panel--assignments { grid-area: assignments; }
-.subject-panel--materials { grid-area: materials; }
 .subject-panel__heading { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; margin-bottom: 1rem; }
 .subject-eyebrow { display: block; margin-bottom: 0.3rem; color: #899bb4; font-family: Inter, sans-serif; font-size: 0.5625rem; font-weight: 600; letter-spacing: 0.12em; }
 .subject-panel h2 { margin: 0; color: #123263; font-size: 1.05rem; }
@@ -68,7 +65,8 @@
 .moram-modal.subject-preview-dialog { width: min(65rem, calc(100% - 2rem)); }
 .subject-pdf-preview { width: 100%; height: 60vh; border: 1px solid #d9e2ef; border-radius: 0.5rem; }
 .subject-text-preview { max-height: 60vh; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; font: 0.875rem / 1.8 var(--font-family); color: #34527a; }
-@media (max-width: 63.99rem) { .subject-overview { grid-template-columns: repeat(2, minmax(0, 1fr)); } .subject-home-grid { grid-template-columns: 1fr; grid-template-areas: 'notes' 'exams' 'assignments' 'materials'; } }
+/* 모바일·태블릿: 한 열. 순서는 시험 일정 → 학습 노트 → 과제 → 강의자료 → 퀴즈 오답 */
+@media (max-width: 63.99rem) { .subject-overview { grid-template-columns: repeat(2, minmax(0, 1fr)); } .subject-home-grid { grid-template-columns: minmax(0, 1fr); } .subject-col { display: contents; } .subject-panel--exams { order: 1; } .subject-panel--notes { order: 2; } .subject-panel--assignments { order: 3; } .subject-panel--materials { order: 4; } .subject-panel--wrong { order: 5; } }
 @media (max-width: 47.99rem) { .subject-home { padding: 1.25rem 0.85rem; } .subject-hero { flex-direction: column; align-items: stretch; gap: 1rem; padding: 1.25rem; } .subject-hero__progress { flex-basis: auto; grid-template-columns: 1fr auto; gap: 0.4rem 1rem; } .subject-hero__progress strong { grid-row: 1 / span 2; grid-column: 2; font-size: 1.75rem; } .subject-hero progress { grid-column: 1; } .subject-overview { gap: 0.65rem; } .subject-overview > div { padding: 0.9rem; } .subject-overview dd { font-size: 1.3rem; } .subject-section-nav { justify-content: space-between; gap: 0.3rem; } .subject-file { flex-wrap: wrap; gap: 0.65rem; } .subject-file > .subject-item-actions { flex-basis: 100%; justify-content: flex-end; } .subject-panel__heading { gap: 0.5rem; } .subject-add-button { padding-inline: 0.5rem; } }
 .subject-chat { margin-top: 1.5rem; padding: clamp(1rem, 2vw, 1.5rem); border: 1px solid #e0e6ef; border-radius: 1.25rem; background: white; box-shadow: 0 2px 5px #12326305; scroll-margin-top: 1rem; }
 .subject-chat header { margin-bottom: 1rem; }
@@ -82,3 +80,17 @@
 .subject-chat__message--user { justify-self: end; background: #dfe9f7; }
 .subject-chat__form { display: flex; gap: 0.6rem; margin-top: 0.85rem; }
 .subject-chat__form input { flex: 1; min-width: 0; padding: 0.8rem 0.95rem; border: 1px solid #cad5e6; border-radius: 0.65rem; background: #f0f3fa; color: var(--color-ink); font: inherit; font-size: 0.875rem; }
+
+/* 퀴즈 오답 카드: 항목이 많으면 카드 안에서 스크롤 */
+a.subject-add-button { display: inline-flex; align-items: center; text-decoration: none; }
+.subject-wrong-list { display: grid; gap: 0.75rem; max-height: 26rem; margin: 0; padding: 0 0.25rem 0 0; overflow-y: auto; overscroll-behavior: contain; list-style: none; scrollbar-width: thin; scrollbar-color: #b9c8de transparent; }
+.subject-wrong-list::-webkit-scrollbar { width: 0.3rem; }
+.subject-wrong-list::-webkit-scrollbar-thumb { border-radius: 1rem; background: #b9c8de; }
+.subject-wrong { display: grid; gap: 0.35rem; min-width: 0; padding: 0.95rem; border: 1px solid #e2e8f1; border-radius: 0.85rem; background: #fff; font-size: 0.8125rem; line-height: 1.7; overflow-wrap: anywhere; }
+.subject-wrong p { margin: 0; }
+.subject-wrong.is-resolved { opacity: 0.65; }
+.subject-wrong__question { color: #123263; font-weight: 700; }
+.subject-wrong__mine { color: #b91c1c; }
+.subject-wrong__answer { color: #2e7d32; }
+.subject-wrong__explanation { color: #5b6e8a; white-space: pre-wrap; }
+.subject-wrong__meta { color: #899bb4; font-size: 0.6875rem; }

@@ -5,7 +5,11 @@ import { Link } from 'react-router-dom'
 import { scheduleColors } from '../../data/dashboard.js'
 import { weekDisplay } from '../../data/subjectDates.js'
 
-const scheduleHours = Array.from({ length: 24 }, (_, i) => i)
+// "HH:MM" → 시간 단위 숫자(9시 30분 = 9.5). 저장 형식은 기존과 같은 숫자(시간)이고, 형식이 틀리면 null.
+const parseTime = value => {
+  const match = /^([01]\d|2[0-3]):([0-5]\d)$/.exec(String(value || '').trim())
+  return match ? Number(match[1]) + Number(match[2]) / 60 : null
+}
 const timeLabel = value => {
   const minutes = Math.round(value * 60)
   return `${String(Math.floor(minutes / 60)).padStart(2, '0')}:${String(minutes % 60).padStart(2, '0')}`
@@ -14,12 +18,16 @@ const timeLabel = value => {
 function AddSchedule({ onAdd, onClose, events, weekLabels }) {
   const [color, setColor] = useState(0)
   const [error, setError] = useState('')
+  const [times, setTimes] = useState({ start: '09:00', end: '10:00' })
+  const start = parseTime(times.start)
+  const end = parseTime(times.end)
+  const timeError = start === null || end === null ? '시간을 HH:MM 형식(예: 09:30)으로 입력해주세요.' : end <= start ? '종료 시간은 시작 시간보다 늦어야 합니다.' : ''
   function submit(event) {
     event.preventDefault()
+    if (timeError) return
     const values = new FormData(event.currentTarget)
-    const item = { id: crypto.randomUUID(), name: values.get('name').trim(), location: '', day: Number(values.get('day')), start: Number(values.get('start')), end: Number(values.get('end')), color }
+    const item = { id: crypto.randomUUID(), name: values.get('name').trim(), location: '', day: Number(values.get('day')), start, end, color }
     if (!item.name) return setError('시간표 이름을 입력해주세요.')
-    if (item.end <= item.start) return setError('종료 시간은 시작 시간보다 늦어야 합니다.')
     if (events.some(existing => existing.day === item.day && item.start < existing.end && item.end > existing.start)) return setError('해당 시간에는 이미 일정이 있습니다. 다른 시간을 선택해주세요.')
     onAdd(item)
     onClose()
@@ -30,9 +38,9 @@ function AddSchedule({ onAdd, onClose, events, weekLabels }) {
         <label>시간표 이름<input name="name" placeholder="이름을 입력하세요." required maxLength={40} /></label>
         <fieldset className="schedule-colors"><legend>블록 색상</legend><div>{scheduleColors.map((label, index) => <label key={label} className={`schedule-color schedule-color--${index}`}><input type="radio" name="color" value={index} aria-label={label} checked={color === index} onChange={() => setColor(index)} /></label>)}</div></fieldset>
         <label>요일<select name="day" defaultValue="3">{weekLabels.map((day, i) => <option value={i} key={day}>{day}</option>)}</select></label>
-        <div className="schedule-time-row"><label>시작 시간<select name="start" defaultValue="9">{scheduleHours.map(hour => <option value={hour} key={hour}>{timeLabel(hour)}</option>)}</select></label><label>종료 시간<select name="end" defaultValue="10">{scheduleHours.map(hour => <option value={hour + 1} key={hour}>{timeLabel(hour + 1)}</option>)}</select></label></div>
-        {error && <p className="field-error" role="alert">{error}</p>}
-        <div className="schedule-actions"><button className="schedule-cancel" type="button" onClick={onClose}>취소</button><Button type="submit">추가하기</Button></div>
+        <div className="schedule-time-row"><label>시작 시간<input type="time" step="60" required value={times.start} onChange={event => { setTimes(current => ({ ...current, start: event.target.value })); setError('') }} aria-invalid={start === null} /></label><label>종료 시간<input type="time" step="60" required value={times.end} onChange={event => { setTimes(current => ({ ...current, end: event.target.value })); setError('') }} aria-invalid={end === null || end <= start} /></label></div>
+        {(timeError || error) && <p className="field-error" role="alert">{timeError || error}</p>}
+        <div className="schedule-actions"><button className="schedule-cancel" type="button" onClick={onClose}>취소</button><Button type="submit" disabled={Boolean(timeError)}>추가하기</Button></div>
       </form>
     </Modal>
   )

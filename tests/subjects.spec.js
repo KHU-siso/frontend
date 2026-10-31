@@ -107,7 +107,7 @@ test('subjects, draft notes, exams, assignments and IndexedDB files persist and 
   await expect(page.getByRole('button', { name: /프론트엔드 개발 · React 중간평가,/ })).toBeVisible()
   await ready(page, info, 'subject-dashboard-connected')
   await page.goto(`/materials/${id}`)
-  await page.getByRole('link', { name: '이 과목으로 학습하기 →', exact: true }).click()
+  await page.getByRole('link', { name: '문제풀기 →', exact: true }).click()
   await page.getByRole('button', { name: '넘어가기', exact: true }).click()
   await expect(page.getByRole('button', { name: '프론트엔드 개발', exact: true })).toHaveAttribute('aria-pressed', 'true')
   await expect(page.getByText('등록한 과목이 선택되었습니다.', { exact: false })).toBeVisible()

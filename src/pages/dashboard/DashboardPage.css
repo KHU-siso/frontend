@@ -156,10 +156,24 @@
 .cancel-form__subject { margin: 0; color: #486b98; font-size: 0.875rem; font-weight: 800; }
 .cancel-form__days { display: grid; gap: 0.6rem; margin: 0; padding: 0; border: 0; }
 .cancel-form__days legend { margin-bottom: 0.6rem; padding: 0; font-size: 0.875rem; font-weight: 600; }
-.cancel-form__days label { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0.85rem; border: 1px solid #cad5e6; border-radius: 0.65rem; background: #f0f3fa; cursor: pointer; }
-.cancel-form__days input { width: 1.1rem; height: 1.1rem; flex: none; accent-color: var(--color-hero); }
-.cancel-form__days span { display: grid; gap: 0.2rem; font-size: 0.875rem; }
-.cancel-form__days small { color: #61799a; font-size: 0.75rem; }
+.cancel-form__days { min-width: 0; }
+.cancel-form__days label { display: flex; align-items: center; gap: 0.75rem; min-width: 0; padding: 0.75rem 0.85rem; border: 1px solid #cad5e6; border-radius: 0.65rem; background: #f0f3fa; cursor: pointer; }
+/* .schedule-form의 input{width:100%}가 체크박스까지 늘려 행이 삐져나가던 문제: 체크박스는 고정 크기 */
+.schedule-form .cancel-form__days input[type='checkbox'] { width: 1.1rem; height: 1.1rem; min-width: 1.1rem; flex: none; padding: 0; accent-color: var(--color-hero); }
+.cancel-form__day { display: flex; flex: 1; align-items: baseline; flex-wrap: wrap; justify-content: space-between; gap: 0.15rem 0.75rem; min-width: 0; font-size: 0.875rem; }
+.cancel-form__day strong { min-width: 0; overflow-wrap: anywhere; }
+.cancel-form__day small { color: #61799a; font-size: 0.75rem; overflow-wrap: anywhere; }
+.moram-modal:has(.cancel-form) { overflow-x: hidden; }
+.cancel-list { min-width: 0; margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid #dce4ef; }
+.cancel-list h3 { margin: 0 0 0.75rem; font-size: 0.9375rem; color: #123263; }
+.cancel-list h3 small { margin-left: 0.25rem; color: #9daec4; font-size: 0.8125rem; }
+.cancel-list ul { display: grid; gap: 0.5rem; max-height: 14rem; margin: 0; padding: 0; overflow-y: auto; list-style: none; }
+.cancel-list li { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; min-width: 0; padding: 0.65rem 0.8rem; border: 1px solid #e2e8f1; border-radius: 0.65rem; background: white; }
+.cancel-list li > span { display: grid; gap: 0.15rem; min-width: 0; font-size: 0.8125rem; }
+.cancel-list li strong, .cancel-list li small { overflow-wrap: anywhere; }
+.cancel-list li small { color: #61799a; font-size: 0.75rem; }
+.cancel-list__restore { flex: none; min-height: 2rem; padding: 0.3rem 0.7rem; border: 1px solid #c8d7eb; border-radius: 0.55rem; background: #f2f6fc; color: #214b83; font: inherit; font-size: 0.75rem; font-weight: 600; cursor: pointer; }
+.cancel-list__empty { margin: 0; color: #61799a; font-size: 0.8125rem; }
 .cancel-form__hint { margin: 0; color: #61799a; font-size: 0.75rem; }
 .timetable-title { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 0.75rem; min-width: 0; }
 .timetable-week-nav { display: flex; align-items: center; gap: 0.3rem; }

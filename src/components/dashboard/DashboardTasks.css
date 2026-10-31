@@ -1,7 +1,12 @@
 .dashboard-tasks { min-width: 0; }
-.dashboard-tasks .todo-panel { display: flex; flex-direction: column; gap: 0.6rem; width: 100%; padding: 1rem; }
+.dashboard-tasks .todo-panel { display: flex; flex: 1; flex-direction: column; gap: 0.6rem; width: 100%; min-height: 0; max-height: 100%; padding: 1rem; overflow: hidden; }
 .dashboard-tasks #tasks-heading { margin: 0; }
-.todo-items { display: grid; gap: 0.4rem; margin: 0; padding: 0; list-style: none; }
+/* 카드 높이는 고정, 목록만 안에서 스크롤 (휠·터치 모두, 얇은 스크롤바) */
+.todo-items { display: grid; flex: 1 1 auto; align-content: start; gap: 0.4rem; min-height: 0; margin: 0; padding: 0 0.2rem 0 0; overflow-y: auto; max-height: min(30rem, 62svh); overscroll-behavior: contain; -webkit-overflow-scrolling: touch; touch-action: pan-y; list-style: none; scrollbar-width: thin; scrollbar-color: #b9c8de transparent; }
+.todo-items::-webkit-scrollbar { width: 0.3rem; }
+.todo-items::-webkit-scrollbar-thumb { border-radius: 1rem; background: #b9c8de; }
+.todo-items::-webkit-scrollbar-track { background: transparent; }
+.todo-more { flex: none; }
 .todo-item { display: flex; align-items: center; gap: 0.6rem; min-width: 0; padding: 0.55rem 0.75rem; border: 1px solid rgb(0 0 0 / 15%); border-radius: 0.9rem; background: white; box-shadow: 0 1px 4px rgb(0 0 0 / 12%); }
 .todo-item.is-overdue { background: rgb(255 163 163 / 27%); border-color: #e57373; }
 .todo-item.is-urgent { border: 2px solid #f59e0b; background: #fff8e6; }
