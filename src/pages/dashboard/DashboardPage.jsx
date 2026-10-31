@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useOutletContext } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import DashboardMascot from '../../components/dashboard/DashboardMascot.jsx'
 import DashboardTasks from '../../components/dashboard/DashboardTasks.jsx'
 import CancelClassModal from '../../components/dashboard/CancelClassModal.jsx'
@@ -15,7 +15,6 @@ import { useDemo } from '../../state/DemoContext.js'
 export default function DashboardPage() {
   const { state } = useDemo()
   const { user } = useAuth()
-  const { search } = useOutletContext()
   const { data, now, commit, error } = useSubjects()
   const [saveError, setSaveError] = useState('')
   const courses = dashboardSubjects(data, now)
@@ -29,7 +28,6 @@ export default function DashboardPage() {
   const goal = state.profile.goalMinutes
   const pendingCount = data.assignments.filter(item => !item.completed).length
   const hasSubjects = data.subjects.length > 0
-  const filtered = courses.filter(course => `${course.title} ${course.teacher}`.includes(search.trim()))
   return (
     <div className={`dashboard-page${hasSubjects ? '' : ' dashboard-page--empty'}`}>
       <section className="dashboard-banner" aria-labelledby="dashboard-title">
@@ -57,7 +55,7 @@ export default function DashboardPage() {
           <h2 id="quick-heading">빠른 실행</h2>
           <div className="quick-actions">{[['/study/setup', '퀴즈하기'], ['/wrong-answers', '복습하기'], ['/materials', '강의자료실'], ['/chat', 'AI chat']].map(([to, label], i) => <Link className={`quick-action quick-action--${i}`} to={to} key={to}>{label}</Link>)}</div>
         </section>
-        <DashboardTasks courses={filtered} hasSubjects={hasSubjects} onCancelClass={setCancelling} />
+        <DashboardTasks courses={courses} hasSubjects={hasSubjects} onCancelClass={setCancelling} />
         </div>
         <Timetable allEvents={data.calendarEvents} examTarget={data.subjects[0] ? `/materials/${data.subjects[0].id}#exams` : '/materials?add=1'} events={events} exams={exams} weekItems={weekItems} weekOffset={weekOffset} onWeekChange={setWeekOffset} now={now} onAdd={event => change(current => ({ ...current, calendarEvents: [...current.calendarEvents, event] }))} />
       </div>

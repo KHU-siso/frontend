@@ -3,6 +3,7 @@ import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import BrandLogo from '../components/brand/BrandLogo.jsx'
 import AppNavigation from '../components/navigation/AppNavigation.jsx'
 import searchIcon from '../assets/dashboard/dashboard-search.svg'
+import GlobalSearch from '../components/layout/GlobalSearch.jsx'
 import menuIcon from '../assets/dashboard/dashboard-menu.svg'
 import bellIcon from '../assets/dashboard/dashboard-bell.svg'
 import './AppLayout.css'
@@ -12,9 +13,7 @@ import { buildNotifications } from '../data/notifications.js'
 
 export default function AppLayout() {
   const headerRef = useRef(null)
-  const [queries, setQueries] = useState({})
   const pathname = useLocation().pathname
-  const search = queries[pathname] || ''
   const navigate = useNavigate()
   const { state } = useDemo()
   const { data: subjectData, now: subjectNow } = useSubjects()
@@ -31,10 +30,7 @@ export default function AppLayout() {
       <header className="app-header" ref={headerRef}>
         <BrandLogo to="/dashboard" />
         <button className="app-icon-button app-menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded={menuOpen} onClick={() => setMenuOpen(true)}><img src={menuIcon} alt="" /></button>
-        <form className={`app-search ${searchOpen ? 'is-open' : ''}`} role="search" onSubmit={event => event.preventDefault()}>
-          <img src={searchIcon} alt="" />
-          <input aria-label={pathname === '/dashboard' ? '대시보드 과목 검색' : pathname.startsWith('/materials/') ? '과목 홈 노트 검색' : '과목 검색'} value={search} onChange={event => setQueries(current => ({ ...current, [pathname]: event.target.value }))} />
-        </form>
+        <GlobalSearch subjects={subjectData.subjects} isOpen={searchOpen} onNavigate={() => setSearchOpen(false)} />
         <time className="app-date" dateTime={now.toISOString()}>{currentDate}</time>
         <button className="app-icon-button app-mobile-search" type="button" aria-label={searchOpen ? '검색 닫기' : '검색 열기'} aria-expanded={searchOpen} onClick={() => setSearchOpen(value => !value)}><img src={searchIcon} alt="" /></button>
         <button className="app-notification" type="button" aria-label={alerts.length ? `알림 ${alerts.length}개 확인` : '알림 확인'} aria-expanded={alertsOpen} onClick={() => setAlertsOpen(open => !open)}><img src={bellIcon} alt="" />{alerts.length > 0 && <span aria-hidden="true" />}</button>
@@ -46,7 +42,7 @@ export default function AppLayout() {
       </section>}
       {notice && <div className="app-notice"><p role="status">{notice}</p><button type="button" aria-label="안내 닫기" onClick={() => setNotice('')}>×</button></div>}
       {state.storageFailed && <div className="app-notice"><p role="alert">서버와 통신하지 못했습니다. 코인·착용 상태를 불러오지 못했을 수 있습니다.</p></div>}
-      <main className="app-main" id="dashboard-content"><Outlet context={{ search }} /></main>
+      <main className="app-main" id="dashboard-content"><Outlet /></main>
       <footer className="app-footer">
         <nav aria-label="서비스 안내"><Link to="/support">고객센터</Link><Link to="/faq">자주 묻는 질문(FAQ)</Link><Link to="/community">커뮤니티</Link></nav>
         <BrandLogo to="/dashboard" />

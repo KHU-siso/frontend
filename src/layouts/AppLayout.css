@@ -76,3 +76,11 @@
 .app-alerts li.is-overdue span { color: #b91c1c; font-weight: 700; }
 .app-alerts p { margin: 0.5rem 0.25rem; font-size: 0.85rem; color: #5b6575; line-height: 1.6; }
 .app-shell { position: relative; }
+.app-search { position: relative; }
+.app-search__results { position: absolute; z-index: 20; top: calc(100% + 0.4rem); left: 0; right: 0; max-height: 18rem; overflow-y: auto; margin: 0; padding: 0.35rem; list-style: none; border: 1px solid #cad5e6; border-radius: 0.9rem; background: white; box-shadow: 0 0.4rem 1.5rem #12326324; }
+.app-search__results li { display: flex; align-items: center; gap: 0.6rem; padding: 0.55rem 0.7rem; border-radius: 0.6rem; color: var(--color-ink); font-size: 0.875rem; cursor: pointer; }
+.app-search__results li.is-active { background: #e3ecf8; }
+.app-search__results strong { font-weight: 700; }
+.app-search__results small { margin-left: auto; color: #61799a; font-size: 0.75rem; }
+.app-search__kind { flex: none; padding: 0.1rem 0.5rem; border-radius: 1rem; background: #edf2fa; color: #486b98; font-size: 0.6875rem; font-weight: 700; }
+.app-search__empty { color: #61799a; cursor: default; }

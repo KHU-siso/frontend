@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useOutletContext, useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { EmptyState, PageTitle } from '../../components/service/ServiceUI.jsx'
 import { useSubjects } from '../../state/SubjectsContext.js'
 import { semesterLabel } from '../../data/subjectDates.js'
@@ -9,7 +9,6 @@ import SemesterSelect from '../../components/subjects/SemesterSelect.jsx'
 import './MaterialsPage.css'
 
 export default function MaterialsPage() {
-  const { search } = useOutletContext()
   const { data, semester, setSemester, materials, error, removeSubject } = useSubjects()
   const courses = data.subjects
   const [params, setParams] = useSearchParams()
@@ -18,7 +17,7 @@ export default function MaterialsPage() {
   const [message, setMessage] = useState('')
   const [expanded, setExpanded] = useState([])
   const [attendanceOpen, setAttendanceOpen] = useState({})
-  const visible = courses.filter(course => (semester === 'all' || course.semester === semester) && `${course.name} ${course.teacher}`.includes(search.trim()))
+  const visible = courses.filter(course => (semester === 'all' || course.semester === semester))
   function toggle(id) { setExpanded(current => current.includes(id) ? current.filter(value => value !== id) : [...current, id]) }
   return (
     <div className="service-page materials-page">
