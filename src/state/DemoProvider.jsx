@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useReducer, useRef } from 'react'
 import { DemoContext } from './DemoContext.js'
 import { defaultNotifications, demoReducer, initialDemoState } from './demoReducer.js'
 import { useAuth } from './AuthContext.js'
-import { buyItem, getShop, getState, putState, saveEquipment, updateMe } from '../services/api.js'
+import { buyItem, getShop, getState, putState, saveEquipment, setDeadlineEmail, updateMe } from '../services/api.js'
 import { equippedWithItem, itemById } from '../data/itemCatalog.js'
 
 // 서버(코인샵/프로필/설정)와 동기화되는 전역 상태. 화면에서는 기존처럼 dispatch(action)을 쓰고,
@@ -28,7 +28,8 @@ export default function DemoProvider({ children }) {
       dispatch({ type: 'SHOP_SET', shop })
       dispatch({ type: 'HYDRATE', values: {
         profile: { nickname: user.nickname, email: user.email, department: extra.department || '', year: extra.year || '', goalMinutes: extra.goalMinutes || null },
-        notifications: { ...defaultNotifications, ...(extra.notifications || {}) },
+        // 과제 마감 알림은 계정(users.deadline_email_enabled)에 저장된 값이 기준이다.
+        notifications: { ...defaultNotifications, ...(extra.notifications || {}), deadline: user.deadline_email_enabled ?? defaultNotifications.deadline },
       } })
     }).catch(() => active && dispatch({ type: 'STORAGE_FAILED' }))
     return () => { active = false }
@@ -75,7 +76,13 @@ export default function DemoProvider({ children }) {
         case 'NOTIFICATION': {
           const next = { ...current.notifications, [action.key]: action.value }
           dispatch({ type: 'NOTIFICATIONS_SET', values: next })
-          await saveProfileExtras(current.profile, next)
+          try {
+            if (action.key === 'deadline') await setDeadlineEmail(action.value)
+            else await saveProfileExtras(current.profile, next)
+          } catch (failure) {
+            dispatch({ type: 'NOTIFICATIONS_SET', values: current.notifications })
+            throw failure
+          }
           return
         }
         default: dispatch(action)

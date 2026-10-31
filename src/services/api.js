@@ -79,6 +79,7 @@ export async function fetchBlob(path) {
 // 사용자 정보 / 상태
 export const getMe = () => apiFetch('/api/auth/me')
 export const updateMe = nickname => apiFetch('/api/auth/me', { method: 'PATCH', body: { nickname } })
+export const setDeadlineEmail = enabled => apiFetch('/api/auth/me/notification-settings', { method: 'PATCH', body: { deadline_email_enabled: enabled } })
 export const changePassword = (current_password, new_password) => apiFetch('/api/auth/password', { method: 'POST', body: { current_password, new_password } })
 export const getState = async key => (await apiFetch(`/api/state/${key}`)).data
 export const putState = (key, data, options) => apiFetch(`/api/state/${key}`, { method: 'PUT', body: { data }, ...options })
