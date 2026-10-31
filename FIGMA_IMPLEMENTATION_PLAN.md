@@ -69,7 +69,7 @@ Page 1의 메타데이터에서 최상위 항목은 frame 89개, section 2개, r
 | 로그인 화면 | [171:622](https://www.figma.com/design/a9SBfEEq9DY4PA857328Zr/?node-id=171-622) | 5909 × 4333 | 로그인: Google 계속하기, 아이디/비밀번호, 찾기·가입 링크. | M+S |
 | 정보입력 | [167:336](https://www.figma.com/design/a9SBfEEq9DY4PA857328Zr/?node-id=167-336) | 6172 × 4389 | 가입 정보 입력: 닉네임 중복확인, 비밀번호/확인, 학교·학과. | M+S |
 | 정보입력 | [270:101](https://www.figma.com/design/a9SBfEEq9DY4PA857328Zr/?node-id=270-101) | 5910 × 4203 | 가입 정보 단계의 배경·진행 표시만 보이는 중간/미완성 시안. 입력 폼은 스크린샷에 없음. | M+S |
-| 정보입력 | [272:218](https://www.figma.com/design/a9SBfEEq9DY4PA857328Zr/?node-id=272-218) | 5910 × 4203 | 가입 학습 성향 선택: 시간 관리 3유형, 학습 방식 4유형, 선택 목록 펼침. | M+S |
+| 정보입력 | [272:218](https://www.figma.com/design/a9SBfEEq9DY4PA857328Zr/?node-id=272-218) | 5910 × 4203 | 가입 정보 입력(학습 성향 선택 단계는 제거됨; `가입하기`로 바로 가입). | M+S |
 | 가입 완료 | [171:447](https://www.figma.com/design/a9SBfEEq9DY4PA857328Zr/?node-id=171-447) | 5909 × 4203 | 가입 완료 명칭이나 배경·로고만 보임. 전환 중간 상태인지 미완성인지 미확정. | M+S |
 | 가입 완료 | [171:530](https://www.figma.com/design/a9SBfEEq9DY4PA857328Zr/?node-id=171-530) | 5909 × 4202 | 가입 완료: 파란 캐릭터와 가입완료 문구. | M+S |
 | 첫화면 1 | [169:42](https://www.figma.com/design/a9SBfEEq9DY4PA857328Zr/?node-id=169-42) | 5802 × 4126 | 공개 랜딩 1: MORAM 타이틀·옹이 캐릭터 히어로. | M+S |

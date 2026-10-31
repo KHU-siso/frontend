@@ -9,41 +9,14 @@ import AuthDemoNotice from '../../components/auth/AuthDemoNotice.jsx'
 import lock from '../../assets/auth/signup-lock.svg'
 import './SignupPage.css'
 
-const timeOptions = [
-  ['steady', '꾸준형', '매일 조금씩 공부'],
-  ['focused', '집중형', '한 번에 오래 집중해서 공부'],
-  ['last-minute', '벼락치기형', '시험 직전에 몰아서 공부'],
-]
-const studyOptions = [
-  ['understanding', '이해형', '개념과 원리를 이해하며 공부'],
-  ['memorization', '암기형', '반복해서 외우며 공부'],
-  ['problem-solving', '문제풀이형', '문제를 풀면서 익히는 방식'],
-  ['organizing', '정리형', '필기·노트·요약으로 정리하며 공부'],
-]
 const CODE_SECONDS = 300
 const RESEND_SECONDS = 60
 const emptyDetails = { email: '', code: '', nickname: '', password: '', confirmation: '', school: '', department: '' }
 
-function PreferenceGroup({ title, name, value, options, onChange }) {
-  return (
-    <fieldset className="preference-group">
-      <legend>{title} <span>(선택)</span></legend>
-      <div className="preference-options">
-        {options.map(([key, label, description]) => (
-          <label key={key} className={value === key ? 'is-selected' : ''}>
-            <input type="radio" name={name} value={key} checked={value === key} onChange={() => onChange(key)} />
-            <span><strong>{label}</strong><small>{description}</small></span>
-          </label>
-        ))}
-      </div>
-    </fieldset>
-  )
-}
-
 export default function SignupPage() {
   const [step, setStep] = useState('details')
+  const [submitting, setSubmitting] = useState(false)
   const [details, setDetails] = useState(emptyDetails)
-  const [preferences, setPreferences] = useState({ time: '', study: '' })
   const [errors, setErrors] = useState({})
   const [codeSentAt, setCodeSentAt] = useState(null)
   const [now, setNow] = useState(Date.now())
@@ -121,8 +94,10 @@ export default function SignupPage() {
     setErrors(current => ({ ...current, [name]: undefined }))
     if (name === 'nickname') setNicknameStatus('')
   }
-  function next(event) {
+  async function submit(event) {
     event.preventDefault()
+    if (submitting) return
+    setSubmitError('')
     const nextErrors = {}
     if (!/^\S+@khu\.ac\.kr$/i.test(details.email.trim())) nextErrors.email = '경희대학교 이메일(@khu.ac.kr)만 사용할 수 있습니다.'
     else if (!verified) nextErrors.code = '이메일 인증을 완료해주세요.'
@@ -136,32 +111,29 @@ export default function SignupPage() {
       document.getElementById(`signup-${Object.keys(nextErrors)[0]}`)?.focus()
       return
     }
-    setStep('preferences')
-    headingRef.current?.focus()
-  }
-  async function complete(event) {
-    event.preventDefault()
-    setSubmitError('')
+    setSubmitting(true)
     try {
       await signup(details.email.trim(), details.password, details.nickname.trim())
     } catch (error) {
       if (error.status === 409 && error.message.includes('닉네임')) {
         setErrors({ nickname: error.message })
-        setStep('details')
       } else if (error.status === 409) {
         setErrors({ email: '이미 가입된 이메일입니다.' })
-        setStep('details')
       } else if (error.status === 400) {
         setVerified(false)
         setCodeSentAt(null)
         setErrors({ code: error.message })
-        setStep('details')
       } else {
         setSubmitError(error.message)
       }
+      setSubmitting(false)
       return
     }
-    await refresh()
+    try {
+      await refresh()
+    } finally {
+      setSubmitting(false)
+    }
     setDetails({ ...emptyDetails })
     setStep('complete')
     headingRef.current?.focus()
@@ -185,48 +157,36 @@ export default function SignupPage() {
         <h1 id="signup-title" tabIndex={-1} ref={headingRef}>회원가입</h1>
         <SignupProgress />
       </aside>
-      {step === 'details' ? (
-        <form className="signup-form" onSubmit={next} noValidate>
-          <FormField id="signup-email" label="이메일" type="email" value={details.email} onChange={e => update('email', e.target.value)} autoComplete="email" readOnly={verified} error={errors.email} placeholder="name@khu.ac.kr"
-            hint={!verified && details.email.trim() && !khuEmail ? '경희대학교 이메일(@khu.ac.kr)만 사용할 수 있습니다.' : undefined}>
-            {verified ? <span className="auth-status" role="status">인증 완료 ✓</span> : (
-              <Button className="nickname-check" onClick={requestCode} disabled={sending || !khuEmail || resendWait > 0}>
-                {sending ? '발송 중...' : !codeSentAt ? '인증 코드 받기' : resendWait > 0 ? `재전송 (${resendWait}초)` : '재전송'}
-              </Button>
-            )}
-          </FormField>
-          {codeSentAt && !verified && (
-            <FormField id="signup-code" label="인증 코드" value={details.code} onChange={e => update('code', e.target.value.replace(/\D/g, '').slice(0, 6))} inputMode="numeric" autoComplete="one-time-code" maxLength={6}
-              hint={expired ? '인증 코드가 만료되었습니다. 재전송을 눌러주세요.' : `남은 시간 ${Math.floor(remaining / 60)}:${String(remaining % 60).padStart(2, '0')}`} error={errors.code}>
-              <Button className="nickname-check" onClick={confirmCode} disabled={verifying || expired}>{verifying ? '확인 중...' : '확인'}</Button>
-            </FormField>
+      <form className="signup-form" onSubmit={submit} noValidate>
+        <FormField id="signup-email" label="이메일" type="email" value={details.email} onChange={e => update('email', e.target.value)} autoComplete="email" readOnly={verified} error={errors.email} placeholder="name@khu.ac.kr"
+          hint={!verified && details.email.trim() && !khuEmail ? '경희대학교 이메일(@khu.ac.kr)만 사용할 수 있습니다.' : undefined}>
+          {verified ? <span className="auth-status" role="status">인증 완료 ✓</span> : (
+            <Button className="nickname-check" onClick={requestCode} disabled={sending || !khuEmail || resendWait > 0}>
+              {sending ? '발송 중...' : !codeSentAt ? '인증 코드 받기' : resendWait > 0 ? `재전송 (${resendWait}초)` : '재전송'}
+            </Button>
           )}
-          {(!codeSentAt || verified) && errors.code && <p className="field-error">{errors.code}</p>}
-          <p className="auth-status" role="status">{codeStatus}</p>
-          <FormField id="signup-nickname" label="닉네임" value={details.nickname} onChange={e => update('nickname', e.target.value)} autoComplete="nickname" maxLength={30} error={errors.nickname}>
-            <Button className="nickname-check" onClick={checkNicknameAvailable}>중복확인</Button>
+        </FormField>
+        {codeSentAt && !verified && (
+          <FormField id="signup-code" label="인증 코드" value={details.code} onChange={e => update('code', e.target.value.replace(/\D/g, '').slice(0, 6))} inputMode="numeric" autoComplete="one-time-code" maxLength={6}
+            hint={expired ? '인증 코드가 만료되었습니다. 재전송을 눌러주세요.' : `남은 시간 ${Math.floor(remaining / 60)}:${String(remaining % 60).padStart(2, '0')}`} error={errors.code}>
+            <Button className="nickname-check" onClick={confirmCode} disabled={verifying || expired}>{verifying ? '확인 중...' : '확인'}</Button>
           </FormField>
-          <p className="auth-status nickname-status" role="status">{nicknameStatus}</p>
-          <FormField id="signup-password" label="비밀번호" type="password" value={details.password} onChange={e => update('password', e.target.value)} autoComplete="new-password" hint="5자리 이상 입력해주세요." error={errors.password}><img className="signup-lock" src={lock} alt="" /></FormField>
-          <FormField id="signup-confirmation" label="비밀번호 확인" type="password" value={details.confirmation} onChange={e => update('confirmation', e.target.value)} autoComplete="new-password" error={errors.confirmation} />
-          <div className="signup-school-row">
-            <FormField id="signup-school" label="소속 학교" value={details.school} onChange={e => update('school', e.target.value)} autoComplete="organization" maxLength={80} error={errors.school} />
-            <FormField id="signup-department" label="학과" value={details.department} onChange={e => update('department', e.target.value)} maxLength={80} error={errors.department} />
-          </div>
-          <Button type="submit">다음: 학습 성향 선택</Button>
-        </form>
-      ) : (
-        <form className="signup-preferences" onSubmit={complete}>
-          <PreferenceGroup title="시간 관리 방식" name="time" value={preferences.time} options={timeOptions} onChange={time => setPreferences(current => ({ ...current, time }))} />
-          <PreferenceGroup title="학습 방식" name="study" value={preferences.study} options={studyOptions} onChange={study => setPreferences(current => ({ ...current, study }))} />
-          <div className="signup-actions">
-            <button className="signup-back" type="button" onClick={() => setStep('details')}>이전</button>
-            <Button type="submit">입력 완료</Button>
-          </div>
-          <p className="field-hint">선택한 성향을 확인한 뒤 입력을 완료해주세요.</p>
-          <p className="auth-status" role="status">{submitError}</p>
-        </form>
-      )}
+        )}
+        {(!codeSentAt || verified) && errors.code && <p className="field-error">{errors.code}</p>}
+        <p className="auth-status" role="status">{codeStatus}</p>
+        <FormField id="signup-nickname" label="닉네임" value={details.nickname} onChange={e => update('nickname', e.target.value)} autoComplete="nickname" maxLength={30} error={errors.nickname}>
+          <Button className="nickname-check" onClick={checkNicknameAvailable}>중복확인</Button>
+        </FormField>
+        <p className="auth-status nickname-status" role="status">{nicknameStatus}</p>
+        <FormField id="signup-password" label="비밀번호" type="password" value={details.password} onChange={e => update('password', e.target.value)} autoComplete="new-password" hint="5자리 이상 입력해주세요." error={errors.password}><img className="signup-lock" src={lock} alt="" /></FormField>
+        <FormField id="signup-confirmation" label="비밀번호 확인" type="password" value={details.confirmation} onChange={e => update('confirmation', e.target.value)} autoComplete="new-password" error={errors.confirmation} />
+        <div className="signup-school-row">
+          <FormField id="signup-school" label="소속 학교" value={details.school} onChange={e => update('school', e.target.value)} autoComplete="organization" maxLength={80} error={errors.school} />
+          <FormField id="signup-department" label="학과" value={details.department} onChange={e => update('department', e.target.value)} maxLength={80} error={errors.department} />
+        </div>
+        <Button type="submit" disabled={submitting}>{submitting ? '가입 중...' : '가입하기'}</Button>
+        <p className="field-error" role="alert">{submitError}</p>
+      </form>
     </section>
   )
 }
