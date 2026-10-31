@@ -1,5 +1,7 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../state/AuthContext.js'
+import { checkNickname, sendCode, signup, verifyCode } from '../../services/api.js'
 import Button from '../../components/common/Button.jsx'
 import FormField from '../../components/common/FormField.jsx'
 import { SignupCompleteArtwork, SignupProgress } from '../../components/auth/AuthArtwork.jsx'
@@ -18,7 +20,9 @@ const studyOptions = [
   ['problem-solving', '문제풀이형', '문제를 풀면서 익히는 방식'],
   ['organizing', '정리형', '필기·노트·요약으로 정리하며 공부'],
 ]
-const emptyDetails = { nickname: '', password: '', confirmation: '', school: '', department: '' }
+const CODE_SECONDS = 300
+const RESEND_SECONDS = 60
+const emptyDetails = { email: '', code: '', nickname: '', password: '', confirmation: '', school: '', department: '' }
 
 function PreferenceGroup({ title, name, value, options, onChange }) {
   return (
@@ -41,9 +45,78 @@ export default function SignupPage() {
   const [details, setDetails] = useState(emptyDetails)
   const [preferences, setPreferences] = useState({ time: '', study: '' })
   const [errors, setErrors] = useState({})
+  const [codeSentAt, setCodeSentAt] = useState(null)
+  const [now, setNow] = useState(Date.now())
+  const [codeStatus, setCodeStatus] = useState('')
+  const [sending, setSending] = useState(false)
+  const [verifying, setVerifying] = useState(false)
+  const [verified, setVerified] = useState(false)
+  const [submitError, setSubmitError] = useState('')
   const [nicknameStatus, setNicknameStatus] = useState('')
   const headingRef = useRef(null)
+  const { refresh } = useAuth()
+  useEffect(() => {
+    if (!codeSentAt) return undefined
+    const timer = setInterval(() => setNow(Date.now()), 1000)
+    return () => clearInterval(timer)
+  }, [codeSentAt])
+  const elapsed = codeSentAt ? Math.floor((now - codeSentAt) / 1000) : 0
+  const remaining = Math.max(0, CODE_SECONDS - elapsed)
+  const resendWait = codeSentAt ? Math.max(0, RESEND_SECONDS - elapsed) : 0
+  const khuEmail = /^\S+@khu\.ac\.kr$/i.test(details.email.trim())
+  const expired = Boolean(codeSentAt) && remaining === 0
+  async function requestCode() {
+    const email = details.email.trim()
+    if (!/^\S+@khu\.ac\.kr$/i.test(email)) {
+      setErrors(current => ({ ...current, email: '경희대학교 이메일(@khu.ac.kr)만 사용할 수 있습니다.' }))
+      return
+    }
+    setSending(true)
+    setCodeStatus('')
+    try {
+      await sendCode(email)
+      setCodeSentAt(Date.now())
+      setNow(Date.now())
+      setDetails(current => ({ ...current, code: '' }))
+      setCodeStatus('인증 코드를 메일로 보냈습니다. 5분 안에 입력해주세요.')
+    } catch (error) {
+      setErrors(current => ({ ...current, email: error.message }))
+    } finally {
+      setSending(false)
+    }
+  }
+  async function checkNicknameAvailable() {
+    const nickname = details.nickname.trim()
+    if (!nickname) { setNicknameStatus('먼저 닉네임을 입력해주세요.'); return }
+    setNicknameStatus('확인 중...')
+    try {
+      setNicknameStatus(await checkNickname(nickname) ? '사용할 수 있는 닉네임입니다.' : '이미 사용 중인 닉네임입니다.')
+    } catch (error) {
+      setNicknameStatus(error.message)
+    }
+  }
+  async function confirmCode() {
+    if (!/^\d{6}$/.test(details.code.trim())) {
+      setErrors(current => ({ ...current, code: '6자리 인증 코드를 입력해주세요.' }))
+      return
+    }
+    if (expired) {
+      setErrors(current => ({ ...current, code: '인증 코드가 만료되었습니다. 코드를 다시 받아주세요.' }))
+      return
+    }
+    setVerifying(true)
+    try {
+      await verifyCode(details.email.trim(), details.code.trim())
+      setVerified(true)
+      setCodeStatus('')
+    } catch (error) {
+      setErrors(current => ({ ...current, code: error.message }))
+    } finally {
+      setVerifying(false)
+    }
+  }
   function update(name, value) {
+    if (name === 'email') { setCodeSentAt(null); setCodeStatus(''); setVerified(false) }
     setDetails(current => ({ ...current, [name]: value }))
     setErrors(current => ({ ...current, [name]: undefined }))
     if (name === 'nickname') setNicknameStatus('')
@@ -51,6 +124,8 @@ export default function SignupPage() {
   function next(event) {
     event.preventDefault()
     const nextErrors = {}
+    if (!/^\S+@khu\.ac\.kr$/i.test(details.email.trim())) nextErrors.email = '경희대학교 이메일(@khu.ac.kr)만 사용할 수 있습니다.'
+    else if (!verified) nextErrors.code = '이메일 인증을 완료해주세요.'
     if (!details.nickname.trim()) nextErrors.nickname = '닉네임을 입력해주세요.'
     if (details.password.length < 5) nextErrors.password = '비밀번호를 5자리 이상 입력해주세요.'
     if (!details.confirmation || details.confirmation !== details.password) nextErrors.confirmation = '비밀번호가 일치하지 않습니다.'
@@ -64,9 +139,29 @@ export default function SignupPage() {
     setStep('preferences')
     headingRef.current?.focus()
   }
-  function complete(event) {
+  async function complete(event) {
     event.preventDefault()
-    // No account is created; secrets are never persisted or included in demo data.
+    setSubmitError('')
+    try {
+      await signup(details.email.trim(), details.password, details.nickname.trim())
+    } catch (error) {
+      if (error.status === 409 && error.message.includes('닉네임')) {
+        setErrors({ nickname: error.message })
+        setStep('details')
+      } else if (error.status === 409) {
+        setErrors({ email: '이미 가입된 이메일입니다.' })
+        setStep('details')
+      } else if (error.status === 400) {
+        setVerified(false)
+        setCodeSentAt(null)
+        setErrors({ code: error.message })
+        setStep('details')
+      } else {
+        setSubmitError(error.message)
+      }
+      return
+    }
+    await refresh()
     setDetails({ ...emptyDetails })
     setStep('complete')
     headingRef.current?.focus()
@@ -74,12 +169,12 @@ export default function SignupPage() {
   if (step === 'complete') return (
     <section className="signup-complete" aria-labelledby="signup-complete-title">
       <SignupCompleteArtwork />
-      <h1 id="signup-complete-title" tabIndex={-1} ref={node => node?.focus()}>입력 완료</h1>
+      <h1 id="signup-complete-title" tabIndex={-1} ref={node => node?.focus()}>가입 완료</h1>
       <div className="auth-preview-note">
         <AuthDemoNotice>
-          <p><strong>입력 완료</strong><br />실제 계정은 생성되지 않았습니다.</p>
+          <p><strong>가입 완료</strong></p>
         </AuthDemoNotice>
-        <Link to="/dashboard">대시보드 미리보기</Link>
+        <Link to="/dashboard">대시보드로 이동</Link>
         <Link to="/login">로그인 화면으로 돌아가기</Link>
       </div>
     </section>
@@ -92,8 +187,24 @@ export default function SignupPage() {
       </aside>
       {step === 'details' ? (
         <form className="signup-form" onSubmit={next} noValidate>
+          <FormField id="signup-email" label="이메일" type="email" value={details.email} onChange={e => update('email', e.target.value)} autoComplete="email" readOnly={verified} error={errors.email} placeholder="name@khu.ac.kr"
+            hint={!verified && details.email.trim() && !khuEmail ? '경희대학교 이메일(@khu.ac.kr)만 사용할 수 있습니다.' : undefined}>
+            {verified ? <span className="auth-status" role="status">인증 완료 ✓</span> : (
+              <Button className="nickname-check" onClick={requestCode} disabled={sending || !khuEmail || resendWait > 0}>
+                {sending ? '발송 중...' : !codeSentAt ? '인증 코드 받기' : resendWait > 0 ? `재전송 (${resendWait}초)` : '재전송'}
+              </Button>
+            )}
+          </FormField>
+          {codeSentAt && !verified && (
+            <FormField id="signup-code" label="인증 코드" value={details.code} onChange={e => update('code', e.target.value.replace(/\D/g, '').slice(0, 6))} inputMode="numeric" autoComplete="one-time-code" maxLength={6}
+              hint={expired ? '인증 코드가 만료되었습니다. 재전송을 눌러주세요.' : `남은 시간 ${Math.floor(remaining / 60)}:${String(remaining % 60).padStart(2, '0')}`} error={errors.code}>
+              <Button className="nickname-check" onClick={confirmCode} disabled={verifying || expired}>{verifying ? '확인 중...' : '확인'}</Button>
+            </FormField>
+          )}
+          {(!codeSentAt || verified) && errors.code && <p className="field-error">{errors.code}</p>}
+          <p className="auth-status" role="status">{codeStatus}</p>
           <FormField id="signup-nickname" label="닉네임" value={details.nickname} onChange={e => update('nickname', e.target.value)} autoComplete="nickname" maxLength={30} error={errors.nickname}>
-            <Button className="nickname-check" onClick={() => setNicknameStatus(details.nickname.trim() ? '닉네임을 확인할 수 없습니다. 다시 시도해주세요.' : '먼저 닉네임을 입력해주세요.')}>중복확인</Button>
+            <Button className="nickname-check" onClick={checkNicknameAvailable}>중복확인</Button>
           </FormField>
           <p className="auth-status nickname-status" role="status">{nicknameStatus}</p>
           <FormField id="signup-password" label="비밀번호" type="password" value={details.password} onChange={e => update('password', e.target.value)} autoComplete="new-password" hint="5자리 이상 입력해주세요." error={errors.password}><img className="signup-lock" src={lock} alt="" /></FormField>
@@ -113,6 +224,7 @@ export default function SignupPage() {
             <Button type="submit">입력 완료</Button>
           </div>
           <p className="field-hint">선택한 성향을 확인한 뒤 입력을 완료해주세요.</p>
+          <p className="auth-status" role="status">{submitError}</p>
         </form>
       )}
     </section>

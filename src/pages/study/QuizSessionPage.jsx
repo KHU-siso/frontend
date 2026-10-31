@@ -1,44 +1,91 @@
-import { useState } from 'react'
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import Button from '../../components/common/Button.jsx'
 import { EmptyState } from '../../components/service/ServiceUI.jsx'
 import AnswerFeedback from '../../components/study/AnswerFeedback.jsx'
-import { questionById } from '../../data/learningDemo.js'
-import { useSubjects } from '../../state/SubjectsContext.js'
-import { useDemo } from '../../state/DemoContext.js'
+import { getQuestion, listWrongNotes, retryAnswer, submitAnswer } from '../../services/api.js'
 import './StudyPages.css'
 
+const MAX_QUESTIONS = 10
+
+// 퀴즈 풀이 화면. /study/session/:sessionId(서버 퀴즈 세트) 와 /study/review?ids=(오답 복습) 둘 다 처리한다.
 export default function QuizSessionPage() {
   const { sessionId } = useParams()
-  const { state, dispatch } = useDemo()
-  const { data } = useSubjects()
-  const session = state.sessions[sessionId]
-  const index = session?.currentIndex || 0
-  const [draft, setDraft] = useState('')
+  const [params] = useSearchParams()
+  const isReview = !sessionId
+  const reviewKey = params.get('ids') || ''
   const navigate = useNavigate()
-  if (!session) return <EmptyState title="학습 세션을 찾을 수 없어요" to="/study/setup" linkLabel="새 학습 시작">진행 중인 문제는 새로고침 시 초기화됩니다. 이미 받은 코인과 보유 아이템은 유지됩니다.</EmptyState>
-  if (session.status === 'complete') return <Navigate to={`/study/session/${sessionId}/result`} replace />
-  const question = questionById[session.questionIds[index]]
-  const answer = session.answers[index]
-  function submit(event) {
+  const [questions, setQuestions] = useState(null)
+  const [loadError, setLoadError] = useState('')
+  const [index, setIndex] = useState(0)
+  const [answers, setAnswers] = useState([])
+  const [draft, setDraft] = useState('')
+  const [busy, setBusy] = useState(false)
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    let active = true
+    async function load() {
+      try {
+        let list
+        if (isReview) {
+          const wanted = new Set(reviewKey.split(',').map(Number))
+          list = (await listWrongNotes()).filter(note => wanted.has(note.quiz_question_id)).map(note => ({ id: note.quiz_question_id, prompt: note.question_text, choices: note.options }))
+        } else {
+          const rows = await Promise.all(Array.from({ length: MAX_QUESTIONS }, (_, i) => getQuestion(sessionId, i + 1).catch(() => null)))
+          list = rows.filter(Boolean).map(row => ({ id: row.id, prompt: row.question_text, choices: row.options }))
+        }
+        if (active) setQuestions(list)
+      } catch (failure) { if (active) setLoadError(failure.message) }
+    }
+    load()
+    return () => { active = false }
+  }, [isReview, reviewKey, sessionId])
+
+  if (loadError) return <EmptyState title="문제를 불러오지 못했어요" to="/study/setup" linkLabel="새 학습 시작">{loadError}</EmptyState>
+  if (!questions) return <p className="service-page" role="status">문제를 불러오는 중…</p>
+  if (!questions.length) return <EmptyState title="풀 문제가 없어요" to="/study/setup" linkLabel="새 학습 시작">문제가 없거나 접근할 수 없는 학습입니다.</EmptyState>
+
+  const finished = index >= questions.length
+  if (finished) {
+    const correct = answers.filter(answer => answer.correct).length
+    return <section className="study-result service-page"><h1>오답 복습 완료!</h1><p>총 {questions.length}문제 중 <strong>{correct}문제</strong> 정답</p>
+      <div className="result-actions"><Button to="/wrong-answers">오답노트 보기</Button><Link to="/study/setup">새 학습</Link><Link to="/dashboard">나가기</Link></div></section>
+  }
+
+  const question = questions[index]
+  const answer = answers[index]
+  const multiple = Array.isArray(question.choices) && question.choices.length > 0
+  async function submit(event) {
     event.preventDefault()
-    if (session.mode !== 'concept' && !draft.trim()) return
-    dispatch({ type: 'ANSWER', id: sessionId, index, answer: session.mode === 'concept' ? question.answer : draft.trim(), at: Date.now() })
+    if (!draft.trim() || busy) return
+    setBusy(true)
+    setError('')
+    try {
+      const result = await (isReview ? retryAnswer : submitAnswer)(question.id, draft.trim())
+      setAnswers(current => [...current, { correct: result.is_correct, submittedAnswer: result.user_answer, answer: result.correct_answer, explanation: result.explanation }])
+    } catch (failure) {
+      setError(failure.message)
+    } finally {
+      setBusy(false)
+    }
   }
   function next() {
-    if (index + 1 >= session.questionIds.length) { dispatch({ type: 'SESSION_FINISH', id: sessionId }); navigate(`/study/session/${sessionId}/result`) }
-    else { dispatch({ type: 'ADVANCE_QUESTION', id: sessionId }); setDraft('') }
+    if (index + 1 >= questions.length && !isReview) { navigate(`/study/session/${sessionId}/result`); return }
+    setIndex(current => current + 1)
+    setDraft('')
   }
   return (
     <section className="quiz-page service-page" aria-labelledby="question-title">
-      <div className="quiz-tags"><span className="service-badge">{data.subjects.find(subject => subject.id === question.courseId)?.name || session.subjectName || '삭제된 과목의 학습 기록'}</span><span className="service-badge">{session.mode === 'concept' ? '개념 학습' : session.questionType === 'multiple' ? '객관식' : '주관식'}</span>{session.mode === 'review' && <span className="service-badge">오답 복습</span>}</div>
+      <div className="quiz-tags"><span className="service-badge">{index + 1} / {questions.length}</span><span className="service-badge">{multiple ? '객관식' : '주관식'}</span>{isReview && <span className="service-badge">오답 복습</span>}</div>
       <h1 id="question-title">{question.prompt}</h1>
       <form onSubmit={submit}>
-        {session.mode === 'concept' ? <p className="concept-card">{question.explanation}</p> : session.questionType === 'multiple' ? <fieldset className="quiz-options" disabled={!!answer}><legend className="sr-only">정답 선택</legend>{question.choices.map((choice, i) => <label key={choice} className={`${answer && choice === question.answer ? 'is-correct' : ''} ${answer && !answer.correct && choice === answer.submittedAnswer ? 'is-incorrect' : ''} ${draft === choice ? 'is-selected' : ''}`}><input type="radio" name="answer" value={choice} checked={draft === choice} onChange={() => setDraft(choice)} /><span className="quiz-option-number">{i + 1}</span><span>{choice}</span></label>)}</fieldset> : <label className="service-field quiz-short-answer"><span className="sr-only">정답 입력</span><input placeholder="정답 입력" value={draft} disabled={!!answer} onChange={event => setDraft(event.target.value)} maxLength={200} autoComplete="off" /></label>}
-        {!answer && <Button className="quiz-submit" type="submit" disabled={session.mode !== 'concept' && !draft.trim()}>{session.mode === 'concept' ? '개념 확인 완료' : '정답 확인'}</Button>}
+        {multiple ? <fieldset className="quiz-options" disabled={!!answer}><legend className="sr-only">정답 선택</legend>{question.choices.map((choice, i) => <label key={choice} className={`${answer && choice === answer.answer ? 'is-correct' : ''} ${answer && !answer.correct && choice === answer.submittedAnswer ? 'is-incorrect' : ''} ${draft === choice ? 'is-selected' : ''}`}><input type="radio" name="answer" value={choice} checked={draft === choice} onChange={() => setDraft(choice)} /><span className="quiz-option-number">{i + 1}</span><span>{choice}</span></label>)}</fieldset>
+          : <label className="service-field quiz-short-answer"><span className="sr-only">정답 입력</span><input placeholder="정답 입력" value={draft} disabled={!!answer} onChange={event => setDraft(event.target.value)} maxLength={200} autoComplete="off" /></label>}
+        {!answer && <Button className="quiz-submit" type="submit" disabled={!draft.trim() || busy}>{busy ? '채점 중…' : '정답 확인'}</Button>}
       </form>
-      {answer && <><AnswerFeedback question={question} answer={answer} review={session.mode === 'review'} /><Button className="quiz-submit" onClick={next}>{index + 1 === session.questionIds.length ? '결과 확인' : session.mode === 'review' ? '다음 복습하기' : '다음 문제로 넘어가기'}</Button></>}
-
+      {error && <p className="service-error" role="alert">{error}</p>}
+      {answer && <><AnswerFeedback question={{ answer: answer.answer, explanation: answer.explanation }} answer={answer} review={isReview} /><Button className="quiz-submit" onClick={next}>{index + 1 === questions.length ? '결과 확인' : isReview ? '다음 복습하기' : '다음 문제로 넘어가기'}</Button></>}
     </section>
   )
 }

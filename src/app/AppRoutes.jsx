@@ -18,6 +18,7 @@ import CoinRewardPage from '../pages/study/CoinRewardPage.jsx'
 import WrongAnswersPage from '../pages/review/WrongAnswersPage.jsx'
 import WardrobePage from '../pages/inventory/WardrobePage.jsx'
 import MyPage from '../pages/profile/MyPage.jsx'
+import RequireAuth from './RequireAuth.jsx'
 
 const SubjectHomePage = lazy(() => import('../pages/materials/SubjectHomePage.jsx'))
 
@@ -32,6 +33,11 @@ const futurePages = [
 export default function AppRoutes() {
   return (
     <Routes>
+      <Route element={<AuthLayout />}>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/signup" element={<SignupPage />} />
+      </Route>
+      <Route element={<RequireAuth />}>
       <Route path="/chat" element={<ChatPage />} />
       <Route element={<StudyLayout />}>
         <Route path="/wrong-answers" element={<WrongAnswersPage />} />
@@ -39,10 +45,7 @@ export default function AppRoutes() {
         <Route path="/study/session/:sessionId" element={<QuizSessionPage />} />
         <Route path="/study/session/:sessionId/result" element={<StudyResultPage />} />
         <Route path="/study/session/:sessionId/reward" element={<CoinRewardPage />} />
-      </Route>
-      <Route element={<AuthLayout />}>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/study/review" element={<QuizSessionPage />} />
       </Route>
       <Route element={<AppLayout />}>
         <Route path="/dashboard" element={<DashboardPage />} />
@@ -51,6 +54,7 @@ export default function AppRoutes() {
         <Route path="/shop" element={<WardrobePage />} />
         <Route path="/inventory" element={<Navigate to="/shop?tab=inventory" replace />} />
         <Route path="/mypage" element={<MyPage />} />
+      </Route>
       </Route>
       <Route element={<PublicLayout />}>
         <Route index element={<LandingPage />} />

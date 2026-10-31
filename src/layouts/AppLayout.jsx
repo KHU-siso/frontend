@@ -36,7 +36,7 @@ export default function AppLayout() {
         <button className="app-profile" type="button" aria-label="마이페이지 열기" onClick={() => navigate('/mypage')}>{state.profile.nickname.slice(0, 1)}</button>
       </header>
       {notice && <div className="app-notice"><p role="status">{notice}</p><button type="button" aria-label="안내 닫기" onClick={() => setNotice('')}>×</button></div>}
-      {state.storageFailed && <div className="app-notice"><p role="alert">브라우저 저장소에 접근할 수 없습니다. 코인·착용 상태가 새로고침 후 보존되지 않을 수 있습니다.</p></div>}
+      {state.storageFailed && <div className="app-notice"><p role="alert">서버와 통신하지 못했습니다. 코인·착용 상태를 불러오지 못했을 수 있습니다.</p></div>}
       <main className="app-main" id="dashboard-content"><Outlet context={{ search }} /></main>
       <footer className="app-footer">
         <nav aria-label="서비스 안내"><Link to="/support">고객센터</Link><Link to="/faq">자주 묻는 질문(FAQ)</Link><Link to="/community">커뮤니티</Link></nav>

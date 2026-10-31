@@ -19,7 +19,10 @@ export function createSubjectState() {
 export function readSubjectState(storage) {
   const text = storage.getItem(SUBJECTS_KEY)
   if (!text) return createSubjectState()
-  const raw = JSON.parse(text)
+  return parseSubjectState(JSON.parse(text))
+}
+// 서버/스토리지에서 읽은 원본 객체를 검증하고 구버전 필드를 보정한다.
+export function parseSubjectState(raw) {
   if (raw.version !== 1 || !Array.isArray(raw.subjects) || !['notes', 'exams', 'assignments', 'calendarEvents', 'pendingFileDeletions'].every(key => Array.isArray(raw[key])) || !raw.drafts || typeof raw.drafts !== 'object') throw new Error('저장된 과목 데이터를 읽을 수 없습니다. 원본 데이터는 덮어쓰지 않았습니다.')
   const ids = new Set()
   for (const subject of raw.subjects) {

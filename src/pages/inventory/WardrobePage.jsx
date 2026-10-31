@@ -74,7 +74,7 @@ function WardrobeContent({ shop }) {
           return <li key={slot}><span>{label}</span><strong>{occupant ? `${occupant.name}${occupant.slot !== slot ? '에 포함' : ''}` : slot === 'bodyColor' ? '기본 흰색' : '기본 모습'}</strong>{equippedItems[slot] && <button type="button" aria-label={`${label} 해제`} onClick={() => { dispatch({ type: 'UNEQUIP', slot }); setPreview(false) }}>해제</button>}</li>
         })}</ul><button className="service-plain-button" disabled={!Object.keys(equippedItems).length} type="button" onClick={() => { dispatch({ type: 'UNEQUIP_ALL' }); setPreview(false) }}>모두 해제</button></section>
 
-        {state.storageFailed && <p className="service-error" role="alert">localStorage를 사용할 수 없어 변경 내용이 새로고침 후 유지되지 않을 수 있습니다.</p>}
+        {state.storageFailed && <p className="service-error" role="alert">서버와 통신하지 못했습니다. 변경 내용이 저장되지 않았을 수 있습니다.</p>}
       </section>
     </div>
   )
