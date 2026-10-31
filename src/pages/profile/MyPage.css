@@ -39,3 +39,4 @@
 .profile-account span { font-size: 1.5rem; color: #aabedc; }
 .profile-editor .form-field input { width: 100%; min-width: 0; padding: 0.85rem 1rem; border: 1px solid #cbd6e8; border-radius: 0.75rem; background: #f1f4fa; color: var(--color-ink); font: inherit; font-size: 0.875rem; }
 @media (max-width: 47.99rem) { .profile-card { gap: 0.8rem; padding: 1rem; } .profile-card > .ong-peek { width: 4.5rem; right: 1rem; } .profile-initial { width: 3rem; height: 3rem; font-size: 1.25rem; } .profile-card h2 { font-size: 1rem; } .profile-card p { font-size: 0.75rem; } .profile-card .service-badge { font-size: 0.6rem; } .profile-card > .service-plain-button { font-size: 0.65rem; } .profile-learning-row { grid-template-columns: 1fr; gap: 0.5rem; } }
+.service-badge--hint { border: 1px dashed #648ccc; background: #f1f5fb; color: #082e66; cursor: pointer; font: inherit; }
