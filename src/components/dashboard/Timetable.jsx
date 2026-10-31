@@ -38,7 +38,7 @@ function AddSchedule({ onAdd, onClose, events, weekLabels }) {
   )
 }
 
-export default function Timetable({ events, exams = [], onAdd, now }) {
+export default function Timetable({ events, exams = [], examTarget = '/materials?add=1', onAdd, now }) {
   const { weekDates, weekLabels, weekRange } = weekDisplay(now)
   const [adding, setAdding] = useState(false)
   const [selected, setSelected] = useState(null)
@@ -50,6 +50,8 @@ export default function Timetable({ events, exams = [], onAdd, now }) {
   return (
     <section className="dashboard-card timetable-card" aria-labelledby="timetable-heading">
       <header className="timetable-heading"><h2 id="timetable-heading">주간 시간표</h2><div className="timetable-controls">{!!exams.length && <details className="timetable-exams"><summary>시험 일정 {exams.length}</summary><div>{exams.map(exam => <Link to={`/materials/${exam.subjectId}#exams`} key={exam.id}><strong>{exam.subjectName} · {exam.title}</strong><span>{exam.date} · {exam.time || '시간 미정'}{exam.past ? ' · 지난 시험' : ''}</span></Link>)}</div></details>}<button type="button" aria-label="새 과목 추가" onClick={() => setAdding(true)}>+</button></div></header>
+      {!exams.length && <div className="empty-state empty-state--inline" role="status"><p>시험 일정을 등록해 주세요</p><Link className="button" to={examTarget}>시험 일정 등록</Link></div>}
+      {!visibleEvents.length && <div className="empty-state empty-state--inline" role="status"><p>시간표를 등록해 주세요</p><button className="button" type="button" onClick={() => setAdding(true)}>시간표 등록</button></div>}
       <p className="timetable-caption">{weekRange}</p>
       <div className="timetable-scroll" tabIndex={0} role="region" aria-label="주간 시간표 시간대">
         <div className="timetable-grid" style={{ '--timetable-hours': hours.length }}>

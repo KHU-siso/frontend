@@ -27,7 +27,7 @@ export default function DemoProvider({ children }) {
       const extra = saved || {}
       dispatch({ type: 'SHOP_SET', shop })
       dispatch({ type: 'HYDRATE', values: {
-        profile: { nickname: user.nickname, email: user.email, department: extra.department || '', year: extra.year || '', goalMinutes: extra.goalMinutes || 120 },
+        profile: { nickname: user.nickname, email: user.email, department: extra.department || '', year: extra.year || '', goalMinutes: extra.goalMinutes || null },
         notifications: { ...defaultNotifications, ...(extra.notifications || {}) },
       } })
     }).catch(() => active && dispatch({ type: 'STORAGE_FAILED' }))

@@ -1,7 +1,7 @@
 import { DEFAULT_ITEM_IDS } from '../data/itemCatalog.js'
 
 export const defaultEconomy = { coinBalance: 0, ownedItemIds: DEFAULT_ITEM_IDS, equippedItems: {} }
-export const defaultProfile = { nickname: '', email: '', department: '', year: '', goalMinutes: 120 }
+export const defaultProfile = { nickname: '', email: '', department: '', year: '', goalMinutes: null }
 export const defaultNotifications = { deadline: true, study: false, materials: true }
 
 export function initialDemoState() {

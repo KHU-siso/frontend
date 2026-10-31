@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useOutletContext } from 'react-router-dom'
+import { Link, useOutletContext, useSearchParams } from 'react-router-dom'
 import { EmptyState, PageTitle } from '../../components/service/ServiceUI.jsx'
 import { useSubjects } from '../../state/SubjectsContext.js'
 import { semesterLabel } from '../../data/subjectDates.js'
@@ -12,7 +12,8 @@ export default function MaterialsPage() {
   const { search } = useOutletContext()
   const { data, semester, setSemester, materials, error, removeSubject } = useSubjects()
   const courses = data.subjects
-  const [editing, setEditing] = useState(null)
+  const [params, setParams] = useSearchParams()
+  const [editing, setEditing] = useState(() => params.get('add') ? {} : null)
   const [deleting, setDeleting] = useState(null)
   const [message, setMessage] = useState('')
   const [expanded, setExpanded] = useState([])
@@ -42,7 +43,7 @@ export default function MaterialsPage() {
         {!visible.length && <EmptyState title="해당 과목이 없습니다">학기나 검색어를 변경해주세요.</EmptyState>}
       </div>
 
-      {editing && <SubjectForm subject={editing.id ? editing : null} semester={semester === 'all' ? undefined : semester} onClose={() => setEditing(null)} onSaved={(_id, term) => { setSemester(term); setEditing(null); setMessage('과목 정보를 저장했습니다.') }} />}
+      {editing && <SubjectForm subject={editing.id ? editing : null} semester={semester === 'all' ? undefined : semester} onClose={() => { setEditing(null); if (params.get('add')) setParams({}, { replace: true }) }} onSaved={(_id, term) => { setSemester(term); setEditing(null); if (params.get('add')) setParams({}, { replace: true }); setMessage('과목 정보를 저장했습니다.') }} />}
       {deleting && <ConfirmDelete title="과목 삭제" description={`‘${deleting.name}’ 과목과 연결된 노트 ${data.notes.filter(item => item.subjectId === deleting.id).length}개, 시험 ${data.exams.filter(item => item.subjectId === deleting.id).length}개, 과제 ${data.assignments.filter(item => item.subjectId === deleting.id).length}개, 강의자료 ${materials.filter(item => item.subjectId === deleting.id).length}개, 작성 중인 초안, 출결 기록 및 연결 일정을 함께 삭제합니다. 이 작업은 되돌릴 수 없습니다. 기존 코인·아이템·퀴즈 기록은 유지됩니다.`} onClose={() => setDeleting(null)} onConfirm={async () => { const warning = await removeSubject(deleting.id); setDeleting(null); setMessage(warning || '과목과 연결된 기록을 삭제했습니다.') }} />}
     </div>
   )

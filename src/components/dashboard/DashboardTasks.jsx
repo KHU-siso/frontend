@@ -1,7 +1,7 @@
 import './DashboardTasks.css'
 import { Link } from 'react-router-dom'
 
-export default function DashboardTasks({ courses, onToggleCancel }) {
+export default function DashboardTasks({ courses, hasSubjects = true, onToggleCancel }) {
   return (
     <div className="dashboard-tasks">
       <section className="dashboard-card todo-panel" aria-labelledby="tasks-heading">
@@ -20,7 +20,8 @@ export default function DashboardTasks({ courses, onToggleCancel }) {
               </div>
             </article>
           ))}
-          {courses.length === 0 && <p className="todo-empty" role="status">검색한 과목이 없습니다.</p>}
+          {courses.length === 0 && hasSubjects && <p className="todo-empty" role="status">검색한 과목이 없습니다.</p>}
+          {!hasSubjects && <div className="empty-state" role="status"><p>아직 등록된 과목이 없어요</p><Link className="button" to="/materials?add=1">과목 추가</Link></div>}
         </div>
       </section>
     </div>
