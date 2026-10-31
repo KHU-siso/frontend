@@ -2,10 +2,13 @@ import { useState } from 'react'
 import { Link, useOutletContext } from 'react-router-dom'
 import DashboardMascot from '../../components/dashboard/DashboardMascot.jsx'
 import DashboardTasks from '../../components/dashboard/DashboardTasks.jsx'
+import CancelClassModal from '../../components/dashboard/CancelClassModal.jsx'
 import Timetable from '../../components/dashboard/Timetable.jsx'
 import { useAuth } from '../../state/AuthContext.js'
 import { useSubjects } from '../../state/SubjectsContext.js'
 import { dashboardSubjects, subjectTimetable } from '../../data/subjectDashboard.js'
+import { cancelledDatesIn, classDaysOf, replaceCancellations } from '../../data/cancellations.js'
+import { todayInSeoul, weekDisplay, weekOf } from '../../data/subjectDates.js'
 import './DashboardPage.css'
 import { useDemo } from '../../state/DemoContext.js'
 
@@ -19,6 +22,9 @@ export default function DashboardPage() {
   const { events, exams } = subjectTimetable(data, now)
   function change(updater) { try { commit(updater); setSaveError('') } catch (failure) { setSaveError(failure.message) } }
   const [view, setView] = useState('overview')
+  const [cancelling, setCancelling] = useState(null)
+  const thisWeek = weekOf(todayInSeoul(new Date(now)))
+  const cancelSubject = data.subjects.find(subject => subject.id === cancelling)
   const goal = state.profile.goalMinutes
   const pendingCount = data.assignments.filter(item => !item.completed).length
   const hasSubjects = data.subjects.length > 0
@@ -50,10 +56,11 @@ export default function DashboardPage() {
           <h2 id="quick-heading">빠른 실행</h2>
           <div className="quick-actions">{[['/study/setup', '퀴즈하기'], ['/wrong-answers', '복습하기'], ['/materials', '강의자료실'], ['/chat', 'AI chat']].map(([to, label], i) => <Link className={`quick-action quick-action--${i}`} to={to} key={to}>{label}</Link>)}</div>
         </section>
-        <DashboardTasks courses={filtered} hasSubjects={hasSubjects} onToggleCancel={id => change(current => ({ ...current, subjects: current.subjects.map(subject => subject.id === id ? { ...subject, cancelled: !subject.cancelled } : subject) }))} />
+        <DashboardTasks courses={filtered} hasSubjects={hasSubjects} onCancelClass={setCancelling} />
         </div>
-        <Timetable examTarget={data.subjects[0] ? `/materials/${data.subjects[0].id}#exams` : '/materials?add=1'} events={events} exams={exams} now={now} onAdd={event => change(current => ({ ...current, calendarEvents: [...current.calendarEvents, event] }))} />
+        <Timetable allEvents={data.calendarEvents} examTarget={data.subjects[0] ? `/materials/${data.subjects[0].id}#exams` : '/materials?add=1'} events={events} exams={exams} now={now} onAdd={event => change(current => ({ ...current, calendarEvents: [...current.calendarEvents, event] }))} />
       </div>
+      {cancelSubject && <CancelClassModal title={cancelSubject.name} options={classDaysOf(data, cancelSubject, thisWeek, weekDisplay(now).weekLabels)} cancelled={cancelledDatesIn(data.cancellations, cancelSubject.id, thisWeek)} onSave={dates => change(current => replaceCancellations(current, cancelSubject.id, thisWeek, dates))} onClose={() => setCancelling(null)} />}
     </div>
   )
 }

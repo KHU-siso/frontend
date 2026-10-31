@@ -38,7 +38,7 @@ function AddSchedule({ onAdd, onClose, events, weekLabels }) {
   )
 }
 
-export default function Timetable({ events, exams = [], examTarget = '/materials?add=1', onAdd, now }) {
+export default function Timetable({ events, allEvents = events, exams = [], examTarget = '/materials?add=1', onAdd, now }) {
   const { weekDates, weekLabels, weekRange } = weekDisplay(now)
   const [adding, setAdding] = useState(false)
   const [selected, setSelected] = useState(null)
@@ -62,7 +62,7 @@ export default function Timetable({ events, exams = [], examTarget = '/materials
           {visibleEvents.map(event => <button key={event.id} type="button" className={`timetable-event schedule-color--${event.color}${event.end - event.start < 1 ? ' timetable-event--short' : ''}`} style={{ gridColumn: event.day + 2, gridRow: '2 / -1', alignSelf: 'start', marginTop: `calc(${event.start - firstHour} * var(--timetable-hour-height) + 0.5px)`, height: `calc(${event.end - event.start} * var(--timetable-hour-height) - 1px)` }} aria-label={`${event.name}, ${weekLabels[event.day]}, ${timeLabel(event.start)}부터 ${timeLabel(event.end)}`} onClick={() => setSelected(event)}><strong>{event.name}</strong><span>{event.location}</span></button>)}
         </div>
       </div>
-      {adding && <AddSchedule events={events} weekLabels={weekLabels} onAdd={onAdd} onClose={() => setAdding(false)} />}
+      {adding && <AddSchedule events={allEvents} weekLabels={weekLabels} onAdd={onAdd} onClose={() => setAdding(false)} />}
       {selected && <Modal title={selected.name} onClose={() => setSelected(null)}><p>{selected.date ? `${selected.date} · ${selected.time}` : `${weekLabels[selected.day]} · ${timeLabel(selected.start)}–${timeLabel(selected.end)}`}</p>{selected.location && <p>{selected.location}</p>}{selected.subjectId && <Link className="button" to={`/materials/${selected.subjectId}${selected.examId ? '#exams' : ''}`}>과목 홈에서 확인</Link>}</Modal>}
     </section>
   )

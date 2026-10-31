@@ -153,3 +153,11 @@
 .app-shell--dashboard:has(.dashboard-page--empty) { height: auto; min-height: 100svh; }
 .dashboard-page--empty .dashboard-overview { flex: none; min-height: 36rem; }
 @media (max-width: 63.99rem) { .dashboard-page--empty .dashboard-overview { min-height: 0; } }
+.cancel-form__subject { margin: 0; color: #486b98; font-size: 0.875rem; font-weight: 800; }
+.cancel-form__days { display: grid; gap: 0.6rem; margin: 0; padding: 0; border: 0; }
+.cancel-form__days legend { margin-bottom: 0.6rem; padding: 0; font-size: 0.875rem; font-weight: 600; }
+.cancel-form__days label { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 0.85rem; border: 1px solid #cad5e6; border-radius: 0.65rem; background: #f0f3fa; cursor: pointer; }
+.cancel-form__days input { width: 1.1rem; height: 1.1rem; flex: none; accent-color: var(--color-hero); }
+.cancel-form__days span { display: grid; gap: 0.2rem; font-size: 0.875rem; }
+.cancel-form__days small { color: #61799a; font-size: 0.75rem; }
+.cancel-form__hint { margin: 0; color: #61799a; font-size: 0.75rem; }

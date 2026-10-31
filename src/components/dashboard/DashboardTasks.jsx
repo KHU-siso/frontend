@@ -1,7 +1,7 @@
 import './DashboardTasks.css'
 import { Link } from 'react-router-dom'
 
-export default function DashboardTasks({ courses, hasSubjects = true, onToggleCancel }) {
+export default function DashboardTasks({ courses, hasSubjects = true, onCancelClass }) {
   return (
     <div className="dashboard-tasks">
       <section className="dashboard-card todo-panel" aria-labelledby="tasks-heading">
@@ -16,7 +16,7 @@ export default function DashboardTasks({ courses, hasSubjects = true, onToggleCa
               </div>
               <div className="todo-state">
                 <span className={course.overdue ? 'is-overdue' : ''} title={course.statusDescription}><span className="todo-status-text">{course.statusText || (course.overdue ? '지난 주에 밀렸어요!' : '오늘의 할 일')}</span></span>
-                <button type="button" aria-label={`${course.title} ${course.cancelled ? '휴강 해제' : '휴강 처리'}`} onClick={() => onToggleCancel(course.id)}><span aria-hidden="true">휴강<br />{course.cancelled ? '해제' : '처리'}</span></button>
+                <button type="button" aria-label={`${course.title} ${course.cancelled ? '휴강 변경' : '휴강 처리'}`} onClick={() => onCancelClass(course.id)}><span aria-hidden="true">휴강<br />{course.cancelled ? '변경' : '처리'}</span></button>
               </div>
             </article>
           ))}

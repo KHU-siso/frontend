@@ -113,11 +113,11 @@ export default function SubjectsProvider({ children }) {
     if (id && !dataRef.current.subjects.some(subject => subject.id === id)) throw new Error('수정할 과목을 찾을 수 없습니다.')
     const subjectId = id || crypto.randomUUID()
     const stamp = new Date().toISOString()
-    commit(current => ({ ...current, subjects: id ? current.subjects.map(subject => subject.id === id ? { ...subject, ...fields, updatedAt: stamp } : subject) : [...current.subjects, { ...fields, id: subjectId, source: 'user', room: '', cancelled: false, createdAt: stamp, updatedAt: stamp }] }))
+    commit(current => ({ ...current, subjects: id ? current.subjects.map(subject => subject.id === id ? { ...subject, ...fields, updatedAt: stamp } : subject) : [...current.subjects, { ...fields, id: subjectId, source: 'user', room: '', createdAt: stamp, updatedAt: stamp }] }))
     return { id: subjectId }
   }
   const removeSubject = async id => {
-    commit(current => ({ ...current, subjects: current.subjects.filter(subject => subject.id !== id), notes: current.notes.filter(item => item.subjectId !== id), exams: current.exams.filter(item => item.subjectId !== id), assignments: current.assignments.filter(item => item.subjectId !== id), drafts: Object.fromEntries(Object.entries(current.drafts).filter(([, draft]) => draft.subjectId !== id)), attendance: Object.fromEntries(Object.entries(current.attendance || {}).filter(([subjectId]) => subjectId !== id)), calendarEvents: current.calendarEvents.filter(item => item.subjectId !== id), pendingFileDeletions: [...new Set([...current.pendingFileDeletions, id])] }))
+    commit(current => ({ ...current, subjects: current.subjects.filter(subject => subject.id !== id), notes: current.notes.filter(item => item.subjectId !== id), exams: current.exams.filter(item => item.subjectId !== id), assignments: current.assignments.filter(item => item.subjectId !== id), drafts: Object.fromEntries(Object.entries(current.drafts).filter(([, draft]) => draft.subjectId !== id)), attendance: Object.fromEntries(Object.entries(current.attendance || {}).filter(([subjectId]) => subjectId !== id)), calendarEvents: current.calendarEvents.filter(item => item.subjectId !== id), cancellations: current.cancellations.filter(item => item.subjectId !== id), pendingFileDeletions: [...new Set([...current.pendingFileDeletions, id])] }))
     for (const item of materialsRef.current.filter(item => item.subjectId === id && item.server)) await deleteDocument(item.docId).catch(() => {})
     setMaterials(current => current.filter(item => item.subjectId !== id))
     try { await fileRepository.removeSubject(id); commit(current => ({ ...current, pendingFileDeletions: current.pendingFileDeletions.filter(value => value !== id) })); return '' }
