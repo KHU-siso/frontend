@@ -63,7 +63,7 @@ export default function DashboardPage() {
           <h2 id="quick-heading">빠른 실행</h2>
           <div className="quick-actions">
             <Link className="quick-action quick-action--0" to="/materials">강의자료실</Link>
-            <button type="button" className="quick-action quick-action--1" onClick={() => setPicker('study')}>학습하기</button>
+            <button type="button" className="quick-action quick-action--1" onClick={() => setPicker('study')}>문제풀기</button>
             <button type="button" className="quick-action quick-action--2" onClick={() => setPicker('task')}>과제 등록</button>
             <button type="button" className="quick-action quick-action--3" onClick={() => setPicker('chat')}>AI chat</button>
           </div>
@@ -72,8 +72,8 @@ export default function DashboardPage() {
         </div>
         <Timetable allEvents={data.calendarEvents} examTarget={data.subjects[0] ? `/materials/${data.subjects[0].id}#exams` : '/materials?add=1'} events={events} exams={exams} weekItems={weekItems} weekOffset={weekOffset} onWeekChange={setWeekOffset} now={now} onCancelClass={() => setCancelling(true)} onAdd={event => change(current => ({ ...current, calendarEvents: [...current.calendarEvents, event] }))} onAddPersonal={event => change(current => ({ ...current, calendarEvents: [...current.calendarEvents, event] }))} onRemoveEvent={id => change(current => ({ ...current, calendarEvents: current.calendarEvents.filter(event => event.id !== id) }))} />
       </div>
-      {picker && <SubjectPickerModal title={{ study: '어떤 과목을 학습할까요?', task: '어떤 과목의 과제를 등록할까요?', chat: '어떤 과목의 AI 채팅을 열까요?' }[picker]} subjects={data.subjects} onClose={() => setPicker(null)}
-        onPick={subject => { setPicker(null); if (picker === 'task') setTaskSubject(subject); else navigate(picker === 'chat' ? `/materials/${subject.id}#chat` : `/materials/${subject.id}`) }} />}
+      {picker && <SubjectPickerModal title={{ study: '어떤 과목의 문제를 풀까요?', task: '어떤 과목의 과제를 등록할까요?', chat: '어떤 과목의 AI 채팅을 열까요?' }[picker]} subjects={data.subjects} onClose={() => setPicker(null)}
+        onPick={subject => { setPicker(null); if (picker === 'task') setTaskSubject(subject); else navigate(picker === 'chat' ? `/materials/${subject.id}#chat` : picker === 'study' ? `/study/setup?course=${subject.id}` : `/materials/${subject.id}`) }} />}
       {taskSubject && <AssignmentQuickModal subject={taskSubject} onSaved={title => setQuickNotice(`'${title}' 과제를 등록했어요.`)} onClose={() => setTaskSubject(null)} />}
       {cancelling && <CancelClassModal subjects={data.subjects} weekRange={viewedLabels.weekRange} optionsFor={subject => classDaysOf(data, subject, viewedWeek, viewedLabels.weekLabels)} cancelledFor={subject => cancelledDatesIn(data.cancellations, subject.id, viewedWeek)} cancellations={cancellationList(data)} onRestore={(subjectId, date) => change(current => removeCancellation(current, subjectId, date))} onSave={(subject, dates) => change(current => replaceCancellations(current, subject.id, viewedWeek, dates))} onClose={() => setCancelling(false)} />}
     </div>

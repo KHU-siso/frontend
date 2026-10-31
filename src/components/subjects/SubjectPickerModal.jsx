@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import Modal from '../common/Modal.jsx'
 
-// 빠른 실행(학습하기·과제 등록·AI chat)이 함께 쓰는 과목 선택 창.
+// 빠른 실행(문제풀기·과제 등록·AI chat)이 함께 쓰는 과목 선택 창.
 export default function SubjectPickerModal({ title, subjects, onPick, onClose }) {
   return (
     <Modal title={title} onClose={onClose}>

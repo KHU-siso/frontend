@@ -94,3 +94,11 @@ a.subject-add-button { display: inline-flex; align-items: center; text-decoratio
 .subject-wrong__answer { color: #2e7d32; }
 .subject-wrong__explanation { color: #5b6e8a; white-space: pre-wrap; }
 .subject-wrong__meta { color: #899bb4; font-size: 0.6875rem; }
+
+/* 시험 일정·과제·학습 노트: 항목이 늘어도 카드가 길어지지 않고 목록만 안에서 스크롤 (휠·터치, 얇은 스크롤바) */
+.subject-panel--exams .subject-record-list, .subject-panel--assignments .subject-record-list, .subject-panel--notes .subject-record-list { align-content: start; max-height: min(26rem, 60svh); padding-right: 0.25rem; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: #b9c8de transparent; }
+.subject-panel--exams .subject-record-list::-webkit-scrollbar, .subject-panel--assignments .subject-record-list::-webkit-scrollbar, .subject-panel--notes .subject-record-list::-webkit-scrollbar { width: 0.3rem; }
+.subject-panel--exams .subject-record-list::-webkit-scrollbar-thumb, .subject-panel--assignments .subject-record-list::-webkit-scrollbar-thumb, .subject-panel--notes .subject-record-list::-webkit-scrollbar-thumb { border-radius: 1rem; background: #b9c8de; }
+.subject-panel--materials .subject-file-list { align-content: start; max-height: min(26rem, 60svh); padding-right: 0.25rem; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: #b9c8de transparent; }
+.subject-panel--materials .subject-file-list::-webkit-scrollbar { width: 0.3rem; }
+.subject-panel--materials .subject-file-list::-webkit-scrollbar-thumb { border-radius: 1rem; background: #b9c8de; }

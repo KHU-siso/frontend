@@ -44,7 +44,7 @@ export default function CoinRewardPage() {
     <p className="coin-reward__encouragement">꾸준히 공부할수록 더 많은 코인을 모을 수 있어요!</p>
     <div className="coin-reward__balance"><span className="coin-reward__balance-icon" aria-hidden="true"><img src={balanceCoin} alt="" /><span>c</span></span><span>현재 보유 코인</span><strong data-testid="coin-balance">{state.economy.coinBalance} COIN</strong></div>
     <p className="sr-only" role="status">{claimed ? '보상 지급 완료. 같은 학습의 보상은 한 번만 받을 수 있습니다.' : ''}</p>
-    <Button className="coin-reward__primary" to="/study/setup">다음 학습하기</Button>
+    <Button className="coin-reward__primary" to="/study/setup">다음 문제풀기</Button>
     <Link className="coin-reward__shop" to="/shop">코인샵 가기<img src={shopArrow} alt="" /></Link>
     {state.storageFailed && <p className="service-error coin-reward__storage-error" role="alert">브라우저 저장소에 접근할 수 없어 새로고침 후 보존을 보장할 수 없습니다.</p>}
   </section>

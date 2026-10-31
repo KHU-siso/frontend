@@ -43,7 +43,7 @@ test('original Figma coin Ong renders with a single claim and the next-study act
   await expect(page.getByTestId('coin-balance')).toHaveText('18 COIN')
   await expect(page.getByRole('status')).toContainText('보상 지급 완료')
   await expect(page.getByRole('button', { name: '코인 받기', exact: true })).toHaveCount(0)
-  await expect(page.getByRole('link', { name: '다음 학습하기', exact: true })).toBeVisible()
+  await expect(page.getByRole('link', { name: '다음 문제풀기', exact: true })).toBeVisible()
   await page.screenshot({ path: info.outputPath('figma-coin-reward.png'), fullPage: true })
   if (info.project.name === 'desktop') {
     for (const [width, height] of [[1024, 729], [1768, 1305], [1366, 768]]) {
@@ -71,7 +71,7 @@ test('zero reward is honest and missing sessions cannot create coins', async ({ 
   await page.getByRole('button', { name: '학습 완료 확인', exact: true }).click()
   await expect(page.getByTestId('coin-balance')).toHaveText('15 COIN')
   await expect(page.getByRole('status')).toContainText('보상 지급 완료')
-  await page.getByRole('link', { name: '다음 학습하기', exact: true }).click()
+  await page.getByRole('link', { name: '다음 문제풀기', exact: true }).click()
   await expect(page).toHaveURL('/study/setup')
   await page.goto('/study/session/missing/reward')
   await expect(page.getByRole('heading', { name: '보상받을 완료 학습이 없습니다' })).toBeVisible()

@@ -77,7 +77,7 @@ test('quiz feedback, result and one-time persisted coin reward', async ({ page }
   await expect(page.getByTestId('coin-balance')).toHaveText('16 COIN')
   await expect(page.getByRole('status')).toContainText('보상 지급 완료')
   await expect(page.getByRole('button', { name: '코인 받기', exact: true })).toHaveCount(0)
-  await expect(page.getByRole('link', { name: '다음 학습하기', exact: true })).toBeVisible()
+  await expect(page.getByRole('link', { name: '다음 문제풀기', exact: true })).toBeVisible()
   await page.goBack()
   await page.getByRole('link', { name: '코인 보상 확인', exact: true }).click()
   await expect(page.getByTestId('coin-balance')).toHaveText('16 COIN')

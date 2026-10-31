@@ -7,7 +7,7 @@ export default function SubjectWrongNotes({ subjectId }) {
   const [state, setState] = useState({ loading: true, error: '', notes: [] })
   useEffect(() => {
     let active = true
-    listWrongNotes()
+    listWrongNotes(subjectId)
       .then(rows => active && setState({ loading: false, error: '', notes: rows.filter(note => note.subject_ref === subjectId).sort((a, b) => Number(a.resolved) - Number(b.resolved) || Date.parse(b.answered_at) - Date.parse(a.answered_at)) }))
       .catch(failure => active && setState({ loading: false, error: failure.message, notes: [] }))
     return () => { active = false }

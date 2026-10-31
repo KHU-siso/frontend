@@ -101,7 +101,7 @@ export const getQuestion = (setId, index) => apiFetch(`/api/quiz/${setId}/questi
 export const submitAnswer = (questionId, user_answer) => apiFetch(`/api/quiz/questions/${questionId}/submit`, { method: 'POST', body: { user_answer } })
 export const retryAnswer = (questionId, user_answer) => apiFetch(`/api/quiz/questions/${questionId}/retry`, { method: 'POST', body: { user_answer } })
 export const getQuizResult = setId => apiFetch(`/api/quiz/${setId}/result`)
-export const listWrongNotes = () => apiFetch('/api/wrong-notes')
+export const listWrongNotes = subjectRef => apiFetch(subjectRef ? `/api/wrong-notes?subject_ref=${encodeURIComponent(subjectRef)}` : '/api/wrong-notes')
 
 // 채팅
 export const listConversations = () => apiFetch('/api/chat/conversations')
