@@ -26,13 +26,13 @@ function authHeaders() {
   return token ? { Authorization: `Bearer ${token}` } : {}
 }
 
-export async function apiFetch(path, { method = 'GET', body } = {}) {
+export async function apiFetch(path, { method = 'GET', body, keepalive = false } = {}) {
   const headers = { ...authHeaders() }
   const isForm = typeof FormData !== 'undefined' && body instanceof FormData
   if (body !== undefined && !isForm) headers['Content-Type'] = 'application/json'
   let response
   try {
-    response = await fetch(path, { method, headers, body: body === undefined ? undefined : isForm ? body : JSON.stringify(body) })
+    response = await fetch(path, { method, headers, keepalive, body: body === undefined ? undefined : isForm ? body : JSON.stringify(body) })
   } catch {
     throw new ApiError('서버에 연결할 수 없습니다. 잠시 후 다시 시도해주세요.', 0)
   }
@@ -81,7 +81,7 @@ export const getMe = () => apiFetch('/api/auth/me')
 export const updateMe = nickname => apiFetch('/api/auth/me', { method: 'PATCH', body: { nickname } })
 export const changePassword = (current_password, new_password) => apiFetch('/api/auth/password', { method: 'POST', body: { current_password, new_password } })
 export const getState = async key => (await apiFetch(`/api/state/${key}`)).data
-export const putState = (key, data) => apiFetch(`/api/state/${key}`, { method: 'PUT', body: { data } })
+export const putState = (key, data, options) => apiFetch(`/api/state/${key}`, { method: 'PUT', body: { data }, ...options })
 
 // 자료(PDF)
 export const listDocuments = () => apiFetch('/api/documents')

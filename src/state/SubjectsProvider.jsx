@@ -41,12 +41,25 @@ export default function SubjectsProvider({ children }) {
   const { user } = useAuth()
   const loadedRef = useRef(false)
   const saveTimer = useRef(null)
+  const pendingSave = useRef(false)
+  const saveNow = useCallback((options) => {
+    clearTimeout(saveTimer.current)
+    pendingSave.current = false
+    return putState('subjects', dataRef.current, options).then(() => setError('')).catch(failure => setError(`서버에 저장하지 못했습니다: ${failure.message}`))
+  }, [])
   const flushSave = useCallback(() => {
     clearTimeout(saveTimer.current)
-    saveTimer.current = setTimeout(() => {
-      putState('subjects', dataRef.current).then(() => setError('')).catch(failure => setError(`서버에 저장하지 못했습니다: ${failure.message}`))
-    }, 400)
-  }, [])
+    pendingSave.current = true
+    saveTimer.current = setTimeout(() => saveNow(), 400)
+  }, [saveNow])
+  // 탭을 닫거나 이동할 때 아직 보내지 못한 변경을 바로 전송한다. (keepalive는 페이지가 닫혀도 요청을 완료)
+  useEffect(() => {
+    const flushPending = () => { if (pendingSave.current && loadedRef.current) saveNow({ keepalive: true }) }
+    const onVisibility = () => { if (document.visibilityState === 'hidden') flushPending() }
+    window.addEventListener('pagehide', flushPending)
+    document.addEventListener('visibilitychange', onVisibility)
+    return () => { window.removeEventListener('pagehide', flushPending); document.removeEventListener('visibilitychange', onVisibility) }
+  }, [saveNow])
   // Publish immediately and sync to the server shortly after (debounced).
   const commit = useCallback(updater => {
     const next = updater(dataRef.current)
