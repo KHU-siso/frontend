@@ -6,7 +6,6 @@ import FormField from '../../components/common/FormField.jsx'
 import { LoginSymbol } from '../../components/auth/AuthArtwork.jsx'
 import AuthDemoNotice from '../../components/auth/AuthDemoNotice.jsx'
 import { login } from '../../services/api.js'
-import googleContinue from '../../assets/auth/google-continue.png'
 import './LoginPage.css'
 
 export default function LoginPage() {
@@ -38,9 +37,7 @@ export default function LoginPage() {
         <LoginSymbol />
         <h1 id="login-title">환영합니다</h1>
         <p className="login-subtitle">모람과 함께 더 스마트한 학습을 시작하세요.</p>
-        <button className="google-continue" type="button" onClick={() => setStatus('Google로 계속할 수 없습니다. 다시 시도해주세요.')} aria-label="Google로 계속하기">
-          <span className="google-continue__crop" aria-hidden="true"><img src={googleContinue} alt="" /></span>
-        </button>
+        <p className="login-khu-note">khu.ac.kr 경희대 이메일로만 회원가입과 로그인이 가능합니다.</p>
         <form className="login-form" onSubmit={submit} noValidate>
           <FormField id="login-email" name="email" type="email" label="이메일" autoComplete="email" placeholder="이메일을 입력하세요." error={errors.email} />
           <FormField id="login-password" name="password" label="비밀번호" type="password" autoComplete="current-password" placeholder="비밀번호를 입력하세요." error={errors.password}
