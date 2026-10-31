@@ -13,13 +13,13 @@ const primary = [
   ['/chat', 'AI 채팅', 'chat'],
   ['/shop', '코인샵', 'shop'],
 ]
-const secondary = [['/mypage', '마이페이지', 'profile'], ['/mypage#account-settings', '설정', 'settings'], ['/login', '로그아웃하기', 'logout']]
+const secondary = [['/mypage', '마이페이지', 'profile'], ['/login', '로그아웃하기', 'logout']]
 
 export default function AppNavigation({ headerRef, onClose }) {
   const navRef = useRef(null)
   const { logout } = useAuth()
   const navigate = useNavigate()
-  const { pathname, hash } = useLocation()
+  const { pathname } = useLocation()
   useLayoutEffect(() => {
     const dialog = navRef.current.closest('dialog')
     const align = () => dialog.style.setProperty('--navigation-top', `${Math.max(0, headerRef.current.getBoundingClientRect().bottom)}px`)
@@ -37,7 +37,7 @@ export default function AppNavigation({ headerRef, onClose }) {
   }, [headerRef])
   function entry([to, label, icon]) {
     if (icon === 'logout') return <button key={to} type="button" onClick={() => { logout(); onClose(); navigate('/login') }}><NavigationIcon name={icon} /><span>{label}</span></button>
-    const selected = to.includes('#') ? pathname + hash === to : (to === '/study/setup' ? pathname.startsWith('/study/') : to === '/materials' ? pathname === to || pathname.startsWith('/materials/') : pathname === to) && !(to === '/mypage' && hash)
+    const selected = (to === '/study/setup' ? pathname.startsWith('/study/') : to === '/materials' ? pathname === to || pathname.startsWith('/materials/') : pathname === to)
     return <Link key={to} to={to} aria-current={selected ? 'page' : undefined} onClick={onClose}><NavigationIcon name={icon} /><span>{label}</span></Link>
   }
   return <Modal title="MORAM 메뉴" className="app-nav-dialog" onClose={onClose}>
