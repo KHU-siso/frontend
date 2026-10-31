@@ -66,3 +66,13 @@
   .app-shell--dashboard .app-footer { height: 2.5rem; flex-direction: row; gap: 2rem; }
   .app-shell--dashboard .app-footer .brand-logo { width: 4rem; }
 }
+
+.app-alerts { position: absolute; z-index: 20; top: 4.25rem; right: 1rem; width: min(22rem, calc(100vw - 2rem)); max-height: 70vh; overflow: auto; padding: 0.75rem; border: 1px solid #d2dbec; border-radius: 1rem; background: white; box-shadow: 0 12px 32px rgb(8 46 102 / 0.16); }
+.app-alerts header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.4rem; }
+.app-alerts header button { border: 0; background: transparent; font-size: 1.4rem; cursor: pointer; }
+.app-alerts ul { display: grid; gap: 0.4rem; margin: 0; padding: 0; list-style: none; }
+.app-alerts li a { display: grid; gap: 0.15rem; padding: 0.55rem 0.7rem; border-radius: 0.7rem; background: #f1f5fb; color: inherit; text-decoration: none; }
+.app-alerts li span { font-size: 0.8rem; color: #5b6575; }
+.app-alerts li.is-overdue span { color: #b91c1c; font-weight: 700; }
+.app-alerts p { margin: 0.5rem 0.25rem; font-size: 0.85rem; color: #5b6575; line-height: 1.6; }
+.app-shell { position: relative; }

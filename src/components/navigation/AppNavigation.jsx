@@ -1,5 +1,6 @@
 import { useLayoutEffect, useRef } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { useAuth } from '../../state/AuthContext.js'
 import Modal from '../common/Modal.jsx'
 import NavigationIcon from './NavigationIcon.jsx'
 import './AppNavigation.css'
@@ -16,6 +17,8 @@ const secondary = [['/mypage', '마이페이지', 'profile'], ['/mypage#account-
 
 export default function AppNavigation({ headerRef, onClose }) {
   const navRef = useRef(null)
+  const { logout } = useAuth()
+  const navigate = useNavigate()
   const { pathname, hash } = useLocation()
   useLayoutEffect(() => {
     const dialog = navRef.current.closest('dialog')
@@ -33,6 +36,7 @@ export default function AppNavigation({ headerRef, onClose }) {
     }
   }, [headerRef])
   function entry([to, label, icon]) {
+    if (icon === 'logout') return <button key={to} type="button" onClick={() => { logout(); onClose(); navigate('/login') }}><NavigationIcon name={icon} /><span>{label}</span></button>
     const selected = to.includes('#') ? pathname + hash === to : (to === '/study/setup' ? pathname.startsWith('/study/') : to === '/materials' ? pathname === to || pathname.startsWith('/materials/') : pathname === to) && !(to === '/mypage' && hash)
     return <Link key={to} to={to} aria-current={selected ? 'page' : undefined} onClick={onClose}><NavigationIcon name={icon} /><span>{label}</span></Link>
   }

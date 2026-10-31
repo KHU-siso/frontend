@@ -10,8 +10,8 @@
 .app-drawer__primary, .app-drawer__secondary { display: grid; flex-shrink: 0; gap: clamp(0.3rem, 1.4vh, 1rem); }
 .app-drawer__secondary { margin-top: auto; }
 .app-nav-dialog .app-drawer > div { display: grid; padding: 0; background: transparent; }
-.app-drawer a { display: flex; align-items: center; gap: 0.65rem; min-height: 2.75rem; padding: 0.5rem 0.55rem; border-radius: 0.6rem; color: #123263; font-size: clamp(1rem, 1.66vw, 1.4rem); font-weight: 600; line-height: 1.3; text-decoration: none; }
-.app-drawer a:hover { background: rgb(255 255 255 / 30%); }
+.app-drawer a, .app-drawer__secondary button { width: 100%; border: 0; background: transparent; font-family: inherit; text-align: left; cursor: pointer; display: flex; align-items: center; gap: 0.65rem; min-height: 2.75rem; padding: 0.5rem 0.55rem; border-radius: 0.6rem; color: #123263; font-size: clamp(1rem, 1.66vw, 1.4rem); font-weight: 600; line-height: 1.3; text-decoration: none; }
+.app-drawer a:hover, .app-drawer__secondary button:hover { background: rgb(255 255 255 / 30%); }
 .app-drawer a[aria-current='page'] { background: rgb(255 255 255 / 50%); box-shadow: inset 3px 0 #123263; }
 .app-drawer a:focus-visible { outline-offset: -3px; }
 .navigation-icon { position: relative; display: grid; place-items: center; flex-shrink: 0; width: clamp(1.125rem, 1.8vw, 1.625rem); aspect-ratio: 1; color: #123263; font-family: Inter, sans-serif; font-weight: 600; line-height: 1; }
