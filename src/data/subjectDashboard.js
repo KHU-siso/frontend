@@ -1,4 +1,4 @@
-import { dDay, deadlineAt, dueState, todayInSeoul, weekOf } from './subjectDates.js'
+import { dDay, deadlineAt, dueState, todayInSeoul, weekAt, weekOf } from './subjectDates.js'
 import { subjectSummary } from './subjectStore.js'
 import { cancelledDatesIn, eventSubject, isCancelled } from './cancellations.js'
 
@@ -10,8 +10,8 @@ export function dashboardSubjects(data, now) {
     return { id: subject.id, title: subject.name, teacher: subject.teacher, progress, cancelled: cancelledDatesIn(data.cancellations, subject.id, thisWeek).length > 0, deadlineLabel: nextExam ? `${nextExam.title} ${dDay(nextExam.date)}` : '예정된 시험 없음', overdue: pending.some(item => dueState(item, now) === 'overdue'), statusText: pending[0]?.title || (taskCount ? '과제 모두 완료' : '새 과목'), statusDescription: pending.length ? `미완료 과제 ${pending.length}개 · ${pending.map(item => `${item.title} (${item.date})`).join(', ')}` : '미완료 과제가 없습니다.', pendingCount: pending.length }
   })
 }
-export function subjectTimetable(data, now) {
-  const days = weekOf(todayInSeoul(new Date(now)))
+export function subjectTimetable(data, now, weekOffset = 0) {
+  const days = weekAt(now, weekOffset)
   const byId = Object.fromEntries(data.subjects.map(subject => [subject.id, subject]))
   const events = data.calendarEvents
     .filter(event => { const subject = eventSubject(event, data.subjects); return !(subject && isCancelled(data.cancellations, subject.id, days[event.day])) })
@@ -27,5 +27,10 @@ export function subjectTimetable(data, now) {
     events.push({ id: `exam:${exam.id}`, examId: exam.id, subjectId: exam.subjectId, name: `${byId[exam.subjectId]?.name || '과목'} · ${exam.title}`, location: `${exam.time}${exam.location ? ` · ${exam.location}` : ''}`, date: exam.date, time: exam.time, day, start, end: Math.min(start + 1, 24), color: 3 })
   }
   const exams = data.exams.map(exam => ({ ...exam, subjectName: byId[exam.subjectId]?.name || '삭제된 과목', past: deadlineAt(exam) < now })).sort((a, b) => Number(a.past) - Number(b.past) || deadlineAt(a) - deadlineAt(b))
-  return { events, exams }
+  // 보고 있는 주에 걸린 시험·과제 마감 (날짜순)
+  const weekItems = [
+    ...data.exams.filter(exam => days.includes(exam.date)).map(exam => ({ id: `exam:${exam.id}`, kind: 'exam', subjectId: exam.subjectId, title: exam.title, subjectName: byId[exam.subjectId]?.name || '삭제된 과목', date: exam.date, time: exam.time, done: false })),
+    ...data.assignments.filter(task => days.includes(task.date)).map(task => ({ id: `task:${task.id}`, kind: 'task', subjectId: task.subjectId, title: task.title, subjectName: byId[task.subjectId]?.name || '삭제된 과목', date: task.date, time: task.time, done: Boolean(task.completed) })),
+  ].sort((a, b) => deadlineAt(a) - deadlineAt(b))
+  return { events, exams, weekItems }
 }

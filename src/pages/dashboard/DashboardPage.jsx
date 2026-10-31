@@ -19,7 +19,8 @@ export default function DashboardPage() {
   const { data, now, commit, error } = useSubjects()
   const [saveError, setSaveError] = useState('')
   const courses = dashboardSubjects(data, now)
-  const { events, exams } = subjectTimetable(data, now)
+  const [weekOffset, setWeekOffset] = useState(0)
+  const { events, exams, weekItems } = subjectTimetable(data, now, weekOffset)
   function change(updater) { try { commit(updater); setSaveError('') } catch (failure) { setSaveError(failure.message) } }
   const [view, setView] = useState('overview')
   const [cancelling, setCancelling] = useState(null)
@@ -58,7 +59,7 @@ export default function DashboardPage() {
         </section>
         <DashboardTasks courses={filtered} hasSubjects={hasSubjects} onCancelClass={setCancelling} />
         </div>
-        <Timetable allEvents={data.calendarEvents} examTarget={data.subjects[0] ? `/materials/${data.subjects[0].id}#exams` : '/materials?add=1'} events={events} exams={exams} now={now} onAdd={event => change(current => ({ ...current, calendarEvents: [...current.calendarEvents, event] }))} />
+        <Timetable allEvents={data.calendarEvents} examTarget={data.subjects[0] ? `/materials/${data.subjects[0].id}#exams` : '/materials?add=1'} events={events} exams={exams} weekItems={weekItems} weekOffset={weekOffset} onWeekChange={setWeekOffset} now={now} onAdd={event => change(current => ({ ...current, calendarEvents: [...current.calendarEvents, event] }))} />
       </div>
       {cancelSubject && <CancelClassModal title={cancelSubject.name} options={classDaysOf(data, cancelSubject, thisWeek, weekDisplay(now).weekLabels)} cancelled={cancelledDatesIn(data.cancellations, cancelSubject.id, thisWeek)} onSave={dates => change(current => replaceCancellations(current, cancelSubject.id, thisWeek, dates))} onClose={() => setCancelling(null)} />}
     </div>

@@ -161,3 +161,9 @@
 .cancel-form__days span { display: grid; gap: 0.2rem; font-size: 0.875rem; }
 .cancel-form__days small { color: #61799a; font-size: 0.75rem; }
 .cancel-form__hint { margin: 0; color: #61799a; font-size: 0.75rem; }
+.timetable-title { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 0.75rem; min-width: 0; }
+.timetable-week-nav { display: flex; align-items: center; gap: 0.3rem; }
+.timetable-heading .timetable-week-nav button { width: 1.75rem; height: 1.75rem; border-radius: 0.5rem; background: #edf3fc; color: #486b98; font-size: 0.875rem; font-weight: 800; }
+.timetable-heading .timetable-week-nav .timetable-this-week { width: auto; padding: 0 0.6rem; font-size: 0.6875rem; }
+.timetable-heading .timetable-week-nav button:disabled { opacity: 0.45; cursor: default; }
+.timetable-heading .timetable-week-nav button:focus-visible { outline: 2px solid var(--color-hero); outline-offset: 2px; }

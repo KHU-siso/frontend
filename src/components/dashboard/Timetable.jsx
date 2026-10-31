@@ -38,8 +38,8 @@ function AddSchedule({ onAdd, onClose, events, weekLabels }) {
   )
 }
 
-export default function Timetable({ events, allEvents = events, exams = [], examTarget = '/materials?add=1', onAdd, now }) {
-  const { weekDates, weekLabels, weekRange } = weekDisplay(now)
+export default function Timetable({ events, allEvents = events, exams = [], weekItems = [], weekOffset = 0, onWeekChange, examTarget = '/materials?add=1', onAdd, now }) {
+  const { weekDates, weekLabels, weekRange } = weekDisplay(now, weekOffset)
   const [adding, setAdding] = useState(false)
   const [selected, setSelected] = useState(null)
   // Keep the existing 09–20 window; extend only as far as stored events need.
@@ -49,7 +49,7 @@ export default function Timetable({ events, allEvents = events, exams = [], exam
   const hours = Array.from({ length: lastHour - firstHour }, (_, i) => firstHour + i)
   return (
     <section className="dashboard-card timetable-card" aria-labelledby="timetable-heading">
-      <header className="timetable-heading"><h2 id="timetable-heading">주간 시간표</h2><div className="timetable-controls">{!!exams.length && <details className="timetable-exams"><summary>시험 일정 {exams.length}</summary><div>{exams.map(exam => <Link to={`/materials/${exam.subjectId}#exams`} key={exam.id}><strong>{exam.subjectName} · {exam.title}</strong><span>{exam.date} · {exam.time || '시간 미정'}{exam.past ? ' · 지난 시험' : ''}</span></Link>)}</div></details>}<button type="button" aria-label="새 과목 추가" onClick={() => setAdding(true)}>+</button></div></header>
+      <header className="timetable-heading"><div className="timetable-title"><h2 id="timetable-heading">주간 시간표</h2><div className="timetable-week-nav" role="group" aria-label="주 이동"><button type="button" aria-label="이전 주" onClick={() => onWeekChange(weekOffset - 1)}>&lt;</button><button type="button" aria-label="다음 주" onClick={() => onWeekChange(weekOffset + 1)}>&gt;</button><button type="button" className="timetable-this-week" disabled={weekOffset === 0} onClick={() => onWeekChange(0)}>이번 주</button></div></div><div className="timetable-controls">{!!weekItems.length && <details className="timetable-exams" key={weekOffset}><summary>이 주의 시험·과제 {weekItems.length}</summary><div>{weekItems.map(item => <Link to={`/materials/${item.subjectId}#${item.kind === 'exam' ? 'exams' : 'assignments'}`} key={item.id}><strong>{item.kind === 'exam' ? '시험' : '과제'} · {item.subjectName} · {item.title}</strong><span>{item.date} · {item.time || (item.kind === 'exam' ? '시간 미정' : '하루 종일')}{item.done ? ' · 완료' : ''}</span></Link>)}</div></details>}<button type="button" aria-label="새 과목 추가" onClick={() => setAdding(true)}>+</button></div></header>
       {!exams.length && <div className="empty-state empty-state--inline" role="status"><p>시험 일정을 등록해 주세요</p><Link className="button" to={examTarget}>시험 일정 등록</Link></div>}
       {!visibleEvents.length && <div className="empty-state empty-state--inline" role="status"><p>시간표를 등록해 주세요</p><button className="button" type="button" onClick={() => setAdding(true)}>시간표 등록</button></div>}
       <p className="timetable-caption">{weekRange}</p>

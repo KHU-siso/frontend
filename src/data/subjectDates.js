@@ -21,8 +21,10 @@ export function semesterLabel(value) { return value.replace(/^(\d{4})-([12])$/, 
 export const formatStamp = value => new Intl.DateTimeFormat('ko-KR', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'Asia/Seoul' }).format(new Date(value))
 export function currentSemester() { const today = todayInSeoul(); return `${today.slice(0, 4)}-${Number(today.slice(5, 7)) < 7 ? 1 : 2}` }
 export function weekOf(today = todayInSeoul()) { const start = shiftDate(today, -new Date(`${today}T00:00:00Z`).getUTCDay()); return Array.from({ length: 7 }, (_, i) => shiftDate(start, i)) }
-export function weekDisplay(now = Date.now()) {
-  const dates = weekOf(todayInSeoul(new Date(now)))
+// offset: 0 = 이번 주, -1 = 지난주, 1 = 다음 주
+export function weekAt(now = Date.now(), offset = 0) { return weekOf(shiftDate(todayInSeoul(new Date(now)), offset * 7)) }
+export function weekDisplay(now = Date.now(), offset = 0) {
+  const dates = weekAt(now, offset)
   const names = ['일', '월', '화', '수', '목', '금', '토']
   const weekDates = dates.map((date, i) => ({ day: Number(date.slice(8)), dayName: names[i], label: `${Number(date.slice(8))}일 (${names[i]})` }))
   return { weekDates, weekLabels: weekDates.map(date => date.label), weekRange: `${dates[0].slice(0, 4)}년 ${Number(dates[0].slice(5, 7))}월 ${Number(dates[0].slice(8))}일 – ${Number(dates[6].slice(5, 7))}월 ${Number(dates[6].slice(8))}일` }
