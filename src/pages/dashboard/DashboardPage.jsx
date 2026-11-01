@@ -4,7 +4,6 @@ import DashboardMascot from '../../components/dashboard/DashboardMascot.jsx'
 import DashboardTasks from '../../components/dashboard/DashboardTasks.jsx'
 import CancelClassModal from '../../components/dashboard/CancelClassModal.jsx'
 import AssignmentQuickModal from '../../components/dashboard/AssignmentQuickModal.jsx'
-import { SubjectForm } from '../../components/subjects/SubjectForms.jsx'
 import SubjectPickerModal from '../../components/subjects/SubjectPickerModal.jsx'
 import Timetable from '../../components/dashboard/Timetable.jsx'
 import { useAuth } from '../../state/AuthContext.js'
@@ -18,7 +17,7 @@ import { useDemo } from '../../state/DemoContext.js'
 export default function DashboardPage() {
   const { state } = useDemo()
   const { user } = useAuth()
-  const { data, now, commit, error, saveNow, setSemester } = useSubjects()
+  const { data, now, commit, error, saveNow } = useSubjects()
   const [saveError, setSaveError] = useState('')
   const items = todoItems(data, now)
   const [weekOffset, setWeekOffset] = useState(0)
@@ -26,7 +25,6 @@ export default function DashboardPage() {
   function change(updater) { try { commit(updater); setSaveError('') } catch (failure) { setSaveError(failure.message) } }
   const [view, setView] = useState('overview')
   const [cancelling, setCancelling] = useState(false)
-  const [addingSubject, setAddingSubject] = useState(false)
   const [picker, setPicker] = useState(null) // 'study' | 'task' | 'chat'
   const [taskSubject, setTaskSubject] = useState(null)
   const [quickNotice, setQuickNotice] = useState('')
@@ -72,9 +70,8 @@ export default function DashboardPage() {
         </section>
         <DashboardTasks items={items} firstSubjectId={data.subjects[0]?.id} onToggle={toggleTask} onAddTask={() => setPicker('task')} />
         </div>
-        <Timetable allEvents={data.calendarEvents} examTarget={data.subjects[0] ? `/materials/${data.subjects[0].id}#exams` : '/materials?add=1'} events={events} exams={exams} weekOffset={weekOffset} onWeekChange={setWeekOffset} now={now} onCancelClass={() => setCancelling(true)} onAdd={event => change(current => ({ ...current, calendarEvents: [...current.calendarEvents, event] }))} onAddPersonal={event => change(current => ({ ...current, calendarEvents: [...current.calendarEvents, event] }))} onAddSubject={() => setAddingSubject(true)} onUpdateEvent={(event, patch) => { const { name, ...timing } = patch; change(current => ({ ...current, subjects: event.subjectId ? current.subjects.map(subject => subject.id === event.subjectId ? { ...subject, name, updatedAt: new Date().toISOString() } : subject) : current.subjects, calendarEvents: current.calendarEvents.map(item => item.id === event.id ? { ...item, ...timing, ...(event.subjectId ? {} : { name }), ...(item.date ? { day: item.day } : {}) } : item) })); saveNow() }} onRemoveEvent={id => { change(current => ({ ...current, calendarEvents: current.calendarEvents.filter(event => event.id !== id) })); saveNow() }} />
+        <Timetable allEvents={data.calendarEvents} examTarget={data.subjects[0] ? `/materials/${data.subjects[0].id}#exams` : '/materials?add=1'} events={events} exams={exams} weekOffset={weekOffset} onWeekChange={setWeekOffset} now={now} onCancelClass={() => setCancelling(true)} onAdd={added => { change(current => ({ ...current, calendarEvents: [...current.calendarEvents, ...(Array.isArray(added) ? added : [added])] })); saveNow() }} onAddPersonal={event => change(current => ({ ...current, calendarEvents: [...current.calendarEvents, event] }))} onUpdateEvent={(event, patch) => { const { name, ...timing } = patch; change(current => ({ ...current, subjects: event.subjectId ? current.subjects.map(subject => subject.id === event.subjectId ? { ...subject, name, updatedAt: new Date().toISOString() } : subject) : current.subjects, calendarEvents: current.calendarEvents.map(item => item.id === event.id ? { ...item, ...timing, ...(event.subjectId ? {} : { name }), ...(item.date ? { day: item.day } : {}) } : item) })); saveNow() }} onRemoveEvent={id => { change(current => ({ ...current, calendarEvents: current.calendarEvents.filter(event => event.id !== id) })); saveNow() }} />
       </div>
-      {addingSubject && <SubjectForm onClose={() => setAddingSubject(false)} onSaved={(_id, term) => { setSemester(term); setAddingSubject(false); setQuickNotice('과목을 추가했어요.'); saveNow() }} />}
       {picker && <SubjectPickerModal title={{ study: '어떤 과목의 문제를 풀까요?', task: '어떤 과목의 과제를 등록할까요?', chat: '어떤 과목의 AI 채팅을 열까요?' }[picker]} subjects={data.subjects} onClose={() => setPicker(null)}
         onPick={subject => { setPicker(null); if (picker === 'task') setTaskSubject(subject); else navigate(picker === 'chat' ? `/materials/${subject.id}#chat` : picker === 'study' ? `/study/setup?course=${subject.id}` : `/materials/${subject.id}`) }} />}
       {taskSubject && <AssignmentQuickModal subject={taskSubject} onSaved={title => setQuickNotice(`'${title}' 과제를 등록했어요.`)} onClose={() => setTaskSubject(null)} />}

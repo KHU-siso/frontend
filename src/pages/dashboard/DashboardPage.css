@@ -58,6 +58,12 @@
 .schedule-color:has(:checked) { box-shadow: 0 0 0 2px var(--color-ink); }
 .schedule-color input { width: 1rem; height: 1rem; margin: 0; accent-color: var(--color-ink); }
 .schedule-time-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.schedule-days { margin: 0; padding: 0; border: 0; }
+.schedule-days legend { margin-bottom: 0.75rem; font-size: 0.875rem; font-weight: 600; }
+.schedule-days-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.schedule-day { min-width: 2.75rem; min-height: 2.75rem; padding: 0 0.75rem; border: 1px solid #cad5e6; border-radius: 0.65rem; background: #f0f3fa; color: var(--color-ink); font: inherit; font-weight: 600; cursor: pointer; }
+.schedule-day.is-selected { border-color: var(--color-ink); background: var(--color-ink); color: #fff; }
+.schedule-day:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 2px; }
 .schedule-actions { display: flex; gap: 1rem; }
 .schedule-actions > * { flex: 1; }
 .schedule-cancel { border: 0; border-radius: 2rem; background: #d2dbec; color: var(--color-ink); font: inherit; font-weight: 800; cursor: pointer; }
