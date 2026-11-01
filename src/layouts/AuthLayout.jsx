@@ -20,7 +20,7 @@ export default function AuthLayout() {
       </div>
       <a className="skip-link" href="#auth-content">본문으로 건너뛰기</a>
       <header className="auth-header">
-        <BrandLogo />
+        <BrandLogo to="/" label="MORAM 홈" />
         {!signup && <p>계정이 없으신가요? <Link to="/signup">회원가입</Link></p>}
       </header>
       <main className="auth-main" id="auth-content"><Outlet /></main>

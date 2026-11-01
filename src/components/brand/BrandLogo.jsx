@@ -4,9 +4,8 @@ import mobileLogo from '../../assets/moram/mobile-moram-logo.svg'
 import lightLogo from '../../assets/moram/moram-logo-light.svg'
 import './BrandLogo.css'
 
-// Public/auth screens omit `to`. App screens supply their home destination;
-// this presentation option does not assert an authenticated server session.
-export default function BrandLogo({ to = null }) {
+// `to` makes the logo a link. Protected routes still redirect via RequireAuth.
+export default function BrandLogo({ to = null, label = 'MORAM 대시보드' }) {
   const artwork = (
     <>
       <picture className="brand-logo__dark">
@@ -17,6 +16,6 @@ export default function BrandLogo({ to = null }) {
     </>
   )
   return to
-    ? <Link className="brand-logo" to={to} aria-label="MORAM 대시보드">{artwork}</Link>
+    ? <Link className="brand-logo" to={to} aria-label={label}>{artwork}</Link>
     : <span className="brand-logo" role="img" aria-label="MORAM">{artwork}</span>
 }

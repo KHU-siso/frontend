@@ -9,7 +9,7 @@ const secondaryLinks = [
 export default function PublicHeader() {
   return (
     <header className="public-header">
-      <BrandLogo />
+      <BrandLogo to="/dashboard" />
       <nav className="public-header__navigation" aria-label="주 메뉴">
         <NavLink to="/about">소개</NavLink>
         {secondaryLinks.map(([to, label]) => (
