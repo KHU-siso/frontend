@@ -8,6 +8,17 @@ import './StudyPages.css'
 
 const MAX_QUESTIONS = 10
 
+// 보기 순서를 무작위로 섞는다(Fisher–Yates). 예전에 저장된 퀴즈는 정답이 항상 1번이라 화면에서도 섞어 보여준다.
+function shuffled(items) {
+  if (!Array.isArray(items)) return items
+  const copy = [...items]
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]]
+  }
+  return copy
+}
+
 // 퀴즈 풀이 화면. /study/session/:sessionId(서버 퀴즈 세트) 와 /study/review?ids=(오답 복습) 둘 다 처리한다.
 export default function QuizSessionPage() {
   const { sessionId } = useParams()
@@ -30,10 +41,10 @@ export default function QuizSessionPage() {
         let list
         if (isReview) {
           const wanted = new Set(reviewKey.split(',').map(Number))
-          list = (await listWrongNotes()).filter(note => wanted.has(note.quiz_question_id)).map(note => ({ id: note.quiz_question_id, prompt: note.question_text, choices: note.options }))
+          list = (await listWrongNotes()).filter(note => wanted.has(note.quiz_question_id)).map(note => ({ id: note.quiz_question_id, prompt: note.question_text, choices: shuffled(note.options) }))
         } else {
           const rows = await Promise.all(Array.from({ length: MAX_QUESTIONS }, (_, i) => getQuestion(sessionId, i + 1).catch(() => null)))
-          list = rows.filter(Boolean).map(row => ({ id: row.id, prompt: row.question_text, choices: row.options }))
+          list = rows.filter(Boolean).map(row => ({ id: row.id, prompt: row.question_text, choices: shuffled(row.options) }))
         }
         if (active) setQuestions(list)
       } catch (failure) { if (active) setLoadError(failure.message) }
