@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import AiKeyPanel from '../../components/common/AiKeyPanel.jsx'
+import { AI_ERRORS, isAiKeyError } from '../../components/common/aiKey.js'
 import Button from '../../components/common/Button.jsx'
-import { generateQuiz, listDocuments, listWrongNotes } from '../../services/api.js'
+import { clearAiKey, generateQuiz, getAiKey, listDocuments, listWrongNotes } from '../../services/api.js'
 import { useSubjects } from '../../state/SubjectsContext.js'
 import './StudyPages.css'
 
@@ -16,6 +18,10 @@ export default function StudySetupPage() {
   const [step, setStep] = useState(0)
   const [config, setConfig] = useState({ minutes: 30, streak: 3, count: 10, courseId: courseById[params.get('course')] ? params.get('course') : '', mode: 'practice', questionType: 'multiple' })
   const [error, setError] = useState('')
+  // AI 키 오류(키 없음·잘못됨·한도·모델·연결): 이 화면 안에서 키를 입력/변경하고 같은 설정으로 다시 시도할 수 있게 안내를 띄운다.
+  const [aiError, setAiError] = useState('')
+  const [aiProvider, setAiProvider] = useState(() => getAiKey()?.provider ?? null)
+  const [keyNotice, setKeyNotice] = useState('')
   const navigate = useNavigate()
   const [documents, setDocuments] = useState([])
   const [busy, setBusy] = useState(false)
@@ -25,6 +31,8 @@ export default function StudySetupPage() {
     if (!courseById[config.courseId]) return setError('자료실에서 학습할 과목을 등록하거나 선택해주세요.')
     setBusy(true)
     setError('')
+    setAiError('')
+    setKeyNotice('')
     try {
       if (config.mode === 'review') {
         const notes = (await listWrongNotes()).filter(note => note.subject_ref === config.courseId && !note.resolved)
@@ -37,7 +45,10 @@ export default function StudySetupPage() {
       const quizSet = await generateQuiz(doc.id, config.questionType === 'multiple' ? '객관식' : '주관식')
       navigate(`/study/session/${quizSet.id}`)
     } catch (failure) {
-      setError(failure.message)
+      if (isAiKeyError(failure)) {
+        if (failure.code === 'AI_KEY_REQUIRED') { clearAiKey(); setAiProvider(null) }
+        setAiError(AI_ERRORS[failure.code])
+      } else setError(failure.message)
     } finally {
       setBusy(false)
     }
@@ -62,7 +73,15 @@ export default function StudySetupPage() {
         {config.courseId && !courseDocs.length && config.mode !== 'review' && <p className="service-muted">이 과목에는 업로드한 PDF 자료가 없습니다. <Link to="/materials">자료실에서 PDF 올리기</Link></p>}
         {busy && <p className="service-muted" role="status">AI가 문제를 만드는 중이에요. 최대 1분 정도 걸릴 수 있어요…</p>}
         {error && <p className="service-error" role="alert">{error} <Link to="/wrong-answers">오답노트 보기</Link></p>}
-        <div className="service-action-row">{step > 0 && <button className="service-plain-button" type="button" onClick={() => { setStep(current => current - 1); setError('') }}>이전</button>}<Button type="submit" disabled={busy}>{step < 3 ? '넘어가기' : busy ? '문제 생성 중…' : '학습 시작'}</Button></div>
+        {keyNotice && <p className="service-muted" role="status">{keyNotice}</p>}
+        {aiError && <>
+          <p className="service-error" role="alert">{aiError}</p>
+          <AiKeyPanel savedProvider={aiProvider} onError={setAiError}
+            onSaved={provider => { setAiProvider(provider); setAiError(''); setKeyNotice('키를 저장했어요. 설정은 그대로예요. 다시 "학습 시작"을 눌러주세요.') }}
+            onRemoved={() => { setAiProvider(null); setAiError(AI_ERRORS.AI_KEY_REQUIRED) }}
+            onCancel={() => setAiError('')} />
+        </>}
+        <div className="service-action-row">{step > 0 && <button className="service-plain-button" type="button" onClick={() => { setStep(current => current - 1); setError(''); setAiError(''); setKeyNotice('') }}>이전</button>}<Button type="submit" disabled={busy}>{step < 3 ? '넘어가기' : busy ? '문제 생성 중…' : '학습 시작'}</Button></div>
       </form>
 
     </section>

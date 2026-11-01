@@ -48,11 +48,10 @@ test('rows are task-level, sorted with overdue first and completed last', async 
   await expect(page.getByRole('button', { name: /휴강 처리/ })).toHaveCount(0)
 })
 
-test('shows five rows and expands with 더 보기', async ({ page }) => {
+test('renders every row in the scrollable list with no 더 보기 button', async ({ page }) => {
   await setup(page, seed(Array.from({ length: 8 }, (_, i) => task(`t${i}`, `과제 ${i + 1}`, `2026-11-${String(i + 10).padStart(2, '0')}`))))
-  await expect(rows(page)).toHaveCount(5)
-  await page.getByRole('button', { name: '더 보기 (3)' }).click()
   await expect(rows(page)).toHaveCount(8)
+  await expect(page.getByRole('button', { name: /더 보기/ })).toHaveCount(0)
 })
 
 test('completion toggles, is saved to the server and survives reload', async ({ page }) => {

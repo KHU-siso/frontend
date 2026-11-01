@@ -96,22 +96,7 @@ export function uploadDocument(file, subjectRef) {
 export const deleteDocument = id => apiFetch(`/api/documents/${id}`, { method: 'DELETE' })
 export const documentFile = id => fetchBlob(`/api/documents/${id}/file`)
 
-// 퀴즈
-export const generateQuiz = (document_id, quiz_type) => apiFetch('/api/quiz/generate', { method: 'POST', body: { document_id, quiz_type } })
-export const getQuestion = (setId, index) => apiFetch(`/api/quiz/${setId}/questions/${index}`)
-export const submitAnswer = (questionId, user_answer) => apiFetch(`/api/quiz/questions/${questionId}/submit`, { method: 'POST', body: { user_answer } })
-export const retryAnswer = (questionId, user_answer) => apiFetch(`/api/quiz/questions/${questionId}/retry`, { method: 'POST', body: { user_answer } })
-export const getQuizResult = setId => apiFetch(`/api/quiz/${setId}/result`)
-export const listWrongNotes = subjectRef => apiFetch(subjectRef ? `/api/wrong-notes?subject_ref=${encodeURIComponent(subjectRef)}` : '/api/wrong-notes')
-
-// 채팅
-export const listConversations = () => apiFetch('/api/chat/conversations')
-export const createConversation = (document_id, title) => apiFetch('/api/chat/conversations', { method: 'POST', body: { document_id: document_id ?? null, title: title ?? null } })
-export const listSubjectChats = () => apiFetch('/api/chat/subjects')
-export const openSubjectChat = (subjectId, title) => apiFetch(`/api/chat/subjects/${encodeURIComponent(subjectId)}/conversation`, { method: 'POST', body: { title } })
-export const deleteSubjectChat = subjectId => apiFetch(`/api/chat/subjects/${encodeURIComponent(subjectId)}`, { method: 'DELETE' })
-export const listMessages = id => apiFetch(`/api/chat/conversations/${id}/messages`)
-// 사용자 본인의 AI API 키: 이 브라우저(localStorage)에만 저장하고, 채팅 요청 헤더로만 보낸다. (본문·쿼리·콘솔·에러 메시지에는 넣지 않는다.)
+// 사용자 본인의 AI API 키: 이 브라우저(localStorage)에만 저장하고, 채팅·퀴즈 생성 요청 헤더로만 보낸다. (본문·쿼리·콘솔·에러 메시지에는 넣지 않는다.)
 const AI_KEY_STORAGE = 'siso.aiKey'
 export function getAiKey() {
   try {
@@ -125,10 +110,28 @@ export function saveAiKey(provider, key) {
 export function clearAiKey() {
   try { localStorage.removeItem(AI_KEY_STORAGE) } catch { /* storage unavailable */ }
 }
-export function sendMessage(id, content) {
+function aiKeyHeaders() {
   const saved = getAiKey()
-  const headers = saved ? { 'X-AI-Provider': saved.provider, 'X-AI-Key': saved.key } : undefined
-  return apiFetch(`/api/chat/conversations/${id}/messages`, { method: 'POST', body: { content }, headers })
+  return saved ? { 'X-AI-Provider': saved.provider, 'X-AI-Key': saved.key } : undefined
+}
+
+// 퀴즈
+export const generateQuiz = (document_id, quiz_type) => apiFetch('/api/quiz/generate', { method: 'POST', body: { document_id, quiz_type }, headers: aiKeyHeaders() })
+export const getQuestion = (setId, index) => apiFetch(`/api/quiz/${setId}/questions/${index}`)
+export const submitAnswer = (questionId, user_answer) => apiFetch(`/api/quiz/questions/${questionId}/submit`, { method: 'POST', body: { user_answer } })
+export const retryAnswer = (questionId, user_answer) => apiFetch(`/api/quiz/questions/${questionId}/retry`, { method: 'POST', body: { user_answer } })
+export const getQuizResult = setId => apiFetch(`/api/quiz/${setId}/result`)
+export const listWrongNotes = subjectRef => apiFetch(subjectRef ? `/api/wrong-notes?subject_ref=${encodeURIComponent(subjectRef)}` : '/api/wrong-notes')
+
+// 채팅
+export const listConversations = () => apiFetch('/api/chat/conversations')
+export const createConversation = (document_id, title) => apiFetch('/api/chat/conversations', { method: 'POST', body: { document_id: document_id ?? null, title: title ?? null } })
+export const listSubjectChats = () => apiFetch('/api/chat/subjects')
+export const openSubjectChat = (subjectId, title) => apiFetch(`/api/chat/subjects/${encodeURIComponent(subjectId)}/conversation`, { method: 'POST', body: { title } })
+export const deleteSubjectChat = subjectId => apiFetch(`/api/chat/subjects/${encodeURIComponent(subjectId)}`, { method: 'DELETE' })
+export const listMessages = id => apiFetch(`/api/chat/conversations/${id}/messages`)
+export function sendMessage(id, content) {
+  return apiFetch(`/api/chat/conversations/${id}/messages`, { method: 'POST', body: { content }, headers: aiKeyHeaders() })
 }
 
 // 코인샵
