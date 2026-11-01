@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Button from '../common/Button.jsx'
 import Modal from '../common/Modal.jsx'
+import TimeInput from '../common/TimeInput.jsx'
 import { Link } from 'react-router-dom'
 import { scheduleColors } from '../../data/dashboard.js'
 import { validDate, weekDisplay } from '../../data/subjectDates.js'
@@ -21,7 +22,7 @@ function AddSchedule({ onAdd, onClose, events, weekLabels }) {
   const [times, setTimes] = useState({ start: '09:00', end: '10:00' })
   const start = parseTime(times.start)
   const end = parseTime(times.end)
-  const timeError = start === null || end === null ? '시간을 HH:MM 형식(예: 09:30)으로 입력해주세요.' : end <= start ? '종료 시간은 시작 시간보다 늦어야 합니다.' : ''
+  const timeError = start === null || end === null ? '시간을 다시 선택해주세요.' : end <= start ? '종료 시간이 시작 시간보다 늦어야 해요' : ''
   function submit(event) {
     event.preventDefault()
     if (timeError) return
@@ -38,7 +39,7 @@ function AddSchedule({ onAdd, onClose, events, weekLabels }) {
         <label>시간표 이름<input name="name" placeholder="이름을 입력하세요." required maxLength={40} /></label>
         <fieldset className="schedule-colors"><legend>블록 색상</legend><div>{scheduleColors.map((label, index) => <label key={label} className={`schedule-color schedule-color--${index}`}><input type="radio" name="color" value={index} aria-label={label} checked={color === index} onChange={() => setColor(index)} /></label>)}</div></fieldset>
         <label>요일<select name="day" defaultValue="3">{weekLabels.map((day, i) => <option value={i} key={day}>{day}</option>)}</select></label>
-        <div className="schedule-time-row"><label>시작 시간<input type="time" step="60" required value={times.start} onChange={event => { setTimes(current => ({ ...current, start: event.target.value })); setError('') }} aria-invalid={start === null} /></label><label>종료 시간<input type="time" step="60" required value={times.end} onChange={event => { setTimes(current => ({ ...current, end: event.target.value })); setError('') }} aria-invalid={end === null || end <= start} /></label></div>
+        <div className="schedule-time-row"><TimeInput label="시작 시간" value={times.start} onChange={value => { setTimes(current => ({ ...current, start: value })); setError('') }} /><TimeInput label="종료 시간" value={times.end} onChange={value => { setTimes(current => ({ ...current, end: value })); setError('') }} /></div>
         {(timeError || error) && <p className="field-error" role="alert">{timeError || error}</p>}
         <div className="schedule-actions"><button className="schedule-cancel" type="button" onClick={onClose}>취소</button><Button type="submit" disabled={Boolean(timeError)}>추가하기</Button></div>
       </form>
@@ -57,7 +58,7 @@ function AddPersonalEvent({ onAdd, onClose }) {
   const [day, setDay] = useState('1')
   const start = parseTime(times.start)
   const end = parseTime(times.end)
-  const problem = !name.trim() ? '일정 제목을 입력해주세요.' : mode === 'date' && !validDate(date) ? '날짜를 선택해주세요.' : start === null || end === null ? '시간을 HH:MM 형식(예: 18:30)으로 입력해주세요.' : end <= start ? '종료 시간은 시작 시간보다 늦어야 합니다.' : ''
+  const problem = !name.trim() ? '일정 제목을 입력해주세요.' : mode === 'date' && !validDate(date) ? '날짜를 선택해주세요.' : start === null || end === null ? '시간을 다시 선택해주세요.' : end <= start ? '종료 시간이 시작 시간보다 늦어야 해요' : ''
   const [touched, setTouched] = useState(false)
   function submit(event) {
     event.preventDefault()
@@ -67,7 +68,7 @@ function AddPersonalEvent({ onAdd, onClose }) {
     onAdd(mode === 'date' ? { ...base, date, day: new Date(`${date}T00:00:00Z`).getUTCDay() } : { ...base, day: Number(day) })
     onClose()
   }
-  const timeInput = key => <input type="time" step="60" required value={times[key]} onChange={event => setTimes(current => ({ ...current, [key]: event.target.value }))} />
+  const timeInput = (key, label) => <TimeInput label={label} value={times[key]} onChange={value => setTimes(current => ({ ...current, [key]: value }))} />
   return (
     <Modal title="일정 추가" onClose={onClose}>
       <form className="schedule-form" onSubmit={submit} noValidate>
@@ -75,7 +76,7 @@ function AddPersonalEvent({ onAdd, onClose }) {
         <fieldset className="schedule-colors"><legend>블록 색상</legend><div>{scheduleColors.map((label, index) => <label key={label} className={`schedule-color schedule-color--${index}`}><input type="radio" name="personal-color" value={index} aria-label={label} checked={color === index} onChange={() => setColor(index)} /></label>)}</div></fieldset>
         <fieldset className="schedule-repeat"><legend>반복</legend><label><input type="radio" name="personal-mode" checked={mode === 'weekly'} onChange={() => setMode('weekly')} />매주 같은 요일</label><label><input type="radio" name="personal-mode" checked={mode === 'date'} onChange={() => setMode('date')} />특정 날짜 하루만</label></fieldset>
         {mode === 'weekly' ? <label>요일<select value={day} onChange={event => setDay(event.target.value)}>{['일', '월', '화', '수', '목', '금', '토'].map((name, i) => <option value={i} key={name}>{name}요일</option>)}</select></label> : <label>날짜<input type="date" value={date} required onChange={event => setDate(event.target.value)} /></label>}
-        <div className="schedule-time-row"><label>시작 시간{timeInput('start')}</label><label>종료 시간{timeInput('end')}</label></div>
+        <div className="schedule-time-row">{timeInput('start', '시작 시간')}{timeInput('end', '종료 시간')}</div>
         {touched && problem && <p className="field-error" role="alert">{problem}</p>}
         <div className="schedule-actions"><button className="schedule-cancel" type="button" onClick={onClose}>취소</button><Button type="submit">일정 추가</Button></div>
       </form>

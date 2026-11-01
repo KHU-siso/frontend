@@ -13,9 +13,10 @@ export function clearToken() {
 }
 
 export class ApiError extends Error {
-  constructor(message, status) {
+  constructor(message, status, code) {
     super(message)
     this.status = status
+    this.code = code
   }
 }
 
@@ -26,8 +27,8 @@ function authHeaders() {
   return token ? { Authorization: `Bearer ${token}` } : {}
 }
 
-export async function apiFetch(path, { method = 'GET', body, keepalive = false } = {}) {
-  const headers = { ...authHeaders() }
+export async function apiFetch(path, { method = 'GET', body, keepalive = false, headers: extraHeaders } = {}) {
+  const headers = { ...authHeaders(), ...extraHeaders }
   const isForm = typeof FormData !== 'undefined' && body instanceof FormData
   if (body !== undefined && !isForm) headers['Content-Type'] = 'application/json'
   let response
@@ -41,7 +42,7 @@ export async function apiFetch(path, { method = 'GET', body, keepalive = false }
     clearToken()
     window.dispatchEvent(new Event(AUTH_EXPIRED_EVENT))
   }
-  if (!response.ok) throw new ApiError(typeof data?.detail === 'string' ? data.detail : '요청을 처리할 수 없습니다.', response.status)
+  if (!response.ok) throw new ApiError(typeof data?.detail === 'string' ? data.detail : '요청을 처리할 수 없습니다.', response.status, typeof data?.error_code === 'string' ? data.error_code : undefined)
   return data
 }
 
@@ -110,7 +111,25 @@ export const listSubjectChats = () => apiFetch('/api/chat/subjects')
 export const openSubjectChat = (subjectId, title) => apiFetch(`/api/chat/subjects/${encodeURIComponent(subjectId)}/conversation`, { method: 'POST', body: { title } })
 export const deleteSubjectChat = subjectId => apiFetch(`/api/chat/subjects/${encodeURIComponent(subjectId)}`, { method: 'DELETE' })
 export const listMessages = id => apiFetch(`/api/chat/conversations/${id}/messages`)
-export const sendMessage = (id, content) => apiFetch(`/api/chat/conversations/${id}/messages`, { method: 'POST', body: { content } })
+// 사용자 본인의 AI API 키: 이 브라우저(localStorage)에만 저장하고, 채팅 요청 헤더로만 보낸다. (본문·쿼리·콘솔·에러 메시지에는 넣지 않는다.)
+const AI_KEY_STORAGE = 'siso.aiKey'
+export function getAiKey() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(AI_KEY_STORAGE) || 'null')
+    return saved && (saved.provider === 'claude' || saved.provider === 'openai') && typeof saved.key === 'string' && saved.key ? saved : null
+  } catch { return null }
+}
+export function saveAiKey(provider, key) {
+  try { localStorage.setItem(AI_KEY_STORAGE, JSON.stringify({ provider, key })); return true } catch { return false }
+}
+export function clearAiKey() {
+  try { localStorage.removeItem(AI_KEY_STORAGE) } catch { /* storage unavailable */ }
+}
+export function sendMessage(id, content) {
+  const saved = getAiKey()
+  const headers = saved ? { 'X-AI-Provider': saved.provider, 'X-AI-Key': saved.key } : undefined
+  return apiFetch(`/api/chat/conversations/${id}/messages`, { method: 'POST', body: { content }, headers })
+}
 
 // 코인샵
 export const getShop = () => apiFetch('/api/shop')
