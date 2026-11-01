@@ -98,7 +98,37 @@ function DeleteBlock({ event, onDelete }) {
   )
 }
 
-export default function Timetable({ events, allEvents = events, exams = [], weekItems = [], weekOffset = 0, onWeekChange, examTarget = '/materials?add=1', onAdd, onAddPersonal, onRemoveEvent, onCancelClass, now }) {
+// 시간표 블록 수정. 수업 블록은 이름을 바꾸면 과목 이름도 함께 바뀐다(시간표에는 과목 이름이 표시되므로).
+function EditBlock({ event, weekLabels, onSave, onDelete, onClose }) {
+  const [name, setName] = useState(event.name)
+  const [day, setDay] = useState(String(event.day))
+  const [color, setColor] = useState(event.color ?? 0)
+  const [times, setTimes] = useState({ start: timeLabel(event.start), end: timeLabel(event.end) })
+  const [error, setError] = useState('')
+  function submit(e) {
+    e.preventDefault()
+    const start = parseTime(times.start)
+    const end = parseTime(times.end)
+    if (!name.trim()) return setError('이름을 입력해주세요.')
+    if (start === null || end === null) return setError('시간을 다시 선택해주세요.')
+    if (end <= start) return setError('종료 시간이 시작 시간보다 늦어야 해요')
+    onSave({ name: name.trim(), day: Number(day), start, end, color })
+  }
+  return (
+    <form className="schedule-form" onSubmit={submit} noValidate>
+      <label>이름<input value={name} maxLength={event.subjectId ? 100 : 40} onChange={e => { setName(e.target.value); setError('') }} /></label>
+      {event.subjectId && <p className="subject-muted">수업 이름을 바꾸면 과목 이름도 함께 바뀌어요.</p>}
+      {!event.date && <label>요일<select value={day} onChange={e => setDay(e.target.value)}>{weekLabels.map((label, i) => <option value={i} key={label}>{label}</option>)}</select></label>}
+      {event.date && <p>{event.date} (특정 날짜 일정)</p>}
+      <div className="schedule-time-row"><TimeInput label="시작 시간" value={times.start} onChange={value => { setTimes(c => ({ ...c, start: value })); setError('') }} /><TimeInput label="종료 시간" value={times.end} onChange={value => { setTimes(c => ({ ...c, end: value })); setError('') }} /></div>
+      <fieldset className="schedule-colors"><legend>블록 색상</legend><div>{scheduleColors.map((label, index) => <label key={label} className={`schedule-color schedule-color--${index}`}><input type="radio" name="edit-color" value={index} aria-label={label} checked={color === index} onChange={() => setColor(index)} /></label>)}</div></fieldset>
+      {error && <p className="field-error" role="alert">{error}</p>}
+      <div className="schedule-actions"><DeleteBlock event={event} onDelete={onDelete} /><Button type="submit">저장</Button></div>
+    </form>
+  )
+}
+
+export default function Timetable({ events, allEvents = events, exams = [], weekOffset = 0, onWeekChange, examTarget = '/materials?add=1', onAdd, onAddPersonal, onRemoveEvent, onUpdateEvent, onAddSubject, onCancelClass, now }) {
   const { weekDates, weekLabels, weekRange } = weekDisplay(now, weekOffset)
   const [adding, setAdding] = useState(false)
   const [addingPersonal, setAddingPersonal] = useState(false)
@@ -110,7 +140,7 @@ export default function Timetable({ events, allEvents = events, exams = [], week
   const hours = Array.from({ length: lastHour - firstHour }, (_, i) => firstHour + i)
   return (
     <section className="dashboard-card timetable-card" aria-labelledby="timetable-heading">
-      <header className="timetable-heading"><div className="timetable-title"><h2 id="timetable-heading">주간 시간표</h2><div className="timetable-week-nav" role="group" aria-label="주 이동"><button type="button" aria-label="이전 주" onClick={() => onWeekChange(weekOffset - 1)}>&lt;</button><button type="button" aria-label="다음 주" onClick={() => onWeekChange(weekOffset + 1)}>&gt;</button><button type="button" className="timetable-this-week" disabled={weekOffset === 0} onClick={() => onWeekChange(0)}>이번 주</button><button type="button" className="timetable-cancel-class" onClick={onCancelClass}>휴강 등록</button><button type="button" className="timetable-add-event" onClick={() => setAddingPersonal(true)}>일정 추가</button></div></div><div className="timetable-controls">{!!weekItems.length && <details className="timetable-exams" key={weekOffset}><summary>이 주의 시험·과제 {weekItems.length}</summary><div>{weekItems.map(item => <Link to={`/materials/${item.subjectId}#${item.kind === 'exam' ? 'exams' : 'assignments'}`} key={item.id}><strong>{item.kind === 'exam' ? '시험' : '과제'} · {item.subjectName} · {item.title}</strong><span>{item.date} · {item.time || (item.kind === 'exam' ? '시간 미정' : '하루 종일')}{item.done ? ' · 완료' : ''}</span></Link>)}</div></details>}<button type="button" aria-label="새 과목 추가" onClick={() => setAdding(true)}>+</button></div></header>
+      <header className="timetable-heading"><div className="timetable-title"><h2 id="timetable-heading">주간 시간표</h2><div className="timetable-week-nav" role="group" aria-label="주 이동"><button type="button" aria-label="이전 주" onClick={() => onWeekChange(weekOffset - 1)}>&lt;</button><button type="button" aria-label="다음 주" onClick={() => onWeekChange(weekOffset + 1)}>&gt;</button><button type="button" className="timetable-this-week" disabled={weekOffset === 0} onClick={() => onWeekChange(0)}>이번 주</button><button type="button" className="timetable-cancel-class" onClick={onCancelClass}>휴강 등록</button><button type="button" className="timetable-add-event" onClick={() => setAddingPersonal(true)}>일정 추가</button></div></div><div className="timetable-controls"><button type="button" aria-label="과목 추가" title="과목 추가" onClick={onAddSubject}>+</button></div></header>
       {!exams.length && <div className="empty-state empty-state--inline" role="status"><p>시험 일정을 등록해 주세요</p><Link className="button" to={examTarget}>시험 일정 등록</Link></div>}
       {!visibleEvents.length && <div className="empty-state empty-state--inline" role="status"><p>시간표를 등록해 주세요</p><button className="button" type="button" onClick={() => setAdding(true)}>시간표 등록</button></div>}
       <p className="timetable-caption">{weekRange}</p>
@@ -125,7 +155,7 @@ export default function Timetable({ events, allEvents = events, exams = [], week
       </div>
       {addingPersonal && <AddPersonalEvent onAdd={onAddPersonal} onClose={() => setAddingPersonal(false)} />}
       {adding && <AddSchedule events={allEvents} weekLabels={weekLabels} onAdd={onAdd} onClose={() => setAdding(false)} />}
-      {selected && <Modal title={selected.name} onClose={() => setSelected(null)}><p>{selected.date && selected.time ? `${selected.date} · ${selected.time}` : selected.date ? `${selected.date} · ${timeLabel(selected.start)}–${timeLabel(selected.end)}` : `${weekLabels[selected.day]} · ${timeLabel(selected.start)}–${timeLabel(selected.end)}`}</p>{selected.location && <p>{selected.location}</p>}{selected.kind === 'personal' && <p>{selected.date ? '특정 날짜 일정' : '매주 반복 일정'}</p>}{!selected.examId && <DeleteBlock event={selected} onDelete={() => { onRemoveEvent(selected.id); setSelected(null) }} />}{selected.subjectId && <Link className="button" to={`/materials/${selected.subjectId}${selected.examId ? '#exams' : ''}`}>과목 홈에서 확인</Link>}</Modal>}
+      {selected && <Modal title={selected.examId ? selected.name : '시간표 수정'} onClose={() => setSelected(null)}>{selected.examId ? <><p>{`${selected.date} · ${selected.time}`}</p>{selected.location && <p>{selected.location}</p>}</> : <EditBlock key={selected.id} event={selected} weekLabels={weekLabels} onSave={patch => { onUpdateEvent(selected, patch); setSelected(null) }} onDelete={() => { onRemoveEvent(selected.id); setSelected(null) }} onClose={() => setSelected(null)} />}{selected.subjectId && <Link className="button" to={`/materials/${selected.subjectId}${selected.examId ? '#exams' : ''}`}>과목 홈에서 확인</Link>}</Modal>}
     </section>
   )
 }
